@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+#root {
+  height: 100%;
+}
+@media only screen and (min-width: 0) {
+  body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 768px) {
+  body {
+    max-width: 1440px;
+    max-height: 2443px;
+    padding: 64px 96px 90px 96px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+}

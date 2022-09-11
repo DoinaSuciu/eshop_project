@@ -1,0 +1,154 @@
+@media only screen and (min-width: 0) {
+  h1 {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 400;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 27px;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h3 {
+    font-size: 14px;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h4 {
+    font-size: 20px;
+    line-height: 20px;
+    // margin: 0;
+    font-family: "DM Sans Medium", sans-serif;
+  }
+
+  h5 {
+    font-size: 16px;
+    line-height: 27px;
+    font-weight: 400;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+    // font-weight: 400px;
+  }
+
+  .body-small {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+  .body-medium {
+    font-size: 14px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 20px;
+    line-height: 26px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 27px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h4 {
+    font-size: 20px;
+    line-height: 20px;
+    font-family: "DM Sans Medium", sans-serif;
+  }
+
+  h5 {
+    font-size: 16px;
+    line-height: 27px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  .body-medium {
+    font-size: 14px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  .body-small {
+    font-size: 12px;
+    line-height: 20px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 33px;
+    font-family: "DM Sans Medium", sans-serif;
+  }
+
+  h2 {
+    font-size: 26px;
+    line-height: 35px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 26px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    font-family: "DM Sans Medium", sans-serif;
+  }
+
+  h5 {
+    font-size: 16px;
+    line-height: 27px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+
+  .body-large {
+    font-size: 16px;
+    font-family: "DM Sans Bold", sans-serif;
+  }
+
+  .body-medium {
+    font-size: 20px;
+    font-family: "DM Sans Regular", sans-serif;
+    font-weight: 400;
+    line-height: 26px;
+  }
+
+  .body-small {
+    font-size: 12px;
+    line-height: 20px;
+    font-family: "DM Sans Regular", sans-serif;
+  }
+}
+
+@font-face {
+  font-family: "DM Sans Medium";
+  src: local("DM Sans Medium"),
+    url("../styles/fonts/DMSans-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DM Sans Bold";
+  src: local("DM Sans Bold"),
+    url("../styles/fonts/DMSans-Bold.woff") format("woff");
+}

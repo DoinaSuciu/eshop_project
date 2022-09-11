@@ -1,32 +1,63 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <Header />
+    <!-- <SearchBar /> -->
+    <router-view />
+    <Footer />
   </div>
 </template>
 
+<script>
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+// import SearchBar from "./components/SearchBar.vue";
+export default {
+  name: "App",
+  components: {
+    Header,
+    Footer,
+    // SearchBar,
+  },
+};
+</script>
+
 <style lang="scss">
+@import "./styles/base.scss";
+@import "./styles/vars.scss";
+
+@font-face {
+  font-family: "DM Sans Regular";
+  src: local("DM Sans"),
+    url("./styles/fonts/DMSans-Regular.woff") format("woff");
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "DM Sans Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 nav {
-  padding: 30px;
+  padding: 0px;
+  font-size: 20px;
 
   a {
-    font-weight: bold;
-    color: #2c3e50;
+    color: $black;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $accent;
     }
   }
+
+  a:active,
+  a:hover,
+  a.router-link-active {
+    color: $accent;
+    text-decoration: underline;
+  }
+}
+
+li {
+  list-style-type: none;
 }
 </style>
