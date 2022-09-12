@@ -6,6 +6,7 @@ import OurStory from "../views/OurStory.vue";
 import Shop from "../views/Shop.vue";
 import ProductView from "../views/ProductView.vue";
 import About from "../views/About.vue";
+import Account from "../views/Account.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     name: "about",
     component: About,
   },
+  {
+    path: "/account",
+    name: "account",
+    component: Account,
+  },
   // {
   // path: "/help",
   // name: "help",
@@ -54,11 +60,6 @@ const routes = [
   //   path: "/bag",
   //   name: "",
   //   component: Bag,
-  // },
-  // {
-  //   path: "/account",
-  //   name: "",
-  //   component: Account,
   // },
   // {
   // path: "/contact",

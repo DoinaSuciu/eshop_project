@@ -6,7 +6,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {},
+    userId: null,
+    token: null,
+    tokenExpiration: null,
+
     categories: [
       { id: 1, name: "earrings" },
       { id: 2, name: "necklaces" },
@@ -376,7 +379,45 @@ export default new Vuex.Store({
     ],
   },
   getters: {},
-  mutations: {},
-  actions: {},
+  mutations: {
+    setUser(state, payload) {
+      state.token = payload.token;
+      state.userId = payload.userId;
+      state.tokenExpiration = payload.tokenExpiration;
+    },
+  },
+  actions: {
+    signIn() {},
+    async register(context, payload) {
+      const response = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDesA7LU8NRvlbeVIQU_Z51KrGyRkhng8c",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: payload.email,
+            password: payload.password,
+            returnSecureToken: true,
+          }),
+        }
+      );
+
+      const responseData = await response.json();
+      if (!response.ok) {
+        console.log(responseData);
+        const error = new Error(
+          responseData.message ||
+            "Failed to authenticate. Check your sign in data."
+        );
+        throw error;
+      }
+
+      console.log(responseData);
+      context.commit("setUser", {
+        token: responseData.idToken,
+        userId: responseData.localId,
+        tokenExpiration: responseData.expiresIn,
+      });
+    },
+  },
   modules: {},
 });
