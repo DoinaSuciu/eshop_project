@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <Header />
+    <AppHeader />
     <!-- <SearchBar /> -->
     <router-view />
-    <Footer />
+    <AppFooter class="footer" />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 // import SearchBar from "./components/SearchBar.vue";
 export default {
   name: "App",
   components: {
-    Header,
-    Footer,
+    AppHeader,
+    AppFooter,
     // SearchBar,
   },
 };
@@ -34,6 +34,9 @@ export default {
   font-family: "DM Sans Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 nav {
@@ -59,5 +62,9 @@ nav {
 
 li {
   list-style-type: none;
+}
+
+.footer {
+  margin-top: auto;
 }
 </style>

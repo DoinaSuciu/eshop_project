@@ -7,6 +7,8 @@ import Shop from "../views/Shop.vue";
 import ProductView from "../views/ProductView.vue";
 import About from "../views/About.vue";
 import Account from "../views/Account.vue";
+import ResetPassword from "../views/ResetPassword.vue";
+import Contact from "../views/Contact.vue";
 
 Vue.use(VueRouter);
 
@@ -46,6 +48,16 @@ const routes = [
     name: "account",
     component: Account,
   },
+  {
+    path: "/reset-password",
+    name: "reset-password",
+    component: ResetPassword,
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: Contact,
+  },
   // {
   // path: "/help",
   // name: "help",
@@ -60,11 +72,6 @@ const routes = [
   //   path: "/bag",
   //   name: "",
   //   component: Bag,
-  // },
-  // {
-  // path: "/contact",
-  // name: "contact",
-  // component: Contact,
   // },
   // {
   // path: "/terms-of-services",

@@ -8,11 +8,24 @@
           </router-link>
         </li>
       </ul>
-      <router-link class="hamb-menu-item-icon hamb-menu-item" to="/account"
-        ><img src="../assets/Icon account.png" />My account</router-link
-      >
-      <router-link class="hamb-menu-item-icon hamb-menu-item" to="/"
-        ><img src="../assets/Icon logout.png" />Logout</router-link
+
+      <div v-if="isLoggedIn">
+        <router-link class="hamb-menu-item-icon hamb-menu-item" to="/account"
+          ><img src="../assets/Icon account.png" />My account</router-link
+        >
+        <router-link
+          @click="logout"
+          class="hamb-menu-item-icon hamb-menu-item"
+          to="/"
+          ><img src="../assets/Icon logout.png" />Logout</router-link
+        >
+      </div>
+
+      <router-link
+        v-if="!isLoggedIn"
+        class="hamb-menu-item-icon hamb-menu-item"
+        to="/account"
+        ><img src="../assets/Icon logout.png" />Register</router-link
       >
     </div>
   </nav>
@@ -54,6 +67,18 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    isLoggedIn() {
+      console.log(`isLoggedIn ${this.$store.getters.isAuthenticated}`);
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      console.log("logout");
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>
@@ -102,6 +127,8 @@ export default {
     font-weight: 400;
     text-decoration: none;
     transition-duration: 0.25s;
+    background-color: $white;
+    border: none;
   }
   .hamb-menu-item-icon {
     display: flex;

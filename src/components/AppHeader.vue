@@ -23,27 +23,45 @@
         ><img src="../assets/Icon account.png"
       /></router-link>
 
-      <HambMenuIcon class="nav-icon hamb-icon" @action="handleHambIcon" />
+      <HambMenuIcon
+        id="hamb-menu-icon"
+        class="nav-icon hamb-icon"
+        @action="handleHambIcon"
+      />
 
-      <!-- <HambMenu class="hamb-menu" :class="{ 'show-menu': open }" /> -->
       <div class="hamb-menu" :class="{ 'show-menu': open }">
-        <div class="hamb-menu-test">
-          <div class="hamb-menu-items">
-            <ul class="hamb-menu-list">
-              <li v-for="item in hambMenu">
-                <router-link class="hamb-menu-item" :to="item.path">
-                  {{ item.name }}
-                </router-link>
-              </li>
-            </ul>
+        <div class="hamb-menu-items">
+          <ul class="hamb-menu-list">
+            <li @click="hideHambMenu" v-for="item in hambMenu">
+              <router-link class="hamb-menu-item" :to="item.path">
+                {{ item.name }}
+              </router-link>
+            </li>
+          </ul>
+          <div @click="hideHambMenu">
             <router-link
+              v-if="isLoggedIn"
               class="hamb-menu-item-icon hamb-menu-item"
               to="/account"
-              ><img src="../assets/Icon account.png" />My account</router-link
             >
-            <router-link class="hamb-menu-item-icon hamb-menu-item" to="/"
-              ><img src="../assets/Icon logout.png" />Logout</router-link
+              <img src="../assets/Icon account.png" />My account
+            </router-link>
+
+            <button
+              @click="logout"
+              v-if="isLoggedIn"
+              class="hamb-menu-item-icon hamb-menu-item"
             >
+              <img src="../assets/Icon logout.png" />Logout
+            </button>
+
+            <router-link
+              v-if="!isLoggedIn"
+              class="hamb-menu-item-icon hamb-menu-item"
+              to="/account"
+            >
+              <img src="../assets/Icon logout.png" />Register
+            </router-link>
           </div>
         </div>
       </div>
@@ -110,18 +128,42 @@ export default {
       open: false,
     };
   },
+
   components: { HambMenuIcon },
+
   methods: {
+    hideHambMenu(isOpen) {
+      this.handleHambIcon(!isOpen);
+    },
+
     handleHambIcon(isOpen) {
-      console.log(this.open);
-      console.log(isOpen);
+      // console.log(this.open);
+      // console.log(isOpen);
       this.open = isOpen;
+      if (isOpen) {
+        document.documentElement.style.overflow = "hidden";
+
+        return;
+      }
+      document.documentElement.style.overflow = "auto";
       // this.isOpen = !this.isOpen;
       // console.log(isOpen);
       // this.$refs.hambMenu.style.height = "isOpen" ? "50%" : "0%";
       // console.log(this.$refs.hambMenu);
       // console.log(this.$refs.hambMenu.style);
       // console.log(this.$refs.hambMenu.style.height);
+    },
+
+    logout() {
+      console.log("logout");
+      return this.$store.dispatch("logout");
+    },
+  },
+
+  computed: {
+    isLoggedIn() {
+      console.log(`isLoggedIn ${this.$store.getters.isAuthenticated}`);
+      return this.$store.getters.isAuthenticated;
     },
   },
 };
@@ -146,15 +188,13 @@ export default {
       display: none;
     }
   }
+
   .mobile-hide {
     display: none;
   }
 
   .nav-icon {
     margin-left: 16px;
-    // width: 28px;
-    // height: 28px;
-    // padding-top: 12px;
   }
 
   .nav-icons {
@@ -165,59 +205,60 @@ export default {
 
   .hamb-menu {
     display: none;
-    position: absolute;
-    z-index: 5;
+    z-index: 2;
+    width: 0;
   }
 
   .show-menu {
-    display: block;
-    position: fixed;
-    top: 36px;
-    right: -50%;
-    // // left: -100%;
-    // width: 400px;
-    height: 100%;
-
-    position: fixed;
-    top: 0;
-    margin: 50px 16px;
-    left: 0;
+    display: flex;
     flex-direction: column;
+    position: fixed;
+    overflow: hidden;
+    flex-grow: 1;
+    top: 0;
+    height: 100%;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    transition: all 1s ease-in-out;
-    overflow-x: hidden;
+    margin-top: 50px;
+    padding: 0 16px;
+    left: 100vw;
+    justify-content: left;
+    align-items: left;
+    transform: translate(-100vw);
+    transition: transform 0.5s ease-in-out;
   }
 
   .hamb-menu-items {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     position: relative;
     top: 0;
     max-width: 1200px;
     height: 100%;
-    // margin: 0;
     padding: 16px 0;
     list-style: none;
     background-color: $white;
-    // box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-    // transition-duration: 0.25s;
   }
 
   .hamb-menu-list {
-    padding: 0;
+    padding: 0 0 23px 0;
+    border-bottom: 1px $light-gray;
+    border-style: none none solid none;
+    margin-bottom: 0;
   }
 
   .hamb-menu-item {
-    display: block;
+    display: flex;
+    flex-direction: row;
     margin: 0;
     padding: 16px 16px;
-    overflow: hidden;
     color: black;
     font-size: 20px;
     font-weight: 400;
     text-decoration: none;
     transition-duration: 0.25s;
+    border: none;
+    background-color: $white;
   }
   .hamb-menu-item-icon {
     display: flex;
@@ -227,14 +268,11 @@ export default {
       margin-right: 10px;
     }
   }
-
-  .web-hide {
-  }
 }
+
 @media only screen and (min-width: 768px) {
   .logo {
     min-width: 140px;
-    // min-height: 40px;
   }
   .nav-bar {
     display: flex;

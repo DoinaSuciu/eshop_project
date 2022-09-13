@@ -7,10 +7,13 @@
       :duration="5000"
       :speed="1000"
       height="100%"
+      :autoplay="false"
+      :indicators="false"
     >
       <SliderItem v-for="(image, index) in images" :key="index" :image="image">
         <img class="photo" :src="image" />
       </SliderItem>
+      <!-- <div class="scroll-line"></div> -->
     </Slider>
   </div>
 </template>
@@ -32,7 +35,7 @@ export default {
   },
   data() {
     return {
-      sliderValue: 1,
+      sliderValue: 0,
     };
   },
 };
@@ -40,15 +43,10 @@ export default {
 
 <style lang="scss">
 .container-photos {
-  // display: flex;
-  // flex-grow: 1;
-  // border-radius: 6px;
   border-radius: 5px;
 }
 @media only screen and (min-width: 0) {
   slider {
-    // width: 100%;
-    // height: 400px;
     object-fit: cover;
     background-position: center;
     background-size: cover;
@@ -65,6 +63,21 @@ export default {
     height: 100%;
     border-radius: 5px;
   }
+
+  // .scroll-line {
+  //   background: linear-gradient(
+  //       217deg,
+  //       rgba(255, 0, 0, 0.8),
+  //       rgba(255, 0, 0, 0) 70.71%
+  //     ),
+  //     linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+  //     linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  //   // top: 60px;
+  //   left: 0;
+  //   height: 10px;
+  //   position: fixed;
+  //   transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  // }
 }
 
 @media only screen and (min-width: 728px) {

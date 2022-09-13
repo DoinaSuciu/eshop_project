@@ -1,10 +1,5 @@
 <template>
   <div class="product-view">
-    <!-- <div v-if="!images.length">
-      Please Wait......
-      <img width="50%" src="" />
-    </div>
-    <div v-else> -->
     <SlideShow class="slide-show-photos" :images="images" />
     <h1 class="product-name">{{ product.name }}</h1>
     <div class="product-share">
@@ -23,52 +18,89 @@
         <img class="view-more-icon" src="../assets/Icon view-more.png" />
       </button>
     </div>
+
     <div class="description-reviews-container">
-      <div class="description-reviews-group">
-        <p class="description-text body-small">Description</p>
-        <img
-          class="view-more-icon-vertical"
-          src="../assets/Icon view-more-vertical.png"
-        />
+      <div class="description-reviews-btn body-small">
+        <div class="description-reviews-group">
+          <p class="description-text body-small">Description</p>
+          <button @click="showHideDesciption" class="btn-view-more-vertical">
+            <img
+              class="view-more-icon-vertical"
+              src="../assets/Icon view-more-vertical.png"
+            />
+          </button>
+        </div>
+        <p v-if="isHiddenDescription">
+          {{ product.description }}
+        </p>
       </div>
-      <div class="description-reviews-group">
-        <p class="description-text body-small">Additional information</p>
-        <img
-          class="view-more-icon-vertical"
-          src="../assets/Icon view-more-vertical.png"
-        />
+
+      <div class="description-reviews-btn body-small">
+        <div class="description-reviews-group">
+          <p class="description-text body-small">Additional information</p>
+          <button @click="showHideAddInfo" class="btn-view-more-vertical">
+            <img
+              class="view-more-icon-vertical"
+              src="../assets/Icon view-more-vertical.png"
+            />
+          </button>
+        </div>
+        <span v-if="isHiddenAddInfo">
+          Arrival date: {{ product.arrivalDate }}
+        </span>
       </div>
-      <div class="description-reviews-group">
-        <p class="description-text body-small">Reviews</p>
-        <img
-          class="view-more-icon-vertical"
-          src="../assets/Icon view-more-vertical.png"
-        />
+
+      <div class="description-reviews-btn body-small">
+        <div class="description-reviews-group">
+          <p class="description-text body-small">Reviews</p>
+          <button @click="showHideReviews" class="btn-view-more-vertical">
+            <img
+              class="view-more-icon-vertical"
+              src="../assets/Icon view-more-vertical.png"
+            />
+          </button>
+        </div>
+        <span v-if="isHiddenReviews"> 0 reviews {{ product.reviews }} </span>
       </div>
     </div>
+
     <div>
       <h5>Similar Items</h5>
+      <SimilarItemsSlides :products="similarProducts" />
     </div>
   </div>
 </template>
 
 <script>
 import SlideShow from "../components/SlideShow.vue";
+import SimilarItemsSlides from "@/components/SimilarItemsSlides.vue";
 
 //import { setTimeout } from "timers";
 export default {
   name: "ProductView",
   components: {
     SlideShow,
+    SimilarItemsSlides,
   },
   data() {
     return {
       // images: [],
       readMore: false,
+      isHiddenDescription: true,
+      isHiddenAddInfo: true,
+      isHiddenReviews: true,
     };
   },
-  created() {},
+
   computed: {
+    similarProducts() {
+      return this.$store.state.products.filter(
+        (product) =>
+          `${product.id}` !== this.$route.params.productId &&
+          product.category === this.product.category
+      );
+    },
+
     images() {
       // console.log(this.$route.params.productId);
       // console.log(this.$store.state.products.length); //result = 18 photos
@@ -83,11 +115,13 @@ export default {
       }
       return [];
     },
+
     product() {
       return this.$store.state.products.filter(
         (product) => `${product.id}` === this.$route.params.productId
       )[0];
     },
+
     productDescription() {
       // console.log(`${JSON.stringify(this.product, null, 3)}`);
       return this.readMore
@@ -95,13 +129,24 @@ export default {
         : this.product.aboutProducts.split(" ").splice(0, 10).join(" ") +
             " ...";
     },
+
     buttonText() {
       return this.readMore ? "View less" : "View more";
     },
   },
+
   methods: {
     showMoreOrLess() {
       this.readMore = !this.readMore;
+    },
+    showHideDesciption() {
+      this.isHiddenDescription = !this.isHiddenDescription;
+    },
+    showHideAddInfo() {
+      this.isHiddenAddInfo = !this.isHiddenAddInfo;
+    },
+    showHideReviews() {
+      this.isHiddenReviews = !this.isHiddenReviews;
     },
   },
 };
@@ -117,6 +162,7 @@ export default {
     display: flex;
     flex-direction: column;
   }
+
   .slide-show-photos {
     width: 100%;
     height: 374px;
@@ -190,16 +236,28 @@ export default {
     border-style: solid none solid none;
     padding: 16px 0 5px;
   }
+
+  .btn-view-more-vertical {
+    border: none;
+    background-color: $white;
+  }
+
+  .description-reviews-btn {
+    color: $dark-grey;
+    margin-bottom: 15px;
+  }
+
   .description-reviews-group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: $black;
     // margin: 0;
   }
   .description-text {
     margin-top: 0;
-    margin-bottom: 9px;
+    margin-bottom: 5px;
     &:last-child {
       margin-bottom: 0;
     }

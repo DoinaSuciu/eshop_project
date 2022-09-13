@@ -82,6 +82,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 6px;
+      margin-top: 20px;
       color: $dark-grey;
     }
 

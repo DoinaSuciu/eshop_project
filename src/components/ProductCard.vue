@@ -44,7 +44,7 @@ export default {
         margin-top: 13px;
         width: 100%;
         height: auto;
-        border-radius: 4px;
+        border-radius: 5px;
         object-fit: cover;
         display: flex;
         flex-grow: 1;
