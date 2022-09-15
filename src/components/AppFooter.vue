@@ -17,11 +17,11 @@
       </form> -->
       <div class="navs-footer">
         <router-link class="nav-footer" to="/contact">CONTACT </router-link>
-        <router-link class="nav-footer" to="/contact"
-          >TERMS OF SERVICES
+        <router-link class="nav-footer" to="/terms-and-conditions"
+          >TERMS & CONDITIONS
         </router-link>
-        <router-link class="nav-footer" to="/contact"
-          >SHIPPING AND RETURNS
+        <router-link class="nav-footer" to="/deliveries-and-returns"
+          >DELIVERIES & RETURNS
         </router-link>
       </div>
     </div>

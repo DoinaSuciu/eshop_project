@@ -7,7 +7,7 @@
     </div>
 
     <form class="body-small account-form" @submit.prevent="submitForm">
-      <input
+      <!-- <input
         v-if="!isLoading"
         class="body-small"
         type="text"
@@ -23,7 +23,7 @@
         id="surname"
         placeholder="Surname"
         v-model="surname"
-      />
+      /> -->
 
       <input
         class="body-small"

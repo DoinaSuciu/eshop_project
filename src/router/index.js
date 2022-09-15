@@ -9,6 +9,8 @@ import About from "../views/About.vue";
 import Account from "../views/Account.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import Contact from "../views/Contact.vue";
+import TermsAndConditions from "../views/TermsAndConditions";
+import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
 
 Vue.use(VueRouter);
 
@@ -58,6 +60,16 @@ const routes = [
     name: "contact",
     component: Contact,
   },
+  {
+    path: "/terms-and-conditions",
+    name: "terms and conditions",
+    component: TermsAndConditions,
+  },
+  {
+    path: "/deliveries-and-returns",
+    name: "deliveries and returns",
+    component: DeliveriesAndReturns,
+  },
   // {
   // path: "/help",
   // name: "help",
@@ -73,22 +85,18 @@ const routes = [
   //   name: "",
   //   component: Bag,
   // },
-  // {
-  // path: "/terms-of-services",
-  // name: "terms of services",
-  // component: TermsOfServices,
-  // },
-  // {
-  // path: "/shipping-and-returns",
-  // name: "shipping and returns",
-  // component: ShippingAndReturns,
-  // }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  console.log(from);
+  next();
 });
 
 export default router;

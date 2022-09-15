@@ -65,8 +65,18 @@
     </div>
 
     <div>
-      <h5>Similar Items</h5>
+      <h5 class="similar-items-title">Similar Items</h5>
       <SimilarItemsSlides :products="similarProducts" />
+    </div>
+
+    <div class="continue-shopping">
+      <p class="continue-shopping-text body-small">Continue shopping</p>
+      <button @click="redirectShopPage" class="btn-continue-shopping">
+        <img
+          class="view-more-icon-horizintal"
+          src="../assets/Icon view-more.png"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -86,9 +96,9 @@ export default {
     return {
       // images: [],
       readMore: false,
-      isHiddenDescription: true,
-      isHiddenAddInfo: true,
-      isHiddenReviews: true,
+      isHiddenDescription: false,
+      isHiddenAddInfo: false,
+      isHiddenReviews: false,
     };
   },
 
@@ -147,6 +157,9 @@ export default {
     },
     showHideReviews() {
       this.isHiddenReviews = !this.isHiddenReviews;
+    },
+    redirectShopPage() {
+      this.$router.push({ path: "/shop" });
     },
   },
 };
@@ -214,7 +227,7 @@ export default {
 
   .about-products {
     color: $dark-grey;
-    margin-top: 16px;
+    margin: 16px 0 0;
   }
 
   .view-more-group {
@@ -260,6 +273,27 @@ export default {
     margin-bottom: 5px;
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  .similar-items-title {
+    margin: 21px 0 13px 0;
+  }
+
+  .continue-shopping {
+    margin: 39px 0 72px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .continue-shopping-text {
+      color: $accent;
+    }
+
+    .btn-continue-shopping {
+      border: none;
+      background-color: $white;
     }
   }
 }
