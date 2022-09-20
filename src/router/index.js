@@ -11,6 +11,7 @@ import ResetPassword from "../views/ResetPassword.vue";
 import Contact from "../views/Contact.vue";
 import TermsAndConditions from "../views/TermsAndConditions";
 import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
+import ShoppingCart from "../views/ShoppingCart.vue";
 
 Vue.use(VueRouter);
 
@@ -69,6 +70,11 @@ const routes = [
     path: "/deliveries-and-returns",
     name: "deliveries and returns",
     component: DeliveriesAndReturns,
+  },
+  {
+    path: "/shopping-cart",
+    name: "shopping cart",
+    component: ShoppingCart,
   },
   // {
   // path: "/help",

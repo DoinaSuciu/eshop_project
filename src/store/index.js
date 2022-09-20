@@ -9,6 +9,7 @@ export default new Vuex.Store({
     userId: null,
     token: null,
     tokenExpiration: null,
+    cart: [],
 
     categories: [
       { id: 1, name: "earrings" },
@@ -391,11 +392,44 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setUser(state, payload) {
+    SET_USER(state, payload) {
       state.token = payload.token;
       state.userId = payload.userId;
       state.tokenExpiration = payload.tokenExpiration;
       console.log(`token: ${state.token}`);
+    },
+    INCREMENT_PRODUCT_COUNT(state, id) {
+      console.log(`INCREMENT: ${JSON.stringify(this.state.cart, null, 3)}`);
+      //find the index of the product (with the above index) in products
+      console.log(`ID: ${id}`);
+      const index = state.cart.findIndex((product) => product.id === id);
+      console.log(JSON.stringify(state.cart[index], null, 3));
+      state.cart[index].count += 1;
+      // const productUpdated = { ...state.cart[index], count };
+      // Vue.set(state.products, index, productUpdated);
+    },
+    DECREMENT_PRODUCT_COUNT(state, id) {
+      console.log(`DECREMENT: ${JSON.stringify(this.state.cart, null, 3)}`);
+      //find the index of the product (with the above index) in products
+      console.log(`ID: ${id}`);
+      const index = state.cart.findIndex((product) => product.id === id);
+      console.log(JSON.stringify(state.cart[index], null, 3));
+      if (state.cart[index].count > 0) {
+        state.cart[index].count -= 1;
+      }
+      // const productUpdated = { ...state.cart[index], count };
+      // Vue.set(state.cart, index, productUpdated);
+    },
+    ADD_TO_CART(state, id) {
+      const index = state.products.findIndex((product) => product.id === id);
+      const product = { ...state.products[index], count: 1 };
+      console.log(JSON.stringify(product, null, 3));
+      state.cart.push(product);
+      Vue.set(state.cart);
+      console.log(`ADD_TO_CART: ${JSON.stringify(this.state.cart, null, 3)}`);
+    },
+    REMOVE_FROM_CART(state, id) {
+      state.cart = state.cart.filter((product) => product.id !== id);
     },
   },
   actions: {
@@ -411,6 +445,7 @@ export default new Vuex.Store({
           }),
         }
       );
+      // this.$router.push("/");
 
       const responseData = await response.json();
       if (!response.ok) {
@@ -424,7 +459,7 @@ export default new Vuex.Store({
 
       console.log(`okSignIn ${responseData}`);
 
-      context.commit("setUser", {
+      context.commit("SET_USER", {
         token: responseData.idToken,
         userId: responseData.localId,
         tokenExpiration: responseData.expiresIn,
@@ -455,7 +490,7 @@ export default new Vuex.Store({
       }
 
       console.log(`okRegister ${responseData}`);
-      context.commit("setUser", {
+      context.commit("SET_USER", {
         token: responseData.idToken,
         userId: responseData.localId,
         tokenExpiration: responseData.expiresIn,
@@ -464,11 +499,23 @@ export default new Vuex.Store({
     },
 
     logout(context) {
-      context.commit("setUser", {
+      context.commit("SET_USER", {
         token: null,
         userId: null,
         tokenExpiration: null,
       });
+    },
+    addToCart(context, productId) {
+      console.log(`addToCart: ${context.state.cart}`);
+      const index = context.state.cart.findIndex(
+        (product) => product.id === productId
+      );
+
+      if (index >= 0) {
+        context.commit("INCREMENT_PRODUCT_COUNT", productId);
+      } else {
+        context.commit("ADD_TO_CART", productId);
+      }
     },
   },
   modules: {},

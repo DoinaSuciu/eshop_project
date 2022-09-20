@@ -16,9 +16,11 @@
       <router-link class="nav-icon mobile-hide" to="/search"
         ><img src="../assets/Icon search.png"
       /></router-link>
-      <router-link class="nav-icon" to="/bag"
-        ><img src="../assets/Bag.png"
-      /></router-link>
+      <router-link class="nav-icon" to="/shopping-cart">
+        <!-- <img src="../assets/Bag.png"
+      /> -->
+        cart: {{ cartTotal }}
+      </router-link>
       <router-link class="nav-icon mobile-hide" to="/account"
         ><img src="../assets/Icon account.png"
       /></router-link>
@@ -164,6 +166,12 @@ export default {
     isLoggedIn() {
       console.log(`isLoggedIn ${this.$store.getters.isAuthenticated}`);
       return this.$store.getters.isAuthenticated;
+    },
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartTotal() {
+      return this.cart.reduce((acc, curr) => acc + curr.count, 0);
     },
   },
 };

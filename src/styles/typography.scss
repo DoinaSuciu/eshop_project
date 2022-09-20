@@ -80,12 +80,15 @@
   }
 
   .body-medium {
-    font-size: 14px;
+    font-size: 20px;
     font-family: "DM Sans Regular", sans-serif;
+    font-weight: 400;
+    line-height: 26px;
   }
 
   .body-small {
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 20px;
     font-family: "DM Sans Regular", sans-serif;
   }
@@ -117,7 +120,7 @@
   }
 
   h5 {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 27px;
     font-family: "DM Sans Regular", sans-serif;
   }
@@ -135,7 +138,7 @@
   }
 
   .body-small {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 20px;
     font-family: "DM Sans Regular", sans-serif;
   }

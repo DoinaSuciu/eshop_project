@@ -6,7 +6,9 @@
       <h5 class="product-price">$ {{ product.price }}</h5>
       <img class="share-image" src="../assets/share.png" />
     </div>
-    <button class="product-view-btn">ADD TO CART</button>
+    <button @click="addToCart(product)" class="product-view-btn">
+      ADD TO CART
+    </button>
     <div>
       <p class="body-small about-products">
         {{ productDescription }}
@@ -160,6 +162,9 @@ export default {
     },
     redirectShopPage() {
       this.$router.push({ path: "/shop" });
+    },
+    addToCart(product) {
+      this.$store.dispatch("addToCart", product.id);
     },
   },
 };

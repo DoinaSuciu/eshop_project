@@ -1,6 +1,6 @@
 <template>
   <router-link class="product-card" :to="`/product-view/${product.id}`">
-    <img class="img" :src="product.photo" />
+    <img class="img-card" :src="product.photo" />
     <span class="product-name body-medium">{{ product.name }}</span>
     <h4 class="product-price body-small">$ {{ product.price }}</h4>
   </router-link>
@@ -40,7 +40,7 @@ export default {
     a {
       text-decoration: none;
 
-      .img {
+      .img-card {
         margin-top: 13px;
         width: 100%;
         height: auto;
@@ -66,7 +66,7 @@ export default {
   @media only screen and (min-width: 768px) {
     a {
       margin-bottom: 40px;
-      .img {
+      .img-card {
         // margin-top: 20px;
         min-width: 260px;
         min-height: 260px;
@@ -87,7 +87,7 @@ export default {
 
   @media only screen and (min-width: 1024px) {
     margin-bottom: 40px;
-    .img {
+    .img-card {
       // margin-top: 20px;
       min-width: 377px;
       min-height: 380px;

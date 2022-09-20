@@ -1,63 +1,75 @@
 <template>
-  <main class="account">
-    <h1 class="myAccount">My account</h1>
-    <div class="wrapper">
-      <tabs>
-        <tab title="Sign In">
-          <SignIn />
-        </tab>
-        <tab title="Register">
-          <Register />
-        </tab>
-      </tabs>
-    </div>
-  </main>
+  <section class="sign-in">
+    <form class="body-small sign-in-form" @submit.prevent="submitForm">
+      <input
+        class="body-small"
+        type="text"
+        id="email-sign-in"
+        placeholder="Email"
+        v-model="email"
+      />
+      <input
+        class="body-small"
+        type="password"
+        id="password-sign-in"
+        placeholder="Password"
+        v-model.trim="password"
+      />
+
+      <label class="remember-checkbox">
+        <input class="checkbox" type="checkbox" value="Remember me" />Remember
+        me</label
+      >
+      <p v-if="!formIsValid" class="msg-error-formIsNotValid">
+        Please enter a valid email and password (must be at least 6 characters
+        long).
+      </p>
+
+      <button class="btn-auth-mode body-small" @click="">SIGN IN</button>
+
+      <button
+        @click="redirectToResetPassword()"
+        class="forgot-password body-small"
+      >
+        Have you forgotten your password?
+      </button>
+    </form>
+  </section>
 </template>
 
 <script>
-import Tab from "@/components/Tab.vue";
-import Tabs from "@/components/Tabs.vue";
-import SignIn from "@/components/SignIn.vue";
-import Register from "@/components/Register.vue";
-
 export default {
-  name: "Account",
-  components: {
-    Tab,
-    Tabs,
-    SignIn,
-    Register,
-  },
+  name: "SignIn",
   data() {
     return {
       email: "",
       password: "",
       formIsValid: true,
-      mode: "signIn",
+      // mode: "signIn",
       isLoading: false,
       error: null,
     };
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
-
-    submitButtonCaption() {
-      if (this.mode === "signIn") {
-        return "SIGN IN";
-      } else {
-        return "REGISTER";
-      }
-    },
-    switchModeButtonCaption() {
-      if (this.mode === "signIn") {
-        return "REGISTER";
-      } else {
-        return "SIGN IN";
-      }
-    },
+    // isLoggedIn() {
+    //   return this.$store.getters.isAuthenticated;
+    // },
+    // submitButtonCaption() {
+    //   if (this.mode === "signIn") {
+    //     return "SIGN IN";
+    //   } else {
+    //     return "REGISTER";
+    //   }
+    // },
+    // switchModeButtonCaption() {
+    //   if (this.mode === "signIn") {
+    //     return "REGISTER";
+    //   } else {
+    //     return "SIGN IN";
+    //   }
+    // },
   },
+
   methods: {
     async submitForm() {
       this.FormIsValid = true;
@@ -70,7 +82,7 @@ export default {
         return;
       }
 
-      this.isLoading = true;
+      // this.isLoading = true;
 
       const actionPayload = {
         email: this.email,
@@ -78,27 +90,23 @@ export default {
       };
 
       try {
-        if (this.mode === "signIn") {
-          console.log("signIn");
-          await this.$store.dispatch("signIn", actionPayload);
-        } else {
-          console.log("register");
-          await this.$store.dispatch("register", actionPayload);
-        }
+        await this.$store.dispatch("signIn", actionPayload);
+        this.$router.push("/");
       } catch (err) {
         this.error = err.message || "Failed to authenticate, try later.";
       }
 
-      this.isLoading = false;
+      // this.isLoading = false;
     },
 
-    switchAuthMode() {
-      if (this.mode === "signIn") {
-        this.mode = "register";
-      } else {
-        this.mode = "signIn";
-      }
-    },
+    // switchAuthMode() {
+    //   if (this.mode === "signIn") {
+    //     this.mode = "register";
+    //   } else {
+    //     this.mode = "signIn";
+    //   }
+    // },
+
     redirectToResetPassword() {
       this.$router.push({ path: "/reset-password" });
     },
@@ -112,48 +120,19 @@ export default {
 @import "../styles/typography.scss";
 
 @media only screen and (min-width: 0) {
-  .account {
-    padding-top: 24px;
+  .sign-in {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    line-height: 20px;
-    font-family: "DM Sans Regular", sans-serif;
-
-    .myAccount {
-      margin: 0 auto 24px auto;
-    }
   }
 
-  .signIn-register-btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 32px;
-    width: 288px;
-    margin: 0 auto;
-    border-radius: 4px;
-    background-color: $light-gray;
-  }
-
-  .btn-log {
-    width: 134px;
-    height: 30px;
-    border: none;
-    padding: 0;
-    border-radius: 5px;
-  }
-
-  .account-form {
+  .sign-in-form {
     width: 288px;
     margin: 87px auto 92px;
 
-    #name,
-    #surname,
-    #email,
-    #password {
+    #email-sign-in,
+    #password-sign-in {
       width: 100%;
       height: 25px;
       margin-bottom: 16px;
