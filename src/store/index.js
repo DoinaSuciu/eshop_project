@@ -9,12 +9,47 @@ export default new Vuex.Store({
     userId: null,
     token: null,
     tokenExpiration: null,
+    shippingCountry: null,
+    appliedCoupon: 0,
     cart: [],
+    coupons: [
+      { name: "HAPPY5", value: 5 },
+      { name: "HAPPY10", value: 10 },
+      { name: "HAPPY15", value: 15 },
+    ],
 
     categories: [
       { id: 1, name: "earrings" },
       { id: 2, name: "necklaces" },
       { id: 3, name: "rings" },
+    ],
+    shipping: [
+      { country: "Select a Country", cost: 0 },
+      {
+        id: 90,
+        country: "Romania",
+        cost: 0,
+      },
+      {
+        id: 91,
+        country: "Republic of Moldova",
+        cost: 10,
+      },
+      {
+        id: 92,
+        country: "United Kingdom",
+        cost: 40,
+      },
+      {
+        id: 93,
+        country: "Spain",
+        cost: 18,
+      },
+      {
+        id: 94,
+        country: "Italy",
+        cost: 16,
+      },
     ],
     products: [
       {
@@ -430,6 +465,12 @@ export default new Vuex.Store({
     },
     REMOVE_FROM_CART(state, id) {
       state.cart = state.cart.filter((product) => product.id !== id);
+    },
+    SET_SHIPPING_COUNTRY(state, country) {
+      state.shippingCountry = country;
+    },
+    SET_COUPON(state, couponValue) {
+      state.appliedCoupon = couponValue;
     },
   },
   actions: {

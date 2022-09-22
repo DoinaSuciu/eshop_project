@@ -17,9 +17,12 @@
         ><img src="../assets/Icon search.png"
       /></router-link>
       <router-link class="nav-icon" to="/shopping-cart">
-        <!-- <img src="../assets/Bag.png"
-      /> -->
-        cart: {{ cartTotal }}
+        <div class="bag-item">
+          <img src="../assets/Bag.png" />
+          <span v-if="cartTotal > 0" class="cart-total-items">{{
+            cartTotal
+          }}</span>
+        </div>
       </router-link>
       <router-link class="nav-icon mobile-hide" to="/account"
         ><img src="../assets/Icon account.png"
@@ -203,6 +206,38 @@ export default {
 
   .nav-icon {
     margin-left: 16px;
+
+    .bag-item {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      // margin: 0;
+      // padding: 0;
+      // top: 14px;
+      // right: 50px;
+      // z-index: 4;
+    }
+
+    .cart-total-items {
+      border-radius: 50%;
+      width: 14px;
+      height: 14px;
+      // padding: 10px;
+      background: #fff;
+      border: 1px solid #000;
+      font-size: 7px;
+      color: #000;
+      text-align: center;
+      // border-color: black;
+      padding: 2px;
+      text-align: center;
+      // background-color: red;
+      margin-bottom: 12px;
+      margin-left: 17px;
+      position: absolute;
+    }
   }
 
   .nav-icons {

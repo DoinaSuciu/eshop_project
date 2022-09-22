@@ -10,7 +10,7 @@
           <span class="product-name-cart body-small">{{ product.name }}</span>
         </router-link>
         <button class="remove-btn" @click="removeFromCart(product.id)">
-          x
+          +
         </button>
       </div>
 
@@ -40,14 +40,26 @@
         </button>
       </div>
     </div>
-    <!-- <div class="popup-remove-confirmation">
-      <h2>YOU ARE ABOUT TO REMOVE AN ITEM FROM YOUR CART</h2>
-      <span>Are you sure you wish to proceed?</span>
-      <div>
-        <button>YES</button>
-        <button>NO</button>
+    <div
+      v-if="shouldDisplayRemoveConfirmation"
+      class="popup-remove-confirmation"
+    >
+      <span class="info-remove-item body-small">
+        YOU ARE ABOUT TO REMOVE AN ITEM FROM YOUR CART
+      </span>
+      <span class="body-small">Are you sure you wish to proceed?</span>
+      <div class="btn-group-confirm">
+        <button class="btn-black-normal" @click="removeFromCart(product.id)">
+          YES
+        </button>
+        <button
+          class="btn-black-normal btn-no-remove-item"
+          @click="stayOnShoppingPage"
+        >
+          NO
+        </button>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -69,7 +81,11 @@ export default {
       shouldDisplayRemoveConfirmation: false,
     };
   },
-  computed: {},
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
   methods: {
     increment(id) {
       console.log(`shopping_increment: ${id}`);
@@ -77,13 +93,16 @@ export default {
     },
     decrement(product) {
       if (product.count === 1) {
-        shouldDisplayRemoveConfirmation = true;
+        this.shouldDisplayRemoveConfirmation = true;
       } else {
         this.$store.commit("DECREMENT_PRODUCT_COUNT", product.id);
       }
     },
     removeFromCart(id) {
       this.$store.commit("REMOVE_FROM_CART", id);
+    },
+    stayOnShoppingPage() {
+      this.shouldDisplayRemoveConfirmation = false;
     },
   },
 };
@@ -96,6 +115,7 @@ export default {
 
 @media only screen and (min-width: 0) {
   .shopping-cart-product {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -159,14 +179,58 @@ export default {
     margin-top: 4px;
     border: none;
     background-color: $white;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 18px;
+    transform: rotate(45deg);
   }
 
   .increment-btn,
   .decrement-btn {
     border: none;
     background-color: $white;
+  }
+
+  .popup-remove-confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // margin: 10px auto;
+    top: 0;
+    left: 0;
+    color: $white;
+    background-color: $black;
+    opacity: 0.8;
+    border-radius: 5px;
+
+    .info-remove-item {
+      // display: flex;
+      // flex-direction: row;
+      padding: 5px 10px;
+      // margin: 0 auto;
+      // display: flex;
+      // flex-wrap: wrap;
+      // flex-direction: column;
+      // align-items: center;
+      // justify-content: center;
+    }
+
+    .btn-group-confirm {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 50%;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .btn-no-remove-item {
+      margin-left: 15px;
+    }
   }
 }
 

@@ -12,6 +12,7 @@ import Contact from "../views/Contact.vue";
 import TermsAndConditions from "../views/TermsAndConditions";
 import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
 import ShoppingCart from "../views/ShoppingCart.vue";
+import Checkout from "../views/Checkout.vue";
 
 Vue.use(VueRouter);
 
@@ -76,6 +77,11 @@ const routes = [
     name: "shopping cart",
     component: ShoppingCart,
   },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: Checkout,
+  },
   // {
   // path: "/help",
   // name: "help",
@@ -85,11 +91,6 @@ const routes = [
   //   path: "/search",
   //   name: "",
   //   component: Search,
-  // },
-  // {
-  //   path: "/bag",
-  //   name: "",
-  //   component: Bag,
   // },
 ];
 

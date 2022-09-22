@@ -1,15 +1,17 @@
 <template>
-  <div @click="toggle">
+  <div @click="toggle" v-on-clickaway="away">
     <slot name="toggler">
       <button>Toggle</button>
     </slot>
-    <slot></slot>
+    <slot></slot>>
   </div>
 </template>
 
 <script>
+import { mixin as clickaway } from "vue-clickaway";
 export default {
   name: "AppDropdown",
+  mixins: [clickaway],
   provide() {
     return {
       sharedState: this.sharedState,
@@ -25,6 +27,9 @@ export default {
   methods: {
     toggle() {
       this.sharedState.active = !this.sharedState.active;
+    },
+    away() {
+      this.sharedState.active = false;
     },
   },
 };

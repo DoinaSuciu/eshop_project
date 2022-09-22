@@ -1,47 +1,128 @@
 <template>
   <main>
-    <h5 class="shopping-cart-title">Shopping Cart</h5>
-
-    <ul class="shopping-cards">
-      <li class="shopping-card" v-for="(product, index) in cart" :key="index">
-        <ShoppingCartProduct class="shopping-card-cart" :product="product" />
-      </li>
-    </ul>
-
-    <form class="form-coupon-apply" @submit.prevent="handleSubmit">
-      <input
-        class="body-small"
-        type="text"
-        id="coupon-code"
-        placeholder="Coupon Code"
-        v-model="coupon"
-      />
-      <button class="aplly-coupon-btn">APPLY COUPON</button>
-    </form>
-
-    <div class="cart-total">
-      <h5>Cart totals</h5>
-      <div class="group-cart-total">
-        <span class="body-small left-text"> SUBTOTAL: </span>
-      </div>
-      <div class="group-cart-total">
-        <span class="body-small left-text">SHIPPING</span>
-        <div class="group-cart-total">
-          <span class="body-small"
-            >Shipping costs will be calculated once you have provided
-            adress.</span
-          >
-          <span class="body-small">Calculate Shipping</span>
-          <span class="body-small">Select a Country</span>
-          <span class="body-small">City</span>
-          <span class="body-small">Post code/zip</span>
-          <button class="body-small">UPDATE TOTALS</button>
-        </div>
-      </div>
-      <div class="group-cart-total">
-        <span class="body-small left-text">TOTAL</span>
-      </div>
+    <div v-if="calcTotalCount === 0">
+      <h5>Your Shopping cart is empty</h5>
+      <button @click="continueShopping" class="btn-black-normal-long">
+        CONTINUE SHOPPING
+      </button>
     </div>
+    <section v-if="calcTotalCount !== 0">
+      <div class="shopping-cart-title-group">
+        <router-link id="back-redirect" to="/shop">
+          <img id="back-redirect" src="../assets/Icon-go-back.png" />
+        </router-link>
+        <h5 class="shopping-cart-title">Shopping Cart</h5>
+      </div>
+
+      <span class="body-small-dark-gray total-count-items"
+        >{{ calcTotalCount }} items</span
+      >
+
+      <ul class="shopping-cards">
+        <li class="shopping-card" v-for="(product, index) in cart" :key="index">
+          <ShoppingCartProduct class="shopping-card-cart" :product="product" />
+        </li>
+      </ul>
+
+      <form class="form-coupon-apply" @submit.prevent="handleSubmit">
+        <input
+          class="body-small"
+          type="text"
+          id="coupon-code"
+          placeholder="Coupon Code"
+          v-model="couponCode"
+        />
+        <!-- v-model="coupon" -->
+        <div class="body-small" v-if="showCouponValidation">
+          <span class="is-valid-coupon" v-if="isValidCoupon"
+            >{{ this.couponValue }}% discount has been applied</span
+          >
+          <span class="not-valid-coupon" v-if="!isValidCoupon"
+            >Invalid coupon.</span
+          >
+        </div>
+        <button
+          @click="applyCoupon"
+          class="aplly-coupon-btn btn-black-normal-long"
+        >
+          APPLY COUPON
+        </button>
+      </form>
+
+      <div class="cart-total">
+        <h5 class="cart-totals-title">Cart totals</h5>
+        <div class="group-cart-total">
+          <span class="body-small left-element"> SUBTOTAL: </span>
+          <span class="body-small-dark-gray right-element group-cart-items"
+            >$ {{ calcSubtotalWithCoupon }}</span
+          >
+        </div>
+
+        <div v-if="isValidCoupon" class="group-discount">
+          <span class="body-small left-element"> You saved: </span>
+          <span class="body-small right-element group-cart-items"
+            >$ {{ calcDiscount }}</span
+          >
+        </div>
+
+        <div class="group-cart-total">
+          <span class="body-small left-element">SHIPPING</span>
+          <div class="group-cart-items">
+            <span class="body-small-dark-gray right-element"
+              >Shipping costs will be calculated once you have provided
+              adress.</span
+            >
+            <span class="body-small right-element">Calculate Shipping</span>
+            <select
+              @change="selectShippingCountry($event)"
+              id="country"
+              name="country"
+              v-model="country"
+              class="body-small right-element select-shipping"
+            >
+              <option
+                id="country-option"
+                v-for="cost in shippingCosts"
+                v-bind:value="cost.country"
+              >
+                {{ cost.country }}
+              </option>
+            </select>
+            <button
+              @click="calculatedTotalCost()"
+              class="body-small right-element btn-update-totals"
+            >
+              UPDATE TOTALS
+            </button>
+            <span
+              class="body-small check-shipping-selection"
+              v-if="isTotalUpdated && country === defaultCountry"
+              >Please select a country</span
+            >
+          </div>
+        </div>
+        <div class="group-cart-total-calculation">
+          <span class="body-small left-text">TOTAL</span>
+          <span
+            v-if="isTotalUpdated && country !== defaultCountry"
+            class="body-small right-element group-cart-items"
+          >
+            $ {{ totalCost }}</span
+          >
+        </div>
+        <button
+          @click="goToCheckout()"
+          class="btn-black-normal-long btn-continue-delivery"
+        >
+          CONTINUE TO DELIVERY
+        </button>
+        <span
+          v-if="!isReadyForDelivery"
+          class="body-small ready-to-delivery-check"
+          >Please select a country and update totals.</span
+        >
+      </div>
+    </section>
   </main>
 </template>
 
@@ -52,29 +133,107 @@ export default {
   data() {
     return {
       // count: "",
+      country: "Select a Country",
+      defaultCountry: "Select a Country",
+      shippingCost: 0,
+      totalCost: 0,
+      couponCode: null,
+      couponValue: 0,
+      isValidCoupon: false,
+      showCouponValidation: false,
+      isTotalUpdated: false,
+      isReadyForDelivery: true,
     };
   },
   computed: {
+    calcSubtotal() {
+      let subtotal = 0;
+      this.$store.state.cart.forEach((element, i) => {
+        subtotal += element.price * element.count;
+      });
+      return subtotal;
+    },
+    calcSubtotalWithCoupon() {
+      let subtotal = this.calcSubtotal;
+      if (this.isValidCoupon) {
+        subtotal *= 1 - this.couponValue / 100;
+      }
+      return subtotal;
+    },
+    calcDiscount() {
+      if (this.isValidCoupon) {
+        return (this.calcSubtotal * this.couponValue) / 100;
+      }
+      return 0;
+    },
+    calcTotalCount() {
+      let totalCount = 0;
+      this.$store.state.cart.forEach((element, i) => {
+        totalCount += element.count;
+      });
+      return totalCount;
+    },
     cart() {
       return this.$store.state.cart;
     },
     cartTotal() {
       return this.cart.reduce((acc, curr) => acc + curr.count, 0);
     },
+    shippingCosts() {
+      return this.$store.state.shipping;
+    },
+    coupons() {
+      return this.$store.state.coupons;
+    },
   },
   methods: {
     handleSubmit() {
       console.log("submit prevent");
     },
-    // addToCart(product) {
-    //   this.$store.commit("ADD_TO_CART", product);
-    // },
-    // increment(id) {
-    //   this.$store.commit("INCREMENT_PRODUCT_COUNT", id);
-    // },
-    // decrement(id) {
-    //   this.$store.commit("DECREMENT_PRODUCT_COUNT", id);
-    // },
+    continueShopping() {
+      this.$router.push("/shop");
+    },
+    goToCheckout() {
+      if (this.isTotalUpdated && this.country !== this.defaultCountry) {
+        this.$router.push("/checkout");
+      } else {
+        this.isReadyForDelivery = false;
+      }
+    },
+    selectShippingCountry(event) {
+      this.isTotalUpdated = false;
+      const selectedCountry = event.target.value;
+      this.shippingCost = this.$store.state.shipping.filter(
+        (item) => item.country === selectedCountry
+      )[0].cost;
+
+      this.$store.commit("SET_SHIPPING_COUNTRY", selectedCountry);
+    },
+    calculatedTotalCost() {
+      this.isTotalUpdated = true;
+      if (this.country !== this.defaultCountry) {
+        this.totalCost = this.shippingCost + this.calcSubtotal;
+        this.isReadyForDelivery = true;
+      }
+    },
+    applyCoupon() {
+      const coupons = this.$store.state.coupons.filter(
+        (item) => item.name === this.couponCode
+      );
+
+      this.showCouponValidation = true;
+
+      if (coupons.length > 0) {
+        this.isValidCoupon = true;
+        this.couponValue = coupons[0].value;
+        this.$store.commit("SET_COUPON", this.couponValue);
+        console.log(this.$store.state.appliedCoupon);
+      } else {
+        this.isValidCoupon = false;
+        this.couponValue = 0;
+        this.$store.commit("SET_COUPON", 0);
+      }
+    },
   },
   components: { ShoppingCartProduct },
 };
@@ -84,6 +243,7 @@ export default {
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
+@import "../styles/btn-syles.scss";
 
 @media only screen and (min-width: 0) {
   main {
@@ -94,14 +254,37 @@ export default {
     padding: 0;
     margin: 0;
   }
+  .shopping-cart-title-group {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+    padding: 0;
+    align-items: center;
+    width: 100%;
 
-  .shopping-cart-title {
-    // align-self: flex-start;
+    .shopping-cart-title {
+      margin: 0 auto;
+    }
+
+    #back-redirect {
+      height: 16px;
+    }
+  }
+
+  .total-count-items {
+    width: 100%;
+    margin: 25px 0 3px 0;
+  }
+
+  .cart-totals-title {
+    padding-left: 16px;
+    margin: 15px 0;
   }
 
   .shopping-cards {
     padding: 0;
     width: 100%;
+    margin-top: 0;
   }
   .shopping-card {
     margin-bottom: 22px;
@@ -122,33 +305,102 @@ export default {
   }
 
   .aplly-coupon-btn {
-    left: 8px;
-    height: 32px;
-    max-width: 320px;
-    width: 100%;
-    padding: 6px 100px 6px 100px;
-    line-height: 20px;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    color: $white;
-    background-color: $black;
-    border-radius: 4px;
-    border: 1px solid $black;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     margin: 24px auto;
   }
+
   .cart-total {
     display: flex;
     flex-direction: column;
     background-color: $light-gray;
+    padding-bottom: 24px;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 96px;
+  }
+  .group-cart-total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
   }
 
-  .group-cart-total {
-    margin-top: 22px;
+  .group-discount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+    color: $green;
+  }
+  .group-cart-items {
+    // margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 150px;
+  }
+
+  .right-element {
+    margin: 0 0 24px 0;
+  }
+
+  .btn-update-totals {
+    border-radius: 4px;
+    border: 1px solid $black;
+    background-color: $white;
+    height: 32px;
+    margin: 10px 0 0 0;
+  }
+
+  .select-shipping {
+    background-color: $light-gray;
+    color: $dark-grey;
+    border: none;
+    border-bottom: 1px solid $gray;
+    padding: 5px 0;
+    margin: 0 0 16px 0;
+  }
+
+  .group-cart-total-calculation {
+    border-top: 1px solid $gray;
+    margin: 16px 16px 32px 16px;
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .btn-continue-delivery {
+    margin: 0 auto;
+  }
+
+  #city,
+  #country,
+  #coupon-code {
+    outline: none;
+    // padding-left: 0;
+    // margin-left: 0;
+  }
+
+  #country-option {
+    margin: 0;
+    padding: 0;
+  }
+
+  .is-valid-coupon {
+    color: $green;
+  }
+
+  .not-valid-coupon {
+    color: $errors;
+  }
+
+  .check-shipping-selection {
+    color: $errors;
+  }
+
+  .ready-to-delivery-check {
+    color: $errors;
+    margin-left: 16px;
   }
 }
 </style>

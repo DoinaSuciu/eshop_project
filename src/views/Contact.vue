@@ -6,17 +6,15 @@
       <input
         class="body-small"
         type="text"
-        id="firstName"
+        id="first-name"
         placeholder="First name"
-        v-model="firstName"
       />
 
       <input
         class="body-small"
         type="text"
-        id="lastName"
+        id="last-name"
         placeholder="Last name"
-        v-model="lastName"
       />
 
       <input
@@ -24,19 +22,26 @@
         type="text"
         id="email-contact"
         placeholder="Email"
-        v-model="email"
       />
       <div class="select-group body-small">
-        <label for="content">Select</label>
-        <select class="select-subject" v-model="select">
+        <select
+          class="select-subject body-small-dark-gray"
+          name="subject"
+          v-model="select"
+        >
           <option class="body-small" disabled value=""></option>
+          <option class="body-small">Subject</option>
           <option class="body-small">Online Purchase</option>
           <option class="body-small">Return</option>
           <option class="body-small">Shipping Options</option>
         </select>
       </div>
 
-      <textarea class="message body-small" name="message">Message</textarea>
+      <textarea
+        class="message body-small"
+        name="message"
+        placeholder="Message"
+      ></textarea>
 
       <p v-if="!formIsValid" class="msg-error-formIsNotValid">
         Please enter a valid email.
@@ -52,6 +57,7 @@ export default {
   data() {
     return {
       formIsValid: true,
+      select: "Subject",
     };
   },
   methods: {
@@ -90,13 +96,18 @@ main {
   // width: 288px;
   padding: 0;
   #email-contact,
-  #firstName,
-  #lastName {
+  #first-name,
+  #last-name {
     width: 100%;
     height: 25px;
     padding: 0;
     margin-top: 47px;
     margin-bottom: 0;
+    border-bottom: 1px $light-gray;
+    border-style: none none solid none;
+    background-color: $white;
+    color: $dark-grey;
+    outline: none;
   }
   .select-group {
     margin-top: 47px;
@@ -115,6 +126,7 @@ main {
   .select-subject {
     width: 100%;
     border: none;
+    outline: none;
   }
 
   option {
@@ -131,6 +143,7 @@ main {
     border-style: none none solid none;
     background-color: $white;
     color: $dark-grey;
+    outline: none;
   }
 }
 
