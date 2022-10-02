@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import Blog from "../views/Blog.vue";
+import Blogs from "../views/Blogs.vue";
+import BlogPost from "../views/BlogPost.vue";
 import OurStory from "../views/OurStory.vue";
 import Shop from "../views/Shop.vue";
 import ProductView from "../views/ProductView.vue";
@@ -28,9 +29,14 @@ const routes = [
     component: Shop,
   },
   {
-    path: "/blog",
-    name: "blog",
-    component: Blog,
+    path: "/blogs",
+    name: "blogs",
+    component: Blogs,
+  },
+  {
+    path: "/blog-post/:id",
+    name: "blog-post",
+    component: BlogPost,
   },
   {
     path: "/our-story",

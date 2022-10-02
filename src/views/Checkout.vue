@@ -130,33 +130,35 @@
             :key="index"
           >
             <span class="">{{ product.name }}</span>
-            <span class="">$ {{ product.price * product.count }}</span>
+            <span class="">{{
+              (product.price * product.count) | currency
+            }}</span>
           </li>
         </ul>
 
         <div class="group-checkout">
           <span class="body-small left-element"> SUBTOTAL </span>
           <span class="body-small-dark-gray right-side"
-            >$ {{ calcSubtotal }}
+            >{{ calcSubtotal | currency }}
           </span>
         </div>
         <div class="group-checkout">
           <span class="body-small left-element"> SHIPPING </span>
           <span class="body-small-dark-gray right-side">
-            $ {{ totalShippingCost }}</span
+            {{ totalShippingCost | currency }}</span
           >
         </div>
 
         <div class="group-checkout discount">
           <span class="body-small left-element discount"> DISCOUNT</span>
           <span class="body-small-dark-gray right-side discount">
-            -$ {{ appliedDiscount }}
+            -{{ appliedDiscount | currency }}
           </span>
         </div>
         <div class="group-checkout">
           <span class="body-small left-element"> TOTAL</span>
           <span class="body-small-dark-gray right-side">
-            $ {{ finalTotalCost }}</span
+            {{ finalTotalCost | currency }}</span
           >
         </div>
 
