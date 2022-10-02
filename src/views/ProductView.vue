@@ -3,7 +3,7 @@
     <SlideShow class="slide-show-photos" :images="images" />
     <h1 class="product-name">{{ product.name }}</h1>
     <div class="product-share">
-      <h5 class="product-price">$ {{ product.price }}</h5>
+      <h5 class="product-price">{{ product.price | currency }}</h5>
       <img class="share-image" src="../assets/share.png" />
     </div>
     <button @click="addToCart(product)" class="product-view-btn">

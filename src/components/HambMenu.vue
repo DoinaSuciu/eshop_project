@@ -51,7 +51,7 @@ export default {
         },
         {
           name: "Blog",
-          path: "/blog",
+          path: "/blogs",
         },
         {
           name: "Help",

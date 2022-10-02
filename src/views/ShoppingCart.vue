@@ -53,16 +53,16 @@
         <h5 class="cart-totals-title">Cart totals</h5>
         <div class="group-cart-total">
           <span class="body-small left-element"> SUBTOTAL: </span>
-          <span class="body-small-dark-gray right-element group-cart-items"
-            >$ {{ calcSubtotalWithCoupon }}</span
-          >
+          <span class="body-small-dark-gray right-element group-cart-items">{{
+            calcSubtotalWithCoupon | currency
+          }}</span>
         </div>
 
         <div v-if="isValidCoupon" class="group-discount">
           <span class="body-small left-element"> You saved: </span>
-          <span class="body-small right-element group-cart-items"
-            >$ {{ calcDiscount }}</span
-          >
+          <span class="body-small right-element group-cart-items">{{
+            calcDiscount | currency
+          }}</span>
         </div>
 
         <div class="group-cart-total">
@@ -107,7 +107,7 @@
             v-if="isTotalUpdated && country !== defaultCountry"
             class="body-small right-element group-cart-items"
           >
-            $ {{ totalCost }}</span
+            {{ totalCost | currency }}</span
           >
         </div>
         <button

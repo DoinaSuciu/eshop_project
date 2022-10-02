@@ -93,7 +93,7 @@ export default {
         },
         {
           name: "Blog",
-          path: "/blog",
+          path: "/blogs",
         },
         {
           name: "Our Story",
@@ -115,7 +115,7 @@ export default {
         },
         {
           name: "Blog",
-          path: "/blog",
+          path: "/blogs",
         },
         {
           name: "Help",
