@@ -431,7 +431,7 @@ export default new Vuex.Store({
       console.log(`ID: ${id}`);
       const index = state.cart.findIndex((product) => product.id === id);
       console.log(JSON.stringify(state.cart[index], null, 3));
-      if (state.cart[index].count > 0) {
+      if (state.cart[index].count > 1) {
         state.cart[index].count -= 1;
       }
       // const productUpdated = { ...state.cart[index], count };

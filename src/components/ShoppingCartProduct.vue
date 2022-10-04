@@ -9,9 +9,7 @@
         >
           <span class="product-name-cart body-small">{{ product.name }}</span>
         </router-link>
-        <button class="remove-btn" @click="removeFromCart(product.id)">
-          +
-        </button>
+        <button class="remove-btn" @click="toggleRemoveFromCartIcon">+</button>
       </div>
 
       <span class="in-stock body-small" v-if="product.pieces > 0"
@@ -25,7 +23,7 @@
       <div class="cart-item-quantity">
         <button
           class="decrement-btn body-small"
-          :disabled="product.count === 0"
+          :disabled="product.count === 1"
           @click="decrement(product)"
         >
           -
@@ -87,16 +85,15 @@ export default {
     },
   },
   methods: {
+    toggleRemoveFromCartIcon() {
+      this.shouldDisplayRemoveConfirmation = true;
+    },
     increment(id) {
       console.log(`shopping_increment: ${id}`);
       this.$store.commit("INCREMENT_PRODUCT_COUNT", id);
     },
     decrement(product) {
-      if (product.count === 1) {
-        this.shouldDisplayRemoveConfirmation = true;
-      } else {
-        this.$store.commit("DECREMENT_PRODUCT_COUNT", product.id);
-      }
+      this.$store.commit("DECREMENT_PRODUCT_COUNT", product.id);
     },
     removeFromCart(id) {
       this.$store.commit("REMOVE_FROM_CART", id);
