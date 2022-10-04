@@ -6,7 +6,11 @@
       <h5 class="product-price">{{ product.price | currency }}</h5>
       <img class="share-image" src="../assets/share.png" />
     </div>
-    <button @click="addToCart(product)" class="product-view-btn">
+    <button
+      @click="addToCart(product)"
+      class="product-view-btn"
+      :disabled="product.pieces && product.pieces <= product.count"
+    >
       ADD TO CART
     </button>
     <div>

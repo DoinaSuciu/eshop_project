@@ -1,8 +1,8 @@
 <template>
   <nav class="nav-bar">
-    <router-link to="/"
-      ><img class="logo" src="../assets/SHOPPE.png"
-    /></router-link>
+    <router-link to="/">
+      <img @click="hideHambMenu" class="logo" src="../assets/SHOPPE.png" />
+    </router-link>
 
     <div class="nav-icons">
       <ul class="nav-links">
@@ -13,9 +13,9 @@
         </li>
       </ul>
       <span class="nav-icon mobile-hide"><img src="../assets/Line.png" /></span>
-      <router-link class="nav-icon mobile-hide" to="/search"
-        ><img src="../assets/Icon search.png"
-      /></router-link>
+      <router-link class="nav-icon mobile-hide" to="/search">
+        <img src="../assets/Icon search.png" />
+      </router-link>
       <router-link class="nav-icon" to="/shopping-cart">
         <div class="bag-item">
           <img src="../assets/Bag.png" />
@@ -24,9 +24,9 @@
           }}</span>
         </div>
       </router-link>
-      <router-link class="nav-icon mobile-hide" to="/my-account"
-        ><img src="../assets/Icon account.png"
-      /></router-link>
+      <router-link class="nav-icon mobile-hide" to="/my-account">
+        <img src="../assets/Icon account.png" />
+      </router-link>
 
       <HambMenuIcon
         id="hamb-menu-icon"

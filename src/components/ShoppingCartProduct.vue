@@ -71,6 +71,7 @@ export default {
       photo: String,
       name: String,
       price: String,
+      pieces: Number,
     },
   },
   data() {
