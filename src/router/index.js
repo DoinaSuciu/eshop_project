@@ -7,13 +7,15 @@ import OurStory from "../views/OurStory.vue";
 import Shop from "../views/Shop.vue";
 import ProductView from "../views/ProductView.vue";
 import About from "../views/About.vue";
-import Account from "../views/Account.vue";
+import AccountSignIn from "../views/AccountSignIn.vue";
+import MyAccount from "../views/MyAccount.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import Contact from "../views/Contact.vue";
 import TermsAndConditions from "../views/TermsAndConditions";
 import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
 import ShoppingCart from "../views/ShoppingCart.vue";
 import Checkout from "../views/Checkout.vue";
+import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -37,6 +39,9 @@ const routes = [
     path: "/blog-post/:id",
     name: "blog-post",
     component: BlogPost,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/our-story",
@@ -54,9 +59,20 @@ const routes = [
     component: About,
   },
   {
-    path: "/account",
-    name: "account",
-    component: Account,
+    path: "/account-sign-in",
+    name: "account-sign-in",
+    component: AccountSignIn,
+    meta: {
+      requiresUnauth: true,
+    },
+  },
+  {
+    path: "/my-account",
+    name: "my-account",
+    component: MyAccount,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/reset-password",
@@ -109,7 +125,14 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log(to);
   console.log(from);
-  next();
+
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next("/account-sign-in");
+  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;

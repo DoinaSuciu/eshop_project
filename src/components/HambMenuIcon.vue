@@ -10,14 +10,17 @@
 export default {
   name: "HambMenuIcon",
   data() {
-    return {
-      isOpen: false,
-    };
+    return {};
   },
   methods: {
     toggleIcon() {
-      this.isOpen = !this.isOpen;
+      this.$store.commit("SET_HAMB_ICON", !this.isOpen);
       this.$emit("action", this.isOpen);
+    },
+  },
+  computed: {
+    isOpen() {
+      return this.$store.state.isHambIconOpen;
     },
   },
 };

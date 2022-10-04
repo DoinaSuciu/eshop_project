@@ -1,6 +1,6 @@
 <template>
-  <main class="account">
-    <h1 class="myAccount">My account</h1>
+  <main class="account-sign-in">
+    <h1 class="account-sign-in-title">My account</h1>
     <div class="wrapper">
       <tabs>
         <tab title="Sign In">
@@ -21,7 +21,7 @@ import SignIn from "@/components/SignIn.vue";
 import Register from "@/components/Register.vue";
 
 export default {
-  name: "Account",
+  name: "AccountSignIn",
   components: {
     Tab,
     Tabs,
@@ -112,7 +112,7 @@ export default {
 @import "../styles/typography.scss";
 
 @media only screen and (min-width: 0) {
-  .account {
+  .account-sign-in {
     padding-top: 24px;
     display: flex;
     flex-direction: column;
@@ -121,7 +121,7 @@ export default {
     line-height: 20px;
     font-family: "DM Sans Regular", sans-serif;
 
-    .myAccount {
+    .account-sign-in-title {
       margin: 0 auto 24px auto;
     }
   }

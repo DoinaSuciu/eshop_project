@@ -54,42 +54,36 @@ export default {
           "Delivery Option": "Standard",
           Price: "Free",
           Service: "3-5 working days",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$150",
         },
         {
           "Delivery Option": "Click & Collect from SHOPPE Boutique",
           Price: "Free",
           Service: "2 working days",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$200",
         },
         {
           "Delivery Option": "Next Day Delivery Monday - Friday",
-          Price: "$ 7.95",
+          Price: "$7.95",
           Service: "Next working day",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$350",
         },
         {
           "Delivery Option": "Click & Collect from DPD Pickup Point",
-          Price: "$ 7.95",
+          Price: "$7.95",
           Service: "4-5 working days",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$150",
         },
         {
           "Delivery Option": "Nominated Day Monday - Friday",
-          Price: "$ 7.95",
+          Price: "$7.95",
           Service: "Guaranteed Delivery Date",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$150",
         },
         {
           "Delivery Option": "Nominated Day Weekends",
-          Price: "$ 7.95",
+          Price: "$7.95",
           Service: "Guaranteed Delivery Date",
-          "Order By": "14:00 GMT",
           "Free on orders over": "$400",
         },
       ],
@@ -126,7 +120,9 @@ export default {
 .deliveries-returns {
   display: flex;
   flex-direction: column;
-  margin: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .title-delivery-page {
@@ -137,7 +133,7 @@ export default {
 table {
   font-family: "DM Sans Regular", sans-serif;
   font-size: 9px;
-  min-width: 300px;
+  width: 100%;
   border-collapse: collapse;
   border: 1px solid #44475c;
   margin: 10px 10px 0 10px;

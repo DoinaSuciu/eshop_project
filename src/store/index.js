@@ -11,6 +11,7 @@ export default new Vuex.Store({
     shippingCountry: null,
     appliedCoupon: 0,
     cart: [],
+    isHambIconOpen: false,
     coupons: [
       { name: "HAPPY5", value: 5 },
       { name: "HAPPY10", value: 10 },
@@ -452,6 +453,9 @@ export default new Vuex.Store({
     },
     SET_COUPON(state, couponValue) {
       state.appliedCoupon = couponValue;
+    },
+    SET_HAMB_ICON(state, isHambIconOpen) {
+      state.isHambIconOpen = isHambIconOpen;
     },
   },
   actions: {

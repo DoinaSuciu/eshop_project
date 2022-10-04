@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper-tabs">
     <ul class="tabs__header body-small">
       <li
         v-for="(tab, index) in tabs"
@@ -45,6 +45,16 @@ export default {
 @import "../styles/vars.scss";
 /* @import "../styles/typography.scss"; */
 
+/* .wrapper-tabs {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.wrapper-tabs::-webkit-scrollbar {
+  width: 0;
+} */
+
 ul.tabs__header {
   display: flex;
   flex-direction: row;
@@ -56,6 +66,9 @@ ul.tabs__header {
   padding: 2px;
   border-radius: 5px;
   background-color: #efefef;
+  /* overflow-x: auto;
+  max-width: 100%;
+  overscroll-behavior-inline: contain; */
 }
 ul.tabs__header > li {
   padding: 4px 49px;

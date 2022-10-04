@@ -24,7 +24,7 @@
           }}</span>
         </div>
       </router-link>
-      <router-link class="nav-icon mobile-hide" to="/account"
+      <router-link class="nav-icon mobile-hide" to="/my-account"
         ><img src="../assets/Icon account.png"
       /></router-link>
 
@@ -47,7 +47,7 @@
             <router-link
               v-if="isLoggedIn"
               class="hamb-menu-item-icon hamb-menu-item"
-              to="/account"
+              to="/my-account"
             >
               <img src="../assets/Icon account.png" />My account
             </router-link>
@@ -63,9 +63,9 @@
             <router-link
               v-if="!isLoggedIn"
               class="hamb-menu-item-icon hamb-menu-item"
-              to="/account"
+              to="/account-sign-in"
             >
-              <img src="../assets/Icon logout.png" />Register
+              <img src="../assets/Icon logout.png" />Sign In
             </router-link>
           </div>
         </div>
@@ -142,9 +142,8 @@ export default {
     },
 
     handleHambIcon(isOpen) {
-      // console.log(this.open);
-      // console.log(isOpen);
       this.open = isOpen;
+      this.$store.commit("SET_HAMB_ICON", isOpen);
       if (isOpen) {
         document.documentElement.style.overflow = "hidden";
 
@@ -161,7 +160,8 @@ export default {
 
     logout() {
       console.log("logout");
-      return this.$store.dispatch("logout");
+      this.$store.dispatch("logout");
+      // this.$router.replace("/");
     },
   },
 
@@ -248,8 +248,9 @@ export default {
 
   .hamb-menu {
     display: none;
-    z-index: 2;
+    z-index: 1000;
     width: 0;
+    background-color: $white;
   }
 
   .show-menu {

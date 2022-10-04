@@ -118,7 +118,7 @@ export default {
       try {
         console.log("register");
         await this.$store.dispatch("register", actionPayload);
-        this.$router.push("/account");
+        this.$router.push("/");
       } catch (err) {
         this.error = err.message || "Failed to authenticate, try later.";
       }
