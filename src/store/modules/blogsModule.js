@@ -1,8 +1,15 @@
 export default {
   state: {
+    blogCategories: [
+      { id: 10001, name: "Fashion" },
+      { id: 10002, name: "Celebrity Jewelry" },
+      { id: 10003, name: "Style" },
+      { id: 10004, name: "Accessories" },
+    ],
     blogs: [
       {
         id: 111,
+        category: "Celebrity Jewelry",
         title: "The Jewelry Designers of the Decade",
         coverPhoto: require(`/src/assets/blog/jewelry_designers_of_the_decade/Nikos-Koulis-Earrings - Cover.jpg`),
         intro: `It's been a great decade of jewelry design. Color, form, materials, and even classic diamond designs have been reimagined for modern life. Even serious jewelry has lightened up to become more wearable and personal.
@@ -60,8 +67,62 @@ export default {
           },
         ],
       },
+
       {
         id: 112,
+        category: "Fashion",
+        title: "A Preview of the Jewels of TEFAF Maastricht",
+        coverPhoto: require(`/src/assets/blog/jewels-TEFAF/TEFAF-choker-detail-750x600.jpg`),
+        intro: `The annual TEFAF fair in Maastricht is a showcase for art and antiquities, including museum quality jewelry from contemporary masters like Wallace Chan, Hemmerle,
+        and Glenn Spiro as well as vintage jewelry by Suzanne Belperron, Lalique, and other sought after-makers. With a growing international profile thanks to new spin and fall
+        events in New York, the annual main event in Maastricht has an awe-inspiring collection of jewelry on display. I won't be attending to photograph the jewelry in person but
+        I enjoyed the previewed pieces so much I thought I should share them with you too.  Here is a small sample of the riches that will be on display when the fair opens on March 10.`,
+        content: [
+          {
+            id: 1121,
+            title: "Glycines Choker by Philippe Wolfers",
+            photo: require(`/src/assets/blog/jewels-TEFAF/Philippe-Wolfers-Choker.jpg`),
+            content: `This exquisite 1901 choker with carved watermelon tourmaline, opal, ruby, and garnet with plique-a-jour enamel is a textbook example of everything that is wonderful
+            about Art Nouveau jewelry: the whiplash line, the unusual gemstones, the natural inspiration, and the lightness and translucency. It also has great provenance: it comes from
+            the estate of Sophie Willstädter, who was the wife of Philippe Wolfers. How lovely to think that he made this beautiful choker specifically for the neck of his beloved.
+            I's offered by Epoque Fine Jewels.`,
+          },
+          {
+            id: 1122,
+            title: "Toggle Torque Necklace by Suzanne Belperron",
+            photo: require(`/src/assets/blog/jewels-TEFAF/Toggle-Torque-Choker-Suzanne-Belperron.jpg`),
+            content: `This design by Suzanne Belperron was originally created for Elsa Schiaparelli, who was photographed wearing hers for the September 1933 issue of Vogue Paris.
+            The recent revival of the Belperron brand couldn't come at a better time: her designs, like this choker, feel absolutely current. This choker is black lacquer, platinum, 18k
+            gray gold and six carats of diamonds from Herz-Belperron.`,
+          },
+          {
+            id: 1123,
+            title: "Bridge of Waves Ring by Wallace Chan",
+            photo: require(`/src/assets/blog/jewels-TEFAF/Bridge-of-Waves-Wallace-Chan.jpg`),
+            content: `Titanium waves dance into white and yellow diamonds in this dynamic design by modern master Wallace Chan. The diamonds sparkle light sunlight on the waves, hidden
+             and revealed behind the curves of metal in a design that merges sea and sky.`,
+          },
+          {
+            id: 1124,
+            title: "Mesopotamian Carnelian Bangles by G",
+            photo: require(`/src/assets/blog/jewels-TEFAF/Glenn-Spiro-Mesopotamian-Carnelian-Bracelets.jpg`),
+            content: `Designer Glenn Spiro often uses rare gems (another ring he is showing at this year's fair is set with an amazing ten-carat old-mine cut marquise diamond) but these
+            bracelets are designed to highlight something much more precious: four carved carnelian arrowhead-shaped pieces that date from first-millennia Mesopotamia. I love the way this
+            ancient material is set in such a modern design. whether or not these dramatic bracelets will give the woman who wears them ancient superpowers, they will clearly give her supreme style.`,
+          },
+          {
+            id: 1125,
+            title: "Cosmic Union Cuff by Wallace Chan",
+            photo: require(`/src/assets/blog/jewels-TEFAF/Wallace-Chan_Cosmic-Union-Cuff.jpg`),
+            content: `This cuff bracelet represents the first time Wallace Chan has created a piece with agate, which represents the layers of the passage of time laid down by stare on the earth.
+            Diamonds, sapphires and garnets swirl around the bangle like the cosmos swirling around the planet.`,
+          },
+        ],
+      },
+
+      {
+        id: 113,
+        category: "Fashion",
         title: "Top Ten: 2022 AGTA Spectrum Awards",
         coverPhoto: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/2018-AGTA-Spectrum-Awards.jpg`),
         intro: `It's time to celebrate gems in the annual AGTA Spectrum Awards competition! I think Spectrum is the best jewelry design competition because the editor's
@@ -71,14 +132,14 @@ export default {
         Here are the ten gemstone designs I like the best from this year's competition and why I think they are interesting.`,
         content: [
           {
-            id: 1121,
+            id: 1131,
             title: "Helen Kim Currens, J.W. Currens: Remember Ring",
             photo: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/Helen-Kim-Currens-Moonstone-Ring.jpg`),
             content: `This J.W. Currens platinum ring set with a 9.25 carat sugarloaf moonstone isn't just beautiful from the top: every curves surface of this ring is beautifully
             engraved and set with gemstones, including tanzanites and rose-cut diamonds (and a lot of diamond pave). Here is a view from the back.`,
           },
           {
-            id: 1122,
+            id: 1132,
             title: "Joseph Ambalu, Amba Gem Corp: Emerald Ring",
             photo: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/Amba-Gem-Emerald-Ring.jpg`),
             content: `There are emeralds and then there are emeralds. This 7.16 carat untreated Russian emerald is gem quality, what dealers call “crystal.”
@@ -87,7 +148,7 @@ export default {
             I love that this kind of gemmy stone is set at an angle, it really takes this ring to a new level. And the yellow gold double prongs and double pave band are nice touches too.`,
           },
           {
-            id: 1123,
+            id: 1133,
             title: "Zoltan David: Candy Ice Tourmaline Necklace",
             photo: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/Zoltan-Davis-Candy-Ice-Necklace.jpg`),
             content: `This incredible layout of bicolor rubellite tourmalines is perfectly complemented by the design of this geometric necklace,
@@ -96,7 +157,7 @@ export default {
             incredibly difficult. Zoltan David makes it look easy.`,
           },
           {
-            id: 1124,
+            id: 1134,
             title: "Evelyn Huang, Evelyn H Jewelry: Aurora Ring/Pendant",
             photo: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/Evelyn-H-Ring-Pendant.jpg`),
             content: `Who wouldn't want more ways to wear their jewelry? This clever design by Evelyn H is a ring that turns into a pendant.
@@ -105,7 +166,7 @@ export default {
             All of these little details plus the convertibility make it a winner for me. (And I don't even like pink.)`,
           },
           {
-            id: 1125,
+            id: 1135,
             title: "Erica Courtney: Gemstone Mandala Pendant",
             photo: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/Erica-Courtney-Medallion.jpg`),
             content: `Another Spectrum juggernaut, designer Erica Courtney knows her way around gemstones. (If I went to Spectrum one year and found she didn't win anything I would be shocked.)
@@ -116,57 +177,127 @@ export default {
         ],
       },
       {
-        id: 113,
-        title: "A Preview of the Jewels of TEFAF Maastricht",
-        coverPhoto: require(`/src/assets/blog/jewels-TEFAF/TEFAF-choker-detail-750x600.jpg`),
-        intro: `The annual TEFAF fair in Maastricht is a showcase for art and antiquities, including museum quality jewelry from contemporary masters like Wallace Chan, Hemmerle,
-        and Glenn Spiro as well as vintage jewelry by Suzanne Belperron, Lalique, and other sought after-makers. With a growing international profile thanks to new spin and fall
-        events in New York, the annual main event in Maastricht has an awe-inspiring collection of jewelry on display. I won't be attending to photograph the jewelry in person but
-        I enjoyed the previewed pieces so much I thought I should share them with you too.  Here is a small sample of the riches that will be on display when the fair opens on March 10.`,
+        id: 114,
+        category: "Style",
+        title: "What are the Main Shapes of Diamond Rings?",
+        coverPhoto: require(`/src/assets/blog/main-shapes-diamond-rings/Triple_0.50ct_Engagement_Ring_Model.jpg`),
+        intro: `There are probably far more cuts of engagement rings than you might realise, but we're going to focus on nine of the most well-known diamond shapes for rings and give you
+        each of the diamond shape names, so you have everything you need when you search online or in-store. Plus discover who different types of diamond cuts might be best suited to and why
+        each has its own unique beauty.`,
         content: [
           {
-            id: 1131,
-            title: "Glycines Choker by Philippe Wolfers",
-            photo: require(`/src/assets/blog/jewels-TEFAF/Philippe-Wolfers-Choker.jpg`),
-            content: `This exquisite 1901 choker with carved watermelon tourmaline, opal, ruby, and garnet with plique-a-jour enamel is a textbook example of everything that is wonderful
-            about Art Nouveau jewelry: the whiplash line, the unusual gemstones, the natural inspiration, and the lightness and translucency. It also has great provenance: it comes from
-            the estate of Sophie Willstädter, who was the wife of Philippe Wolfers. How lovely to think that he made this beautiful choker specifically for the neck of his beloved.
-            I's offered by Epoque Fine Jewels.`,
+            id: 1141,
+            title: "The Brilliant Cut Diamond",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_4_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `By far the most popular of the diamond ring shapes, particularly when shopping for an engagement ring, the round diamond is a classic beauty that needs no introduction.
+             Round diamonds are cut to optimise brilliance, with over 58 facets that reflect light and cast tiny rainbows in a breath-taking show of sparkle. If you're not sure what your partner
+              would like, a round cut engagement ring is likely your safest bet as it is timeless and elegant with a wow-factor the moment that symbolic little box is opened. Of all the diamond
+              shapes, round cut diamonds lose the most raw material during the shaping process, which gives them their higher price tag.`,
           },
           {
-            id: 1132,
-            title: "Toggle Torque Necklace by Suzanne Belperron",
-            photo: require(`/src/assets/blog/jewels-TEFAF/Toggle-Torque-Choker-Suzanne-Belperron.jpg`),
-            content: `This design by Suzanne Belperron was originally created for Elsa Schiaparelli, who was photographed wearing hers for the September 1933 issue of Vogue Paris.
-            The recent revival of the Belperron brand couldn't come at a better time: her designs, like this choker, feel absolutely current. This choker is black lacquer, platinum, 18k
-            gray gold and six carats of diamonds from Herz-Belperron.`,
+            id: 1142,
+            title: "The Princess Cut Diamond",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x16842_5_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `Square cut diamond rings have been hot on the heels of their spherical cousin for many years, and they are a very popular choice amongst those hoping for an excitable 'yes!'
+             from their loved one. Beloved for its contemporary style and sparkle, the princess cut is the most popular fancy shape diamond. Square on the top, it features four bevelled sides
+              and comes in at a point (like an upside-down pyramid) beneath the shiny surface of the ring.`,
           },
           {
-            id: 1133,
-            title: "Bridge of Waves Ring by Wallace Chan",
-            photo: require(`/src/assets/blog/jewels-TEFAF/Bridge-of-Waves-Wallace-Chan.jpg`),
-            content: `Titanium waves dance into white and yellow diamonds in this dynamic design by modern master Wallace Chan. The diamonds sparkle light sunlight on the waves, hidden
-             and revealed behind the curves of metal in a design that merges sea and sky.`,
+            id: 1143,
+            title: "Emerald Cut Diamond Rings",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_6_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `Emerald cut diamonds are elegant and refined. The elongated shape and octagonal step-cut faceting are great for understated glamour and its flat top highlights the stone's
+            colour and clarity. An emerald cut ring is perfect for those with wider fingers as the thicker stone gives the illusion of slenderness. If you're looking for an Art Deco-inspired style
+             with an edge, an emerald cut diamond ring is for you.`,
           },
           {
-            id: 1134,
-            title: "Mesopotamian Carnelian Bangles by G",
-            photo: require(`/src/assets/blog/jewels-TEFAF/Glenn-Spiro-Mesopotamian-Carnelian-Bracelets.jpg`),
-            content: `Designer Glenn Spiro often uses rare gems (another ring he is showing at this year's fair is set with an amazing ten-carat old-mine cut marquise diamond) but these
-            bracelets are designed to highlight something much more precious: four carved carnelian arrowhead-shaped pieces that date from first-millennia Mesopotamia. I love the way this
-            ancient material is set in such a modern design. whether or not these dramatic bracelets will give the woman who wears them ancient superpowers, they will clearly give her supreme style.`,
+            id: 1144,
+            title: "The Oval Diamond Ring",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_7_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `The oval shape combines the elegance and sparkle of the round brilliant with the uniqueness of the marquise diamond. Its shimmering facets make the light dance and create the
+            illusion of longer fingers. Bold and sophisticated, the oval is a unique shape for the wearer who wants to express their individuality. Oval diamond engagement rings are popular for their
+            nod to the traditional round diamond design, whilst still showcasing the wearers own style and taste and, similarly to the marquis diamond, they help to create the illusion of longer, more
+             slender fingers.`,
           },
           {
-            id: 1135,
-            title: "Cosmic Union Cuff by Wallace Chan",
-            photo: require(`/src/assets/blog/jewels-TEFAF/Wallace-Chan_Cosmic-Union-Cuff.jpg`),
-            content: `This cuff bracelet represents the first time Wallace Chan has created a piece with agate, which represents the layers of the passage of time laid down by stare on the earth.
-            Diamonds, sapphires and garnets swirl around the bangle like the cosmos swirling around the planet.`,
+            id: 1145,
+            title: "The Pear Shaped Diamond",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_8_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `Shaped like a tear (of joy) with an extraordinary display of light, the flattering pear shape elongates the finger — especially when worn with the point facing the nail.
+            Its facets match those of the brilliant round cut and give of magnificent sparkle. It's one of the least common engagement ring shapes, so, if you want to show your individuality,
+            a pear-shaped diamond ring is perfect for you.`,
+          },
+          {
+            id: 1146,
+            title: "The Marquise engagement Ring",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_9_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `The marquis diamond shape was first commissioned at the request of King Louis the Fifteenth of France who wanted a cut shape that resembled the lips of his mistress,
+            Jean Antoinette Poisson. Its oval shape meets in pointed ends, resembling the hull of a ship. In addition to being unique, a marquise diamond ring is great for someone looking to
+            create the illusion of elongated fingers.`,
+          },
+          {
+            id: 1147,
+            title: "The Cushion Cut Diamond",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_11_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `Combining the two most popular diamond shapes : the round brilliant and the princess cut : a cushion cut diamond ring features curved corners and brilliant
+            facets for a soft look with a lot of sparkle. The rounded edges put a unique spin on the classic round brilliant offering the perfect balance between traditional and contemporary style.`,
+          },
+          {
+            id: 1148,
+            title: "Heart Shaped Diamond",
+            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_12_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
+            content: `Heart-shaped diamonds are classic symbols of love and are cut with a precise length-to-width ratio to ensure expertly symmetrical curves. Sentimental and as rare as true
+             connection, a heart shaped diamond ring is an excellent choice for the romantic who wears their heart on their sleeve (and finger). Worn with the point facing the fingernail, a heart
+              shaped diamond elongates the finger however, tradition states that heart shaped rings should be worn with the point facing your body to symbolise that your heart is taken, which way
+              would you choose?`,
           },
         ],
       },
       {
-        id: 114,
+        id: 115,
+        category: "Accessories",
+        title: "Trending: Filled Hoops",
+        coverPhoto: require(`/src/assets/blog/trending-filled-hoops/Nada-G-Filled-Hoops-750x600.jpg`),
+        intro: `Hoops are the most important earring silhouette right now. But what looks especially fresh are hoops that play with the negative space in the center of the circle,
+          filling it with gems, metal, designs or a combination of the two. It allows a classic to become something entirely new.
+          I've been noticing spectacular examples for about a year now and the trend shows no sign of slowing. here are a few of my favorite hoops with a stylish filling in the center.`,
+        content: [
+          {
+            id: 1151,
+            title:
+              "Noor Fares rainbow hoops with rock crystal quartz in the center.",
+            photo: require(`/src/assets/blog/trending-filled-hoops/Noor-Fares-Hoops.jpg`),
+            content: ``,
+          },
+          {
+            id: 1152,
+            title: "Stephen Webster Vertigo Hoops with a cameo center",
+            photo: require(`/src/assets/blog/trending-filled-hoops/Stephen-Webster-Vertigo.jpg`),
+            content: ``,
+          },
+          {
+            id: 1153,
+            title: "Jacqueline Cullen gray agate hoops",
+            photo: require(`/src/assets/blog/trending-filled-hoops/Jacqueline-Cullen-Gray-Agate.jpg`),
+            content: ``,
+          },
+          {
+            id: 1154,
+            title: "Arunashi Titanium and mother-of-pearl hoops",
+            photo: require(`/src/assets/blog/trending-filled-hoops/Arunashi-Titanium-Hoops.jpg`),
+            content: ``,
+          },
+          {
+            id: 1155,
+            title: "Nikos Koulis pearl and diamond hoops",
+            photo: require(`/src/assets/blog/trending-filled-hoops/Nikos-Koulis-Pearl-Hoops.jpg`),
+            content: ``,
+          },
+        ],
+      },
+      {
+        id: 116,
+        category: "Style",
         title: "Top Ten: Metal & Smith",
         coverPhoto: require(`/src/assets/blog/top-ten-metal-smith/AMT-Jewelry-Earrings.jpg`),
         intro: `Metal & Smith promotes itself as #notatradeshow and it is quite different from the other jewelry trade shows I attend each year. It's in a non-traditional pop-up space near
@@ -178,21 +309,21 @@ export default {
         These are my favorite ten pieces from the Spring edition of Metal & Smith.`,
         content: [
           {
-            id: 1141,
+            id: 1161,
             title: "Tourmaline Rings by Rock & Gem",
             photo: require(`/src/assets/blog/top-ten-metal-smith/RockGems-photo-by-Kremkow.jpg`),
             content: `How fabulous is that watermelon tourmaline ring on the left? The gem dealer envisioned a pair of earrings but Sig Ward of Rock & Gems had other plans.
              That line of baguettes down the middle holds it all together. The ring on the right also is a fresh way to set a watermelon tourmaline.`,
           },
           {
-            id: 1142,
+            id: 1162,
             title: "Earrings by Lauren Harper",
             photo: require(`/src/assets/blog/top-ten-metal-smith/Lauren-Harper-earrings-800.jpg`),
             content: `I've been a Lauren Harper fan for a long time so I was delighted to see that she decided to try Metal & Smith for the first time. She has a really distinctive visual style.
             I love how wearable her earrings are: Deco inspired but very modern and wearable too.`,
           },
           {
-            id: 1143,
+            id: 1163,
             title: "Earrings by Amali",
             photo: require(`/src/assets/blog/top-ten-metal-smith/Amali-Earrings-800.jpg`),
             content: `Choosing just one Amali piece was a challenge. Case in point: check out the killer pair of opal earrings I featured on Instagram. But I have to choose these tourmaline
@@ -200,14 +331,14 @@ export default {
              18k gold chain, Sara Freedenfeld's work really hangs together as a collection too.`,
           },
           {
-            id: 1144,
+            id: 1164,
             title: "Moonstone Ring from Campbellian Collection",
             photo: require(`/src/assets/blog/top-ten-metal-smith/Campbellian-Moonstone1.jpg`),
             content: `She had me at moonstone. This might be a traditional ring design but the quality of this moonstone is exceptional: it's the best large rainbow labradorite I've seen
             in a long time. I'll be featuring more pretty gems from Campbellian Collection in an upcoming post.`,
           },
           {
-            id: 1145,
+            id: 1165,
             title: "Rose Cut Ring by Alberian & Aulde",
             photo: require(`/src/assets/blog/top-ten-metal-smith/AlberianAuldeRing.jpg`),
             content: `Warren and Mary are also long-time favorites. They are fine artists and their work is meticulously detailed.  My favorites at this edition of the show included some
@@ -217,78 +348,138 @@ export default {
         ],
       },
       {
-        id: 115,
-        title: "What are the Main Shapes of Diamond Rings?",
-        coverPhoto: require(`/src/assets/blog/main-shapes-diamond-rings/Triple_0.50ct_Engagement_Ring_Model.jpg`),
-        intro: `There are probably far more cuts of engagement rings than you might realise, but we're going to focus on nine of the most well-known diamond shapes for rings and give you
-        each of the diamond shape names, so you have everything you need when you search online or in-store. Plus discover who different types of diamond cuts might be best suited to and why
-        each has its own unique beauty.`,
+        id: 117,
+        category: "Accessories",
+        title: "Behind the Design",
+        coverPhoto: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Lingerie-Collection-Hoops-750x600.jpg`),
+        intro: `Based in Athens, designer Nikos Koulis is known for his inspired gem geometry. Enamel, colorful gems and angles create an updated Art Deco feeling in his work.
+        His latest collection, Lingerie, introduces round shapes for the first time. The pieces have an intricate construction: the large necklace took six months to craft.`,
         content: [
           {
-            id: 1151,
-            title: "The Brilliant Cut Diamond",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_4_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `By far the most popular of the diamond ring shapes, particularly when shopping for an engagement ring, the round diamond is a classic beauty that needs no introduction.
-             Round diamonds are cut to optimise brilliance, with over 58 facets that reflect light and cast tiny rainbows in a breath-taking show of sparkle. If you're not sure what your partner
-              would like, a round cut engagement ring is likely your safest bet as it is timeless and elegant with a wow-factor the moment that symbolic little box is opened. Of all the diamond
-              shapes, round cut diamonds lose the most raw material during the shaping process, which gives them their higher price tag.`,
+            id: 1171,
+            title: "",
+            photo: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Lingerie-Necklace-Bangle.jpg`),
+            content: `I talked to him at Couture about his inspiration for the new collection and some extraordinary new pieces with transparent enamel added to his existing collections.`,
           },
           {
-            id: 1152,
-            title: "The Princess Cut Diamond",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x16842_5_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `Square cut diamond rings have been hot on the heels of their spherical cousin for many years, and they are a very popular choice amongst those hoping for an excitable 'yes!'
-             from their loved one. Beloved for its contemporary style and sparkle, the princess cut is the most popular fancy shape diamond. Square on the top, it features four bevelled sides
-              and comes in at a point (like an upside-down pyramid) beneath the shiny surface of the ring.`,
+            id: 1172,
+            title: "",
+            photo: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Lingerie-Ring-800.jpg`),
+            content: `After so many architectural designs, I had the feeling that I wanted to use rounded shapes. Pearl is the ideal material, most of the pearls are round. I started doing
+            this pearl collection using these trigons and all these Deco patterns I used in the V collection. So here you have the result.`,
           },
           {
-            id: 1153,
-            title: "Emerald Cut Diamond Rings",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_6_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `Emerald cut diamonds are elegant and refined. The elongated shape and octagonal step-cut faceting are great for understated glamour and its flat top highlights the stone's
-            colour and clarity. An emerald cut ring is perfect for those with wider fingers as the thicker stone gives the illusion of slenderness. If you're looking for an Art Deco-inspired style
-             with an edge, an emerald cut diamond ring is for you.`,
+            id: 1173,
+            title: "",
+            photo: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Lingerie-Cuff.jpg`),
+            content: `It's still quite geometric. This is the first time I'm using round stones. I normally don't use round stones, I don't like round stones.
+
+            Then I revisited the collection with gold balls instead of pearls. For me it's a modern lace. It's very delicate. It's very soft.
+
+            I think that this is the moment to move to more organic designs. This is the beginning.`,
           },
           {
-            id: 1154,
-            title: "The Oval Diamond Ring",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_7_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `The oval shape combines the elegance and sparkle of the round brilliant with the uniqueness of the marquise diamond. Its shimmering facets make the light dance and create the
-            illusion of longer fingers. Bold and sophisticated, the oval is a unique shape for the wearer who wants to express their individuality. Oval diamond engagement rings are popular for their
-            nod to the traditional round diamond design, whilst still showcasing the wearers own style and taste and, similarly to the marquis diamond, they help to create the illusion of longer, more
-             slender fingers.`,
+            id: 1174,
+            title: "",
+            photo: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Sapphire-Ring-800.jpg`),
+            content: `This blue sapphire ring started when I found the stone. I fell in love with the stone. I wanted not to surround the blue sapphire with the black enamel because of it's beauty.
+             I wanted an open space around it. It was the first ring where the black enamel doesn't touch the stone. Now we have more styles based on this ring.`,
           },
           {
-            id: 1155,
-            title: "The Pear Shaped Diamond",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_8_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `Shaped like a tear (of joy) with an extraordinary display of light, the flattering pear shape elongates the finger — especially when worn with the point facing the nail.
-            Its facets match those of the brilliant round cut and give of magnificent sparkle. It's one of the least common engagement ring shapes, so, if you want to show your individuality,
-            a pear-shaped diamond ring is perfect for you.`,
+            id: 1175,
+            title: "",
+            photo: require(`/src/assets/blog/behind-design-nikos-koulis/Nikos-Koulis-Enamel-Earrings-800.jpg`),
+            content: ``,
+          },
+        ],
+      },
+      {
+        id: 118,
+        category: "Celebrity Jewelry",
+        title: "The Top 5 Oscar Jewelry Moments Ever",
+        coverPhoto: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Best-Oscars-Jewelry-675x600.jpg`),
+        intro: `—There is no bigger stage for fine jewelry than the Academy Awards red carpet. It's the Super Bowl of jewelry, which is why celebrity placements are a jewelry brand's equivalent of Super Bowl
+         commercials. Yes, they are often paid to wear the jewelry and very few own their own Oscar jewelry but we enjoy them much more than the main event itself. And like any self-respecting American spectacle,
+          the jewels at the Academy Awards have their own hashtag: #OscarJewelry. Follow along on Twitter and Instagram for cheers and jeers and join in the fun.`,
+        content: [
+          {
+            id: 1181,
+            title: "1. Nicole Kidman in L'Wren Scott at the 2008 Oscars",
+            photo: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Nicole-Kidman-LWren-Scott-2008-Oscars.jpg`),
+            content: `This awe-inspiring statement necklace by L'Wren Scott is 1,399 carats but still manages to look a bit bohemian and ethereal. Nicole Kidman has worn many wonderful jewels to the Oscars,
+            including two amazing L'Wren Scott rough diamond cuffs in 2007 that I was lucky to see in person in Basel at the William Goldberg booth that year, but this necklace is my favorite. It also helped
+             launch the rough diamond trend so it was a landmark piece for jewelry style as well.`,
           },
           {
-            id: 1156,
-            title: "The Marquise engagement Ring",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_9_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `The marquis diamond shape was first commissioned at the request of King Louis the Fifteenth of France who wanted a cut shape that resembled the lips of his mistress,
-            Jean Antoinette Poisson. Its oval shape meets in pointed ends, resembling the hull of a ship. In addition to being unique, a marquise diamond ring is great for someone looking to
-            create the illusion of elongated fingers.`,
+            id: 1182,
+            title: "2. Angelina Jolie in Lorraine Schwartz at the 2009 Oscars",
+            photo: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Angelina-Jolie-Oscars-2009-Lorraine.jpg`),
+            content: `So simple. Yet so mesmerizing. The Lorraine Schwartz Colombian emerald earrings and matching ring that Angelina Jolie wore to the 2009 Oscars transformed the emerald market. I remember
+             interviewing emerald dealers about the resulting surge in sales, and also remembered how disdainful they were about the quality of the stones, which were noticeably included (as emeralds often are.)
+              it didn't matter what the dealers thought: suddenly everyone realized that emeralds didn't have to be clean to be beautiful. In fact, one reason these gems glow is the way their inclusions hold the
+               light.`,
           },
           {
-            id: 1157,
-            title: "The Cushion Cut Diamond",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_11_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `Combining the two most popular diamond shapes : the round brilliant and the princess cut : a cushion cut diamond ring features curved corners and brilliant
-            facets for a soft look with a lot of sparkle. The rounded edges put a unique spin on the classic round brilliant offering the perfect balance between traditional and contemporary style.`,
+            id: 1183,
+            title: "3. Margot Robbie in Van Cleef & Arpels at the 2015 Oscars",
+            photo: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Margot-Robbie-van-Cleef.jpg`),
+            content: `This necklace is an icon of jewelry design because the zipper actually works. You zip up the necklace and you can wear the shorter length as a bracelet.
+            I've seen this necklace style up close at the Vicenza Jewelry Museum and it really is quite beautiful: in person, the zipper is a beautiful texture.`,
           },
           {
-            id: 1158,
-            title: "Heart Shaped Diamond",
-            photo: require(`/src/assets/blog/main-shapes-diamond-rings/1200x1684_12_1200x16842_EJ2209B02_FindTheDiamondShape.webp`),
-            content: `Heart-shaped diamonds are classic symbols of love and are cut with a precise length-to-width ratio to ensure expertly symmetrical curves. Sentimental and as rare as true
-             connection, a heart shaped diamond ring is an excellent choice for the romantic who wears their heart on their sleeve (and finger). Worn with the point facing the fingernail, a heart
-              shaped diamond elongates the finger however, tradition states that heart shaped rings should be worn with the point facing your body to symbolise that your heart is taken, which way
-              would you choose?`,
+            id: 1184,
+            title: "4. Beyonce in Lorraine Schwartz at the 2005 Oscars",
+            photo: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Beyonce-Lorraine-Schwartz-Oscars-2005.jpg`),
+            content: `This was the debut of Lorraine Schwartz as the ultimate red carpet jeweler. These earrings are even more amazing up close.  I visited Lorraine in Basel the next year and felt
+            her diamond handkerchief mesh: it's soft as silk and incredibly flexible.  The craftsmanship is impeccable and she continues to break new design ground.`,
+          },
+          {
+            id: 1185,
+            title: "5. Keira Knightly in Bulgari at the 2006 Oscars",
+            photo: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Keira-Knightley-Bulgari-Oscars-2006.jpg`),
+            content: `This multicolor Bulgari bib necklace has a great Gina Lollobrigida vibe.  And it is such a bold choice with her aubergine one-shoulder Vera Wang dress that
+            I just can't help but love it.`,
+          },
+        ],
+      },
+      {
+        id: 119,
+        category: "Celebrity Jewelry",
+        title: "Best Earrings of the Met Gala",
+        coverPhoto: require(`/src/assets/blog/best-earrings-met-gala/Met-Gala-Earrings-750x600.jpg`),
+        intro: `Because this year's Met Gala celebrates Commes des Garcons, sartorial experimentation is the theme of the night. Jewelry experimentation? Not so much. But a few looks stood out.
+        It's not surprising that they are almost all earrings, since the earring category is the most innovative in jewelry today. Here are my five favorite earrings of the Met Gala.`,
+        content: [
+          {
+            id: 1191,
+            title: "Rihanna in Chopard",
+            photo: require(`/src/assets/blog/best-earrings-met-gala/Rihanna-wears-Rihanna-Loves-Chopard.jpg`),
+            content: `Rihanna ruled the night wearing Commes des Garcon and earrings from her own jewelry collection for Chopard. Best commercial ever.`,
+          },
+          {
+            id: 1192,
+            title: "Blake Lively in Lorraine Schwartz & Ofira",
+            photo: require(`/src/assets/blog/best-earrings-met-gala/Blake-Lively-Met-gala-800.jpg`),
+            content: `Spectacular earrings set with 82 carats of Burmese sapphires. If this is what happens when gem-obsessed Lorraine Schwartz collaborates with her gold-obsessed sister Ofira, bring it on.`,
+          },
+          {
+            id: 1193,
+            title: "Sarah Paulson in Irene Neuwirth",
+            photo: require(`/src/assets/blog/best-earrings-met-gala/Sarah-Paulson-Irene-Neuwirth.jpg`),
+            content: `I love the combination of black and blue and these earrings by Irene Neuwirth are spectacular example, set with rich blue sapphire and indicolite tourmaline.`,
+          },
+          {
+            id: 1194,
+            title: "Emily Ratajkowski in Kimberly McDonald",
+            photo: require(`/src/assets/blog/best-earrings-met-gala/KMD-Hoops.jpg`),
+            content: `Opal hoops by Kimberly McDonald? Sign me up. The colors are the perfect complement for Emily's mermaid gown.`,
+          },
+          {
+            id: 1195,
+            title: "Cassie in Rinaldy Yunardi",
+            photo: require(`/src/assets/blog/best-earrings-met-gala/Cassie-Ear-Cuff-800.jpg`),
+            content: `I had not heard of Cassie before tonight but these ear cuffs (she wore two!) changed that in a hurry. The cuffs, a grand sci-fi statement in diamonds are
+            a collaboration between her stylist B. Akerlund and Indonesian brand Rinaldy Yunardi (and may be costume, but still.)`,
           },
         ],
       },

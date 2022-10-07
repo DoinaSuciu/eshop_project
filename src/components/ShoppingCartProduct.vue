@@ -9,7 +9,9 @@
         >
           <span class="product-name-cart body-small">{{ product.name }}</span>
         </router-link>
-        <button class="remove-btn" @click="toggleRemoveFromCartIcon">+</button>
+        <button class="remove-btn" @click="showRemoveCartConfirmation">
+          +
+        </button>
       </div>
 
       <span class="in-stock body-small" v-if="product.pieces > 0"
@@ -86,7 +88,7 @@ export default {
     },
   },
   methods: {
-    toggleRemoveFromCartIcon() {
+    showRemoveCartConfirmation() {
       this.shouldDisplayRemoveConfirmation = true;
     },
     increment(id) {
@@ -98,6 +100,7 @@ export default {
     },
     removeFromCart(id) {
       this.$store.commit("REMOVE_FROM_CART", id);
+      this.stayOnShoppingPage();
     },
     stayOnShoppingPage() {
       this.shouldDisplayRemoveConfirmation = false;

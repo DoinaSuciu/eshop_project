@@ -5,6 +5,25 @@
       <h1 id="journal">JOURNAL</h1>
       <span id="style-inspiration-title">Style & Inspiration</span>
     </div>
+
+    <ul class="blog-categories">
+      <li v-for="category in blogCategories" :key="category.id">
+        <button
+          :id="category.name"
+          :class="[
+            'blog-category',
+            'body-medium',
+            selectedCategory === category.name
+              ? 'selected-category'
+              : 'not-selected-category',
+          ]"
+          @click="onSelectCategory"
+        >
+          {{ category.name }}
+        </button>
+      </li>
+    </ul>
+
     <div>
       <ul class="blog-cards">
         <li class="blog-card" v-for="blog in blogs" :key="blog.id">
@@ -20,12 +39,28 @@ import BlogCard from "@/components/BlogCard.vue";
 export default {
   name: "Blogs",
   data() {
-    return {};
+    return {
+      selectedCategory: null,
+      // blogsByCategory: [],
+    };
+  },
+  methods: {
+    onSelectCategory(event) {
+      this.selectedCategory = event.target.id;
+    },
   },
   computed: {
     blogs() {
-      console.log(JSON.stringify(this.$store.state.blogs));
-      return this.$store.state.blogsModule.blogs;
+      // console.log(JSON.stringify(this.$store.state.blogs));
+      if (this.selectedCategory === null) {
+        return this.$store.state.blogsModule.blogs;
+      }
+      return this.$store.state.blogsModule.blogs.filter(
+        (blog) => blog.category === this.selectedCategory
+      );
+    },
+    blogCategories() {
+      return this.$store.state.blogsModule.blogCategories;
     },
   },
   components: { BlogCard },
@@ -49,6 +84,29 @@ export default {
   .blog-cards {
     margin: 0;
     padding: 0;
+  }
+  .selected-category {
+    background-color: $black;
+    color: $white;
+  }
+
+  .not-selected-category {
+    background-color: $light-gray;
+  }
+
+  .blog-categories {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  .blog-category {
+    padding: 5px 10px;
+    margin: 5px 10px;
+    border-radius: 15px;
+    border: none;
   }
 
   #the-luxe {

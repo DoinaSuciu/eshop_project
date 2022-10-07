@@ -10,7 +10,7 @@
       <input
         class="body-small"
         type="text"
-        id="email-reste-password"
+        id="email-reset-password"
         placeholder="Email"
         v-model="email"
       />
@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       formIsValid: true,
+      email: "",
     };
   },
   methods: {
@@ -73,7 +74,7 @@ form {
   width: 100%;
   // width: 288px;
   padding: 0;
-  #email-reste-password {
+  #email-reset-password {
     width: 100%;
     height: 25px;
     padding: 0;

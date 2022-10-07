@@ -24,16 +24,14 @@
         Please enter a valid email and password (must be at least 6 characters
         long).
       </p>
-
-      <button class="btn-auth-mode body-small" @click="">SIGN IN</button>
-
-      <button
-        @click="redirectToResetPassword()"
-        class="forgot-password body-small"
-      >
-        Have you forgotten your password?
-      </button>
+      <button class="btn-auth-mode body-small">SIGN IN</button>
     </form>
+    <button
+      @click="redirectToResetPassword()"
+      class="forgot-password body-small"
+    >
+      Have you forgotten your password?
+    </button>
   </section>
 </template>
 
@@ -45,29 +43,14 @@ export default {
       email: "",
       password: "",
       formIsValid: true,
-      // mode: "signIn",
       isLoading: false,
       error: null,
     };
   },
   computed: {
-    // isLoggedIn() {
-    //   return this.$store.getters.isAuthenticated;
-    // },
-    // submitButtonCaption() {
-    //   if (this.mode === "signIn") {
-    //     return "SIGN IN";
-    //   } else {
-    //     return "REGISTER";
-    //   }
-    // },
-    // switchModeButtonCaption() {
-    //   if (this.mode === "signIn") {
-    //     return "REGISTER";
-    //   } else {
-    //     return "SIGN IN";
-    //   }
-    // },
+    prevPage() {
+      return this.$store.state.prevPage;
+    },
   },
 
   methods: {
@@ -91,22 +74,15 @@ export default {
 
       try {
         await this.$store.dispatch("signIn", actionPayload);
+        if (this.prevPage.fullPath === "/blogs") {
+          this.$router.go(-1);
+          return;
+        }
         this.$router.push("/");
       } catch (err) {
         this.error = err.message || "Failed to authenticate, try later.";
       }
-
-      // this.isLoading = false;
     },
-
-    // switchAuthMode() {
-    //   if (this.mode === "signIn") {
-    //     this.mode = "register";
-    //   } else {
-    //     this.mode = "signIn";
-    //   }
-    // },
-
     redirectToResetPassword() {
       this.$router.push({ path: "/reset-password" });
     },
@@ -129,7 +105,7 @@ export default {
 
   .sign-in-form {
     width: 288px;
-    margin: 87px auto 92px;
+    margin: 87px auto 0px;
 
     #email-sign-in,
     #password-sign-in {
@@ -171,14 +147,13 @@ export default {
       justify-content: center;
       // padding: 6px 32px 6px 32px;
     }
-
-    .forgot-password {
-      display: flex;
-      margin: 16px auto 0 auto;
-      border: none;
-      background-color: $white;
-      color: $black;
-    }
+  }
+  .forgot-password {
+    display: flex;
+    margin: 16px auto 92px auto;
+    border: none;
+    background-color: $white;
+    color: $black;
   }
 }
 </style>

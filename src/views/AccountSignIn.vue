@@ -1,5 +1,12 @@
 <template>
   <main class="account-sign-in">
+    <span
+      class="body-medium notification-blog-sign-in"
+      v-if="prevPage.fullPath === '/blogs'"
+    >
+      Please Sign In to read the full blog
+    </span>
+
     <h1 class="account-sign-in-title">My account</h1>
     <div class="wrapper">
       <tabs>
@@ -57,6 +64,9 @@ export default {
         return "SIGN IN";
       }
     },
+    prevPage() {
+      return this.$store.state.prevPage;
+    },
   },
   methods: {
     async submitForm() {
@@ -112,6 +122,10 @@ export default {
 @import "../styles/typography.scss";
 
 @media only screen and (min-width: 0) {
+  .notification-blog-sign-in {
+    margin-bottom: 20px;
+  }
+
   .account-sign-in {
     padding-top: 24px;
     display: flex;
