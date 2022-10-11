@@ -1,12 +1,19 @@
 <template>
   <main>
+    <Modal
+      v-if="modalActive"
+      :modalMessage="modalMessage"
+      v-on:close-modal="closeModal"
+    />
+    <Loading v-if="loading" />
+
     <h1 class="lost-password">Lost password</h1>
-    <p class="body-small">
-      If you've forgotten your password, enter your e-mail address and we'll
-      send you an e-mail
+    <p class="body-medium info-forgot-password">
+      If you've forgotten your password, enter your email in the form below and
+      we'll send you instructions to set a new one.
     </p>
 
-    <form class="body-small" @submit.prevent="resetPasswordClicked">
+    <form class="body-small" @submit.prevent="resetPassword">
       <input
         class="body-small"
         type="text"
@@ -15,11 +22,11 @@
         v-model="email"
       />
 
-      <p v-if="!formIsValid" class="msg-error-formIsNotValid">
+      <p v-if="emailIsNotValid" class="msg-error-formIsNotValid">
         Please enter a valid email.
       </p>
 
-      <button class="btn-reset-password body-small" @click="">
+      <button class="btn-reset-password body-small" type="submit">
         RESET PASSWORD
       </button>
     </form>
@@ -27,22 +34,59 @@
 </template>
 
 <script>
+import Modal from "../components/Modal.vue";
+import Loading from "../components/Loading.vue";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import db from "../firebase/firebaseInit";
+
 export default {
   data() {
     return {
-      formIsValid: true,
+      // formIsValid: true,
       email: "",
+      emailIsNotValid: false,
+      modalActive: false,
+      modalMessage: "",
+      loading: null,
+      regex:
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     };
   },
   methods: {
-    resetPasswordClicked() {
-      this.FormIsValid = true;
-      if (this.email === "" || !this.email.includes("@")) {
-        this.formIsValid = false;
-        return;
+    resetPassword() {
+      if (!this.regex.test(this.email)) {
+        this.emailIsNotValid = true;
+      } else {
+        this.emailIsNotValid = false;
+        this.loading = true;
+        const auth = getAuth();
+        sendPasswordResetEmail(auth, this.email)
+          .then(() => {
+            this.modalMessage =
+              "If your account exists, you will receive an email";
+            this.loading = false;
+            this.modalActive = true;
+          })
+          .catch((err) => {
+            // console.log(JSON.stringify(err, null, 3));
+            if (err.code === "auth/user-not-found") {
+              this.modalMessage = `This email address does not appear to be registered. <br/>
+                Please check you have entered it correctly.`;
+            } else {
+              this.modalMessage = err.message;
+            }
+            this.loading = false;
+            this.modalActive = true;
+          });
       }
     },
+    closeModal() {
+      this.modalActive = !this.modalActive;
+      this.email = "";
+    },
   },
+  components: { Modal, Loading },
 };
 </script>
 
@@ -61,18 +105,20 @@ main {
   margin: 69px auto 16px auto;
 }
 
+.info-forgot-password {
+  margin: 0;
+}
+
 .msg-error-formIsNotValid {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  // margin-bottom: 39px;
   color: $errors;
 }
 form {
   margin-top: 64px;
   width: 100%;
-  // width: 288px;
   padding: 0;
   #email-reset-password {
     width: 100%;

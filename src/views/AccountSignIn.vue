@@ -89,10 +89,10 @@ export default {
 
       try {
         if (this.mode === "signIn") {
-          console.log("signIn");
+          // console.log("signIn");
           await this.$store.dispatch("signIn", actionPayload);
         } else {
-          console.log("register");
+          // console.log("register");
           await this.$store.dispatch("register", actionPayload);
         }
       } catch (err) {

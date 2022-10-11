@@ -150,24 +150,18 @@ export default {
         return;
       }
       document.documentElement.style.overflow = "auto";
-      // this.isOpen = !this.isOpen;
-      // console.log(isOpen);
-      // this.$refs.hambMenu.style.height = "isOpen" ? "50%" : "0%";
-      // console.log(this.$refs.hambMenu);
-      // console.log(this.$refs.hambMenu.style);
-      // console.log(this.$refs.hambMenu.style.height);
     },
 
     logout() {
-      console.log("logout");
       this.$store.dispatch("logout");
-      // this.$router.replace("/");
+      if (this.$router.currentRoute.name !== "home") {
+        this.$router.push("/");
+      }
     },
   },
 
   computed: {
     isLoggedIn() {
-      console.log(`isLoggedIn ${this.$store.getters.isAuthenticated}`);
       return this.$store.getters.isAuthenticated;
     },
     cart() {

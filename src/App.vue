@@ -11,6 +11,7 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 // import SearchBar from "./components/SearchBar.vue";
+
 export default {
   name: "App",
   components: {

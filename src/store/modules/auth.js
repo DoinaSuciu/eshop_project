@@ -1,101 +1,87 @@
+import { getAuth, updateProfile } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import VueRouter from "vue-router";
+import db from "../../firebase/firebaseInit";
+
 export default {
   state: {
+    user: null,
+    profileAdmin: null,
+    profileEmail: null,
+    profileFirstName: null,
+    profileLastName: null,
+    profileUsername: null,
+    profileId: null,
+    profileInitials: null,
+    isAuthenticated: false,
+
     userId: null,
     token: null,
     tokenExpiration: null,
   },
+
   getters: {
-    userId(state) {
-      return state.userId;
-    },
-    token(state) {
-      return state.token;
-    },
     isAuthenticated(state) {
-      console.log(`isAuthenticated ${state.token}`);
-      return !!state.token;
+      return state.isAuthenticated;
     },
   },
+
   mutations: {
-    SET_USER(state, payload) {
-      state.token = payload.token;
-      state.userId = payload.userId;
-      state.tokenExpiration = payload.tokenExpiration;
-      console.log(`token: ${state.token}`);
+    SET_IS_AUTHENTICATED(state, isAuthenticated) {
+      state.isAuthenticated = isAuthenticated;
+    },
+    UPDATE_USER(state, payload) {
+      state.user = payload;
+    },
+    SET_PROFILE_ADMIN(state, payload) {
+      state.profileAdmin = payload;
+    },
+    SET_PROFILE_INFO(state, doc) {
+      state.profileId = doc.id;
+      state.profileEmail = doc.data().email;
+      state.profileFirstName = doc.data().firstName;
+      state.profileLastName = doc.data().lastName;
+      state.profileUsername = doc.data().username;
+      state.profileInitials =
+        state.profileFirstName[0] + state.profileLastName[0];
+    },
+    SET_PROFILE_INITIALS(state) {
+      state.profileInitials =
+        state.profileFirstName[0] + state.profileLastName[0];
+    },
+    CHANGE_FIRST_NAME(state, payload) {
+      state.profileFirstName = payload;
+    },
+    CHANGE_LAST_NAME(state, payload) {
+      state.profileLastName = payload;
+    },
+    CHANGE_USER_NAME(state, payload) {
+      state.profileUsername = payload;
     },
   },
+
   actions: {
-    async signIn(context, payload) {
-      const response = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDesA7LU8NRvlbeVIQU_Z51KrGyRkhng8c",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: payload.email,
-            password: payload.password,
-            returnSecureToken: true,
-          }),
-        }
-      );
-      // this.$router.push("/");
-
-      const responseData = await response.json();
-      if (!response.ok) {
-        console.log(`errorSignIn ${responseData}`);
-        const error = new Error(
-          responseData.message ||
-            "Failed to authenticate. Check your sign in data."
-        );
-        throw error;
-      }
-
-      console.log(`okSignIn ${responseData}`);
-
-      context.commit("SET_USER", {
-        token: responseData.idToken,
-        userId: responseData.localId,
-        tokenExpiration: responseData.expiresIn,
-      });
+    async getCurrentUser({ commit }, user) {
+      const dataBase = doc(db, "users", getAuth().currentUser.uid);
+      const dbResults = await getDoc(dataBase);
+      commit("SET_PROFILE_INFO", dbResults);
+      commit("SET_PROFILE_INITIALS");
+      const token = await user.getIdTokenResult();
+      const admin = await token.claims.admin;
+      commit("SET_PROFILE_ADMIN", admin);
     },
-
-    async register(context, payload) {
-      const response = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDesA7LU8NRvlbeVIQU_Z51KrGyRkhng8c",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: payload.email,
-            password: payload.password,
-            returnSecureToken: true,
-          }),
-        }
-      );
-
-      const responseData = await response.json();
-      if (!response.ok) {
-        console.log(`errorRegister ${responseData}`);
-        const error = new Error(
-          responseData.message ||
-            "Failed to authenticate. Check your sign in data."
-        );
-        throw error;
-      }
-
-      console.log(`okRegister ${responseData}`);
-      context.commit("SET_USER", {
-        token: responseData.idToken,
-        userId: responseData.localId,
-        tokenExpiration: responseData.expiresIn,
+    async updateUserSettings({ commit, state }) {
+      const dataBase = doc(db, "users", state.profileId);
+      await updateProfile(dataBase, {
+        firstName: state.profileFirstName,
+        lastName: state.profileLastName,
+        username: state.profileUsername,
       });
-      console.log(`token is ${state.token}`);
+      commit("SET_PROFILE_INITIALS");
     },
 
     logout(context) {
-      context.commit("SET_USER", {
-        token: null,
-        userId: null,
-        tokenExpiration: null,
-      });
+      getAuth().signOut();
     },
   },
 };
