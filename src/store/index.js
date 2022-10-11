@@ -415,36 +415,24 @@ export default new Vuex.Store({
     ],
   },
   getters: {},
+
   mutations: {
     INCREMENT_PRODUCT_COUNT(state, id) {
-      // console.log(`INCREMENT: ${JSON.stringify(this.state.cart, null, 3)}`);
-      //find the index of the product (with the above index) in products
-      // console.log(`ID: ${id}`);
       const index = state.cart.findIndex((product) => product.id === id);
-      // console.log(JSON.stringify(state.cart[index], null, 3));
       state.cart[index].count += 1;
-      // const productUpdated = { ...state.cart[index], count };
-      // Vue.set(state.products, index, productUpdated);
     },
     DECREMENT_PRODUCT_COUNT(state, id) {
-      // console.log(`DECREMENT: ${JSON.stringify(this.state.cart, null, 3)}`);
-      //find the index of the product (with the above index) in products
       console.log(`ID: ${id}`);
       const index = state.cart.findIndex((product) => product.id === id);
-      // console.log(JSON.stringify(state.cart[index], null, 3));
       if (state.cart[index].count > 1) {
         state.cart[index].count -= 1;
       }
-      // const productUpdated = { ...state.cart[index], count };
-      // Vue.set(state.cart, index, productUpdated);
     },
     ADD_TO_CART(state, id) {
       const index = state.products.findIndex((product) => product.id === id);
       const product = { ...state.products[index], count: 1 };
-      // console.log(JSON.stringify(product, null, 3));
       state.cart.push(product);
       Vue.set(state.cart);
-      // console.log(`ADD_TO_CART: ${JSON.stringify(this.state.cart, null, 3)}`);
     },
     REMOVE_FROM_CART(state, id) {
       state.cart = state.cart.filter((product) => product.id !== id);
@@ -462,9 +450,9 @@ export default new Vuex.Store({
       state.prevPage = prevPage;
     },
   },
+
   actions: {
     addToCart(context, productId) {
-      // console.log(`addToCart: ${context.state.cart}`);
       const index = context.state.cart.findIndex(
         (product) => product.id === productId
       );
@@ -476,6 +464,7 @@ export default new Vuex.Store({
       }
     },
   },
+
   modules: {
     auth,
     blogsModule,

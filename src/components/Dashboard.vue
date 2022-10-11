@@ -1,0 +1,58 @@
+<template>
+  <section class="dashboard-container">
+    <span class="body-small">
+      Hello <span class="bold">{{ getUsername }}</span> (not
+      {{ getUsername }}?<button
+        class="btn-dashboard-logout body-small"
+        @click="logout"
+      >
+        Log out
+      </button>
+      )
+    </span>
+    <p class="body-small">
+      From your account dashboard you can view your recent orders, manage your
+      shipping and billing adresses, and edit your your password and account
+      details.
+    </p>
+  </section>
+</template>
+
+<script>
+export default {
+  name: "Dashboard",
+  data() {
+    return {};
+  },
+  computed: {
+    getUsername() {
+      return this.$store.state.auth.profileUsername;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      if (this.$router.currentRoute.name !== "home") {
+        this.$router.push("/");
+      }
+    },
+  },
+};
+</script>
+<style lang="scss">
+@import "../styles/base.scss";
+@import "../styles/vars.scss";
+@import "../styles/typography.scss";
+
+@media only screen and (min-width: 0) {
+  .dashboard-container {
+    padding-top: 39px;
+  }
+
+  .btn-dashboard-logout {
+    border: none;
+    background-color: $white;
+    color: $accent;
+  }
+}
+</style>

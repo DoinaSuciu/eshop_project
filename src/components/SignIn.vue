@@ -1,6 +1,6 @@
 <template>
   <section class="sign-in">
-    <form class="body-small sign-in-form" @submit.prevent="submitForm">
+    <form class="body-small sign-in-form" @submit.prevent="signIn">
       <input
         class="body-small"
         type="text"
@@ -20,10 +20,10 @@
         <input class="checkbox" type="checkbox" value="Remember me" />Remember
         me</label
       >
-      <p v-if="!formIsValid" class="msg-error-formIsNotValid">
+      <!-- <p v-if="!formIsValid" class="msg-error-formIsNotValid">
         Please enter a valid email and password (must be at least 6 characters
         long).
-      </p>
+      </p> -->
       <button class="btn-auth-mode body-small">SIGN IN</button>
     </form>
     <button
@@ -36,15 +36,19 @@
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import db from "../firebase/firebaseInit";
+
 export default {
   name: "SignIn",
   data() {
     return {
       email: "",
       password: "",
-      formIsValid: true,
-      isLoading: false,
+      // formIsValid: true,
       error: null,
+      errorMessage: "",
     };
   },
   computed: {
@@ -54,37 +58,26 @@ export default {
   },
 
   methods: {
-    async submitForm() {
-      this.FormIsValid = true;
-      if (
-        this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
-      ) {
-        this.formIsValid = false;
-        return;
-      }
-
-      // this.isLoading = true;
-
-      const actionPayload = {
-        email: this.email,
-        password: this.password,
-      };
-
-      try {
-        await this.$store.dispatch("signIn", actionPayload);
-        if (this.prevPage.fullPath === "/blogs") {
-          this.$router.go(-1);
-          return;
-        }
-        this.$router.push("/");
-      } catch (err) {
-        this.error = err.message || "Failed to authenticate, try later.";
-      }
+    signIn() {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+        .then(() => {
+          this.error = false;
+          this.errorMsg = "";
+          if (this.prevPage.fullPath === "/blogs") {
+            this.$router.go(-1);
+            return;
+          }
+          this.$router.push({ name: "home" });
+        })
+        .catch((err) => {
+          this.error = true;
+          this.errorMsg = err.message;
+        });
     },
+
     redirectToResetPassword() {
-      this.$router.push({ path: "/reset-password" });
+      this.$router.push({ name: "reset-password" });
     },
   },
 };

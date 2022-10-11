@@ -227,7 +227,7 @@ export default {
         this.isValidCoupon = true;
         this.couponValue = coupons[0].value;
         this.$store.commit("SET_COUPON", this.couponValue);
-        console.log(this.$store.state.appliedCoupon);
+        // console.log(this.$store.state.appliedCoupon);
       } else {
         this.isValidCoupon = false;
         this.couponValue = 0;

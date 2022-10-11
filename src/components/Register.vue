@@ -1,6 +1,6 @@
 <template>
   <section class="register">
-    <form class="body-small register-form" @submit.prevent="submitForm">
+    <form class="body-small register-form" @submit.prevent="register">
       <input
         class="body-small"
         type="text"
@@ -15,6 +15,14 @@
         id="lastName"
         placeholder="Last Name"
         v-model="lastName"
+      />
+
+      <input
+        class="body-small"
+        type="text"
+        id="username"
+        placeholder="Username"
+        v-model="username"
       />
 
       <input
@@ -39,17 +47,19 @@
         v-model.trim="password"
       />
 
-      <!-- v-model="checked" -->
       <label class="remember-checkbox">
         <input class="checkbox" type="checkbox" value="Remember me" />Remember
         me</label
       >
-      <p v-if="!formIsValid" class="msg-error-formIsNotValid">
+      <!-- <p v-if="!formIsValid" class="msg-error-formIsNotValid">
         Please enter a valid email and password (must be at least 6 characters
         long).
-      </p>
+      </p> -->
+      <div v-show="error" class="msg-error-formIsNotValid">
+        {{ this.errorMessage }}
+      </div>
 
-      <button class="btn-auth-mode body-small" @click="">REGISTER</button>
+      <button type="submit" class="btn-auth-mode body-small">REGISTER</button>
 
       <p class="body-small">
         By continuing you agree to the
@@ -62,80 +72,62 @@
 </template>
 
 <script>
+// import firebase from "firebase/app";
+// import "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+
+import db from "../firebase/firebaseInit";
+
 export default {
   name: "Account",
   data() {
     return {
       firstName: "",
       lastName: "",
+      username: "",
       email: "",
       password: "",
-      formIsValid: true,
-      mode: "signIn",
-      isLoading: false,
       error: null,
+      errorMessage: "",
     };
   },
-  computed: {
-    // isLoggedIn() {
-    //   return this.$store.getters.isAuthenticated;
-    // },
-    // submitButtonCaption() {
-    //   if (this.mode === "signIn") {
-    //     return "SIGN IN";
-    //   } else {
-    //     return "REGISTER";
-    //   }
-    // },
-    // switchModeButtonCaption() {
-    //   if (this.mode === "signIn") {
-    //     return "REGISTER";
-    //   } else {
-    //     return "SIGN IN";
-    //   }
-    // },
-  },
+  computed: {},
 
   methods: {
-    async submitForm() {
-      this.FormIsValid = true;
+    async register() {
       if (
-        this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
+        this.email !== "" &&
+        this.password !== "" &&
+        this.firstName !== "" &&
+        this.username !== "" &&
+        this.lastName !== ""
       ) {
-        this.formIsValid = false;
-        return;
+        this.error = false;
+        this.errorMessage = "";
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, this.email, this.password)
+          .then(async (userCredential) => {
+            const user = userCredential.user;
+            await setDoc(doc(db, "users", user.uid), {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              username: this.username,
+              email: this.email,
+            });
+            this.$router.push({ name: "home" });
+            return;
+          })
+          .catch((err) => {
+            this.error = true;
+            this.errorMessage = err.message;
+            return;
+          });
       }
-
-      this.isLoading = true;
-
-      const actionPayload = {
-        email: this.email,
-        password: this.password,
-      };
-
-      try {
-        console.log("register");
-        await this.$store.dispatch("register", actionPayload);
-        this.$router.push("/");
-      } catch (err) {
-        this.error = err.message || "Failed to authenticate, try later.";
-      }
-
-      this.isLoading = false;
+      this.error = true;
+      this.errorMessage = "Please fill out all the fields!";
+      return;
     },
-
-    // switchAuthMode() {
-    //   if (this.mode === "signIn") {
-    //     this.mode = "register";
-    //   } else {
-    //     this.mode = "signIn";
-    //   }
-    // },
-    // redirectToResetPassword() {
-    //   this.$router.push({ path: "/reset-password" });
-    // },
   },
 };
 </script>
@@ -161,6 +153,7 @@ export default {
 
     #firstName,
     #lastName,
+    #username,
     #email,
     #password,
     #password-confirm {

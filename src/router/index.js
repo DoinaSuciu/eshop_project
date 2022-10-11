@@ -127,7 +127,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // console.log(to);
-  console.log(from);
+  // console.log(from);
   store.commit("SET_PREV_ROUTE", from);
 
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {

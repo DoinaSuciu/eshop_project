@@ -92,7 +92,6 @@ export default {
       this.shouldDisplayRemoveConfirmation = true;
     },
     increment(id) {
-      console.log(`shopping_increment: ${id}`);
       this.$store.commit("INCREMENT_PRODUCT_COUNT", id);
     },
     decrement(product) {
