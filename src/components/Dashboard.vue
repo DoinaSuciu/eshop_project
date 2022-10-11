@@ -36,6 +36,9 @@ export default {
         this.$router.push("/");
       }
     },
+    // goToOrders() {
+    //   this.$router.push({ name: "home" });
+    // }
   },
 };
 </script>

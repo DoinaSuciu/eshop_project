@@ -11,6 +11,27 @@ import db from "./firebase/firebaseInit";
 
 Vue.config.productionTip = false;
 Vue.filter("currency", currency);
+Vue.directive("switching-color", {
+  bind(el, binding) {
+    const speeds = {
+      slow: 2000,
+      normal: 1000,
+      fast: 500,
+      crazy: 100,
+    };
+    const speedName = binding.arg || "fast";
+    const speed = speeds[speedName];
+
+    const colors = binding.value;
+    let i = 0;
+    setInterval(() => {
+      el.style.color = colors[i++];
+      if (i > colors.length - 1) {
+        i = 0;
+      }
+    }, speed);
+  },
+});
 
 new Vue({
   router,

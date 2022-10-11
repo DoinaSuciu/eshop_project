@@ -16,7 +16,9 @@
 
     <section class="shop-the-latest">
       <div class="second-banner-text">
-        <h5 class="latest">Shop The Latest</h5>
+        <h5 v-switching-color="['#a18a68', 'black']" class="latest">
+          LAST DAYS: 10% off EVERYTHING
+        </h5>
         <span>
           <router-link class="view-all" to="/shop">View All</router-link></span
         >

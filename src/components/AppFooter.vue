@@ -43,7 +43,9 @@
           src="../assets/footer/Icon twitter.png"
         />
       </div>
-      <span class="terms">© 2022 SHOPPE. Terms of use and privacy policy.</span>
+      <span class="terms"
+        >© 2022 DOINA SUCIU. Terms of use and privacy policy.</span
+      >
     </div>
   </footer>
 </template>

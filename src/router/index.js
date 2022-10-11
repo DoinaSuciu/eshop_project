@@ -16,6 +16,7 @@ import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
 import ShoppingCart from "../views/ShoppingCart.vue";
 import Checkout from "../views/Checkout.vue";
 import store from "../store/index.js";
+import NotFound from "../views/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -114,6 +115,11 @@ const routes = [
   //   name: "",
   //   component: Search,
   // },
+  {
+    path: "/:notFound(.*)",
+    name: "404 - Page not Found",
+    component: NotFound,
+  },
 ];
 
 const router = new VueRouter({
