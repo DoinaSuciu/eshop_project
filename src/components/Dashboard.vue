@@ -11,9 +11,11 @@
       )
     </span>
     <p class="body-small">
-      From your account dashboard you can view your recent orders, manage your
-      shipping and billing adresses, and edit your your password and account
-      details.
+      From your account dashboard you can view your recent
+      <span @click="onSelectTab('Orders')" class="body-small-dark-gray"
+        >orders</span
+      >, manage your shipping and billing adresses, and edit your your password
+      and account details.
     </p>
   </section>
 </template>
@@ -35,6 +37,9 @@ export default {
       if (this.$router.currentRoute.name !== "home") {
         this.$router.push("/");
       }
+    },
+    onSelectTab(name) {
+      this.$emit("action", name);
     },
     // goToOrders() {
     //   this.$router.push({ name: "home" });
