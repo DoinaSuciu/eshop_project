@@ -127,7 +127,7 @@ export default {
   padding: 0;
   .container {
     max-width: 1000px;
-    padding: 60px 25px;
+    padding: 39px 25px;
     h2 {
       text-align: center;
       margin-bottom: 16px;
