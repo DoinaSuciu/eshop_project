@@ -95,6 +95,7 @@ main {
   width: 100%;
   // width: 288px;
   padding: 0;
+  margin-bottom: 96px;
   #email-contact,
   #first-name,
   #last-name {

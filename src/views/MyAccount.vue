@@ -98,6 +98,7 @@ export default {
   align-self: center;
   color: $dark-grey;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .selected-tab {

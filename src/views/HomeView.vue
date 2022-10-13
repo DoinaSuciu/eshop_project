@@ -4,13 +4,17 @@
 
     <div class="banner">
       <figure class="banner-figure">
-        <img class="banner-image" src="../assets/image-banner.jpeg" />
+        <img class="banner-image" src="../assets/products/01/01-1.jpg" />
       </figure>
 
       <div class="banner-details">
-        <h4 class="banner-title">Gold big hoops</h4>
-        <span class="banner-product-price">$ 68,00</span>
-        <button class="banner-button">View Product</button>
+        <h4 class="banner-title">{{ bannerProduct.name }}</h4>
+        <span class="banner-product-price">{{
+          bannerProduct.price | currency
+        }}</span>
+        <button @click="viewBannerProduct" class="banner-button">
+          View Product
+        </button>
       </div>
     </div>
 
@@ -55,6 +59,16 @@ export default {
     },
     products() {
       return this.$store.state.products;
+    },
+    bannerProduct() {
+      return this.$store.state.products.filter(
+        (product) => product.id === 1
+      )[0];
+    },
+  },
+  methods: {
+    viewBannerProduct() {
+      this.$router.push(`/product-view/${this.bannerProduct.id}`);
     },
   },
 };
