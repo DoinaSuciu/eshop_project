@@ -13,30 +13,33 @@
           <span class="body-medium">admin</span>
         </div> -->
         <div class="input body-small">
-          <!-- <label for="firstName">First Name:</label> -->
+          <label class="body-medium" for="firstName">First Name*</label>
           <input
             type="text"
+            class="body-medium"
             id="firstName"
             v-model="firstName"
-            placeholder="First name"
+            placeholder="First name*"
           />
         </div>
         <div class="input">
-          <!-- <label for="lastName">Last Name:</label> -->
+          <label class="body-medium" for="lastName">Last Name*</label>
           <input
+            class="body-medium"
             type="text"
             id="lastName"
             v-model="lastName"
-            placeholder="Last name"
+            placeholder="Last name*"
           />
         </div>
         <div class="input username">
-          <!-- <label for="username">Username:</label> -->
+          <label class="body-medium" for="username">Username*</label>
           <input
+            class="body-medium"
             type="text"
             id="username"
             v-model="username"
-            placeholder="Username"
+            placeholder="Username*"
           />
         </div>
 
@@ -45,13 +48,14 @@
           and in reviews.
         </p>
         <div class="input">
-          <!-- <label for="email">Email:</label> -->
+          <label class="body-medium" for="email">Email*</label>
           <input
+            class="body-medium"
             disabled
             type="text"
             id="email"
             v-model="email"
-            placeholder="Email"
+            placeholder="Email address*"
           />
         </div>
         <button class="btn-small-read-more" @click="updateProfile">
@@ -182,25 +186,23 @@ export default {
       }
       .input {
         margin: 16px 0;
-        // label {
-        //   font-size: 14px;
-        //   display: block;
-        //   padding-bottom: 6px;
-        // }
+        label {
+          display: flex;
+          padding-bottom: 6px;
+          color: $dark-grey;
+        }
         input {
           width: 100%;
           border: none;
           background-color: #f2f7f6;
-          padding: 0 0 16px 8px;
+          padding: 0 0 0 8px;
           height: 50px;
           display: flex;
           align-items: center;
           justify-content: center;
-          // @media (min-width: 900px) {
-          // }
-          // &:focus {
-          //   outline: none;
-          // }
+          &:focus {
+            outline: none;
+          }
         }
       }
       button {
