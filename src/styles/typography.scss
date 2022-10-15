@@ -53,6 +53,15 @@
     color: #707070;
   }
 
+  .body-small-accent {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+    // margin: 0;
+    font-family: "DM Sans Regular", sans-serif;
+    color: #a18a68;
+  }
+
   .body-medium {
     font-size: 14px;
     font-family: "DM Sans Regular", sans-serif;
@@ -110,6 +119,14 @@
     font-family: "DM Sans Regular", sans-serif;
     color: #707070;
   }
+
+  .body-small-accent {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-family: "DM Sans Regular", sans-serif;
+    color: #a18a68;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -166,6 +183,13 @@
     line-height: 20px;
     font-family: "DM Sans Regular", sans-serif;
     color: #707070;
+  }
+
+  .body-small-accent {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "DM Sans Regular", sans-serif;
+    color: #a18a68;
   }
 }
 

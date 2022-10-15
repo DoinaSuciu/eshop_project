@@ -6,14 +6,20 @@
         class="btn-dashboard-logout body-small"
         @click="logout"
       >
-        Log out
-      </button>
-      )
-    </span>
+        Log out</button
+      >)</span
+    >
     <p class="body-small">
-      From your account dashboard you can view your recent orders, manage your
-      shipping and billing adresses, and edit your your password and account
-      details.
+      From your account dashboard you can view your recent
+      <span @click="onSelectTab('Orders')" class="body-small-accent"
+        >orders</span
+      >, manage your
+      <span @click="onSelectTab('Address')" class="body-small-accent"
+        >shipping and billing adresses</span
+      >, and edit your your
+      <span @click="onSelectTab('Account Details')" class="body-small-accent"
+        >password and account details</span
+      >.
     </p>
   </section>
 </template>
@@ -36,6 +42,12 @@ export default {
         this.$router.push("/");
       }
     },
+    onSelectTab(name) {
+      this.$emit("action", name);
+    },
+    // goToOrders() {
+    //   this.$router.push({ name: "home" });
+    // }
   },
 };
 </script>

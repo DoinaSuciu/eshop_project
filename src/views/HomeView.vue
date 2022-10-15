@@ -4,19 +4,25 @@
 
     <div class="banner">
       <figure class="banner-figure">
-        <img class="banner-image" src="../assets/image-banner.jpeg" />
+        <img class="banner-image" src="../assets/products/01/01-1.jpg" />
       </figure>
 
       <div class="banner-details">
-        <h4 class="banner-title">Gold big hoops</h4>
-        <span class="banner-product-price">$ 68,00</span>
-        <button class="banner-button">View Product</button>
+        <h4 class="banner-title">{{ bannerProduct.name }}</h4>
+        <span class="banner-product-price">{{
+          bannerProduct.price | currency
+        }}</span>
+        <button @click="viewBannerProduct" class="banner-button">
+          View Product
+        </button>
       </div>
     </div>
 
     <section class="shop-the-latest">
       <div class="second-banner-text">
-        <h5 class="latest">Shop The Latest</h5>
+        <h5 v-switching-color="['#a18a68', 'black']" class="latest">
+          LAST DAYS: 10% off EVERYTHING
+        </h5>
         <span>
           <router-link class="view-all" to="/shop">View All</router-link></span
         >
@@ -53,6 +59,16 @@ export default {
     },
     products() {
       return this.$store.state.products;
+    },
+    bannerProduct() {
+      return this.$store.state.products.filter(
+        (product) => product.id === 1
+      )[0];
+    },
+  },
+  methods: {
+    viewBannerProduct() {
+      this.$router.push(`/product-view/${this.bannerProduct.id}`);
     },
   },
 };
