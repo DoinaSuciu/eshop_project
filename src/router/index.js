@@ -15,6 +15,7 @@ import TermsAndConditions from "../views/TermsAndConditions";
 import DeliveriesAndReturns from "../views/DeliveriesAndReturns";
 import ShoppingCart from "../views/ShoppingCart.vue";
 import Checkout from "../views/Checkout.vue";
+import Favorites from "../views/Favorites.vue";
 import store from "../store/index.js";
 import NotFound from "../views/NotFound.vue";
 
@@ -104,6 +105,11 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: Checkout,
+  },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: Favorites,
   },
   // {
   // path: "/help",

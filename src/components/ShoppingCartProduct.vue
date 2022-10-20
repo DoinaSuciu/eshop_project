@@ -9,7 +9,10 @@
         >
           <span class="product-name-cart body-small">{{ product.name }}</span>
         </router-link>
-        <button class="remove-btn" @click="showRemoveCartConfirmation">
+        <button
+          class="remove-btn body-medium"
+          @click="showRemoveCartConfirmation"
+        >
           +
         </button>
       </div>
@@ -74,6 +77,7 @@ export default {
       name: String,
       price: String,
       pieces: Number,
+      count: Number,
     },
   },
   data() {
@@ -108,7 +112,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
@@ -154,6 +158,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    text-align: center;
   }
 
   .product-price-cart {
@@ -176,12 +181,12 @@ export default {
   }
 
   .remove-btn {
-    margin-top: 4px;
+    margin-top: 0;
+    font-size: 25px;
     border: none;
     background-color: $white;
-    font-weight: 500;
-    font-size: 18px;
     transform: rotate(45deg);
+    padding: 0;
   }
 
   .increment-btn,
@@ -240,10 +245,6 @@ export default {
   }
   .product-price-cart {
     margin-top: 10px;
-  }
-
-  .remove-btn {
-    font-size: 16px;
   }
 }
 </style>

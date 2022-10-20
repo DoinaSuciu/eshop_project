@@ -10,7 +10,7 @@
     <div class="filtered-products">
       <ul class="product-cards">
         <li class="product-card" v-for="product in products" :key="product.id">
-          <ProductCard product.category :product="product" />
+          <ProductCard :product="product" />
         </li>
       </ul>
     </div>
@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography";

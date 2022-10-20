@@ -7,7 +7,7 @@
     />
     <Loading v-if="loading" />
 
-    <h1 class="lost-password">Lost password</h1>
+    <h1 class="lost-password">Have you Forgotten Your Password ?</h1>
     <p class="body-medium info-forgot-password">
       If you've forgotten your password, enter your email in the form below and
       we'll send you instructions to set a new one.
@@ -90,58 +90,87 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-}
-.lost-password {
-  margin: 69px auto 16px auto;
-}
+@media only screen and (min-width: 0) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .lost-password {
+    margin: 69px auto 16px auto;
+  }
 
-.info-forgot-password {
-  margin: 0;
-}
+  .info-forgot-password {
+    margin: 0;
+  }
 
-.msg-error-formIsNotValid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  color: $errors;
-}
-form {
-  margin-top: 64px;
-  width: 100%;
-  padding: 0;
-  #email-reset-password {
+  .msg-error-formIsNotValid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    color: $errors;
+  }
+  form {
+    margin-top: 64px;
     width: 100%;
-    height: 25px;
     padding: 0;
-    margin-bottom: 39px;
+    #email-reset-password {
+      width: 100%;
+      height: 25px;
+      padding: 0;
+      margin-bottom: 39px;
+      border: none;
+      border-bottom: 1px $light-gray;
+      border-style: none none solid none;
+    }
+  }
+
+  .btn-reset-password {
+    display: flex;
+    margin: 0 auto;
     border: none;
-    border-bottom: 1px $light-gray;
-    border-style: none none solid none;
+    border-radius: 4px;
+    background-color: $black;
+    color: $white;
+    width: 288px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-.btn-reset-password {
-  display: flex;
-  margin: 0 auto;
-  border: none;
-  border-radius: 4px;
-  background-color: $black;
-  color: $white;
-  width: 288px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
+@media only screen and (min-width: 1024px) {
+  main {
+    max-width: 561px;
+  }
+
+  .lost-password {
+    margin-bottom: 39px;
+  }
+
+  form {
+    margin-top: 76px;
+  }
+
+  .btn-reset-password {
+    height: 53px;
+    font-size: 16px;
+    margin-top: 25px;
+
+    &:hover {
+      background-color: white;
+      font-weight: 700;
+      color: $black;
+      border: 1px solid black;
+    }
+  }
 }
 </style>
 >

@@ -5,7 +5,7 @@
         <img id="back-redirect" src="../assets/Icon-go-back.png" />
       </router-link>
 
-      <h5 class="checkout-title">Checkout</h5>
+      <h1 class="checkout-title">Checkout</h1>
     </div>
 
     <div class="checkout-first-questions-group">
@@ -24,193 +24,196 @@
       </div>
     </div>
 
-    <h5 class="checkout-title">Billing Details</h5>
-
     <form class="body-small checkout-form" @submit.prevent="submitForm">
-      <input
-        class="body-small input-check"
-        type="text"
-        id="firstName"
-        placeholder="First name *"
-      />
+      <div class="billing-details-web">
+        <h5 class="checkout-title">Billing Details</h5>
 
-      <input
-        class="body-small input-check"
-        type="text"
-        id="lastName"
-        placeholder="Last name *"
-      />
+        <input
+          class="body-small input-check"
+          type="text"
+          id="firstName"
+          placeholder="First name *"
+        />
 
-      <select
-        id="country"
-        name="country"
-        v-model="country"
-        class="body-small-dark-gray"
-      >
-        <option value="Franta">Franta</option>
-        <option value="Germania">Germania</option>
-        <option value="Republica Moldova">Republica Moldova</option>
-        <option value="Romania">Romania</option>
-        <option value="UK">UK</option>
-        <option value="Spania">Spania</option>
-      </select>
+        <input
+          class="body-small input-check"
+          type="text"
+          id="lastName"
+          placeholder="Last name *"
+        />
 
-      <input
-        class="body-small input-check"
-        type="text"
-        id="streetAddress"
-        placeholder="Street Address *"
-      />
-
-      <input
-        class="body-small input-check"
-        type="text"
-        id="postCode"
-        placeholder="Postcode/ ZIP *"
-      />
-
-      <input
-        class="body-small input-check"
-        type="text"
-        id="town"
-        placeholder="Town/ City *"
-      />
-
-      <input
-        class="body-small input-check"
-        type="number"
-        id="phone"
-        placeholder="Phone *"
-      />
-
-      <input
-        class="body-small input-check"
-        type="text"
-        id="email"
-        placeholder="Email *"
-      />
-
-      <div class="checkbox-group">
-        <label id="create-account-checkbox">
-          <input
-            class="checkbox-checkout"
-            type="checkbox"
-            value="Create an account"
-          />Create an account?</label
+        <select
+          id="country"
+          name="country"
+          v-model="country"
+          class="body-small-dark-gray"
         >
+          <option value="Franta">Franta</option>
+          <option value="Germania">Germania</option>
+          <option value="Republica Moldova">Republica Moldova</option>
+          <option value="Romania">Romania</option>
+          <option value="UK">UK</option>
+          <option value="Spania">Spania</option>
+        </select>
 
-        <label id="different-address-checkbox">
-          <input
-            class="checkbox-checkout"
-            type="checkbox"
-            value="different address"
-          />Ship to a different address?</label
-        >
+        <input
+          class="body-small input-check"
+          type="text"
+          id="streetAddress"
+          placeholder="Street Address *"
+        />
+
+        <input
+          class="body-small input-check"
+          type="text"
+          id="postCode"
+          placeholder="Postcode/ ZIP *"
+        />
+
+        <input
+          class="body-small input-check"
+          type="text"
+          id="town"
+          placeholder="Town/ City *"
+        />
+
+        <input
+          class="body-small input-check"
+          type="number"
+          id="phone"
+          placeholder="Phone *"
+        />
+
+        <input
+          class="body-small input-check"
+          type="text"
+          id="email"
+          placeholder="Email *"
+        />
+
+        <div class="checkbox-group">
+          <label id="create-account-checkbox">
+            <input
+              class="checkbox-checkout"
+              type="checkbox"
+              value="Create an account"
+            />Create an account?</label
+          >
+
+          <label id="different-address-checkbox">
+            <input
+              class="checkbox-checkout"
+              type="checkbox"
+              value="different address"
+            />Ship to a different address?</label
+          >
+        </div>
+        <!-- v-model="checked" -->
+
+        <input
+          class="body-small input-check"
+          type="text"
+          id="notes"
+          placeholder="Order notes"
+        />
       </div>
-      <!-- v-model="checked" -->
 
-      <input
-        class="body-small input-check"
-        type="text"
-        id="notes"
-        placeholder="Order notes"
-      />
+      <div class="order-details-web">
+        <h5 class="checkout-title">Your Order</h5>
+        <div class="order-details">
+          <div class="order-details-header group-checkout">
+            <span class="body-small">PRODUCT</span>
+            <span class="body-small right-side">TOTAL</span>
+          </div>
+          <ul class="list-products-group">
+            <li
+              class="body-small-dark-gray list-products-total"
+              v-for="(product, index) in cart"
+              :key="index"
+            >
+              <span class="">{{ product.name }}</span>
+              <span class="">{{
+                (product.price * product.count) | currency
+              }}</span>
+            </li>
+          </ul>
 
-      <h5 class="checkout-title">Your Order</h5>
+          <div class="group-checkout">
+            <span class="body-small left-element"> SUBTOTAL </span>
+            <span class="body-small-dark-gray right-side"
+              >{{ calcSubtotal | currency }}
+            </span>
+          </div>
+          <div class="group-checkout">
+            <span class="body-small left-element"> SHIPPING </span>
+            <span class="body-small-dark-gray right-side">
+              {{ totalShippingCost | currency }}</span
+            >
+          </div>
 
-      <div class="order-details">
-        <div class="order-details-header group-checkout">
-          <span class="body-small">PRODUCT</span>
-          <span class="body-small right-side">TOTAL</span>
-        </div>
-        <ul class="list-products-group">
-          <li
-            class="body-small-dark-gray list-products-total"
-            v-for="(product, index) in cart"
-            :key="index"
+          <div class="group-checkout discount">
+            <span class="body-small left-element discount"> DISCOUNT</span>
+            <span class="body-small-dark-gray right-side discount">
+              -{{ appliedDiscount | currency }}
+            </span>
+          </div>
+          <div class="group-checkout">
+            <span class="body-small left-element"> TOTAL</span>
+            <span class="body-small-dark-gray right-side">
+              {{ finalTotalCost | currency }}</span
+            >
+          </div>
+
+          <div class="radio-group">
+            <label class="radio-boxes">
+              <input
+                class="radio"
+                type="radio"
+                value="direct bank transfer"
+                v-model="payment"
+              /><img
+                id="payment-methods-img"
+                src="../assets/payment-methods/visa.png"
+              />
+              <img
+                id="payment-methods-img"
+                src="../assets/payment-methods/mastercard.png"
+              />
+              <img
+                id="payment-methods-img"
+                src="../assets/payment-methods/amexco.png"
+              />Debit or Credit Card</label
+            >
+
+            <label class="radio-boxes">
+              <input
+                class="radio"
+                type="radio"
+                value="payPal"
+                v-model="payment"
+              /><img
+                id="payment-methods-img"
+                src="../assets/payment-methods/paypal.png"
+              />PayPal</label
+            >
+
+            <label class="radio-boxes">
+              <input
+                class="radio"
+                type="radio"
+                value="cash"
+                v-model="payment"
+              />Cash on delivery</label
+            >
+          </div>
+
+          <button
+            class="btn-black-normal-long body-small btn-place-order"
+            @click=""
           >
-            <span class="">{{ product.name }}</span>
-            <span class="">{{
-              (product.price * product.count) | currency
-            }}</span>
-          </li>
-        </ul>
-
-        <div class="group-checkout">
-          <span class="body-small left-element"> SUBTOTAL </span>
-          <span class="body-small-dark-gray right-side"
-            >{{ calcSubtotal | currency }}
-          </span>
+            PLACE YOUR ORDER
+          </button>
         </div>
-        <div class="group-checkout">
-          <span class="body-small left-element"> SHIPPING </span>
-          <span class="body-small-dark-gray right-side">
-            {{ totalShippingCost | currency }}</span
-          >
-        </div>
-
-        <div class="group-checkout discount">
-          <span class="body-small left-element discount"> DISCOUNT</span>
-          <span class="body-small-dark-gray right-side discount">
-            -{{ appliedDiscount | currency }}
-          </span>
-        </div>
-        <div class="group-checkout">
-          <span class="body-small left-element"> TOTAL</span>
-          <span class="body-small-dark-gray right-side">
-            {{ finalTotalCost | currency }}</span
-          >
-        </div>
-
-        <div class="radio-group">
-          <label class="radio-boxes">
-            <input
-              class="radio"
-              type="radio"
-              value="direct bank transfer"
-              v-model="payment"
-            /><img
-              id="payment-methods-img"
-              src="../assets/payment-methods/visa.png"
-            />
-            <img
-              id="payment-methods-img"
-              src="../assets/payment-methods/mastercard.png"
-            />
-            <img
-              id="payment-methods-img"
-              src="../assets/payment-methods/amexco.png"
-            />Debit or Credit Card</label
-          >
-
-          <label class="radio-boxes">
-            <input
-              class="radio"
-              type="radio"
-              value="payPal"
-              v-model="payment"
-            /><img
-              id="payment-methods-img"
-              src="../assets/payment-methods/paypal.png"
-            />PayPal</label
-          >
-
-          <label class="radio-boxes">
-            <input
-              class="radio"
-              type="radio"
-              value="cash"
-              v-model="payment"
-            />Cash on delivery</label
-          >
-        </div>
-
-        <button
-          class="btn-black-normal-long body-small btn-place-order"
-          @click=""
-        >
-          PLACE YOUR ORDER
-        </button>
       </div>
     </form>
   </div>
@@ -406,6 +409,42 @@ export default {
     .discount {
       color: $green;
     }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .checkout-title-group {
+    margin-bottom: 64px;
+  }
+  .checkout-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    #email,
+    #firstName,
+    #lastName,
+    #streetAddress,
+    #town,
+    #phone,
+    #postCode,
+    #country,
+    #notes {
+      margin-top: 37px;
+    }
+  }
+
+  .billing-details-web {
+    max-width: 46%;
+  }
+
+  .order-details-web {
+    min-width: 46%;
+  }
+
+  .btn-place-order {
+    height: 53px;
+    font-size: 16px;
   }
 }
 </style>

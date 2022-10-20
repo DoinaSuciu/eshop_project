@@ -71,6 +71,7 @@ export default new Vuex.Store({
         pieces: 4,
         arrivalDate: "2022/08/01",
         reviews: "",
+        favorite: false,
       },
       {
         id: 2,
@@ -91,6 +92,7 @@ export default new Vuex.Store({
         pieces: 5,
         arrivalDate: "2022/07/28",
         reviews: "",
+        favorite: false,
       },
       {
         id: 3,
@@ -111,6 +113,7 @@ export default new Vuex.Store({
         pieces: 6,
         arrivalDate: "2022/07/04",
         reviews: "",
+        favorite: false,
       },
       {
         id: 4,
@@ -131,6 +134,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/03/04",
         reviews: "",
+        favorite: false,
       },
       {
         id: 5,
@@ -151,6 +155,7 @@ export default new Vuex.Store({
         pieces: 4,
         arrivalDate: "2022/01/04",
         reviews: "",
+        favorite: false,
       },
       {
         id: 6,
@@ -171,6 +176,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/06/01",
         reviews: "",
+        favorite: false,
       },
       {
         id: 7,
@@ -191,6 +197,7 @@ export default new Vuex.Store({
         pieces: 2,
         arrivalDate: "2022/06/07",
         reviews: "",
+        favorite: false,
       },
       {
         id: 8,
@@ -211,6 +218,7 @@ export default new Vuex.Store({
         pieces: 2,
         arrivalDate: "2022/06/07",
         reviews: "",
+        favorite: false,
       },
       {
         id: 9,
@@ -231,6 +239,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/08/07",
         reviews: "",
+        favorite: false,
       },
       {
         id: 10,
@@ -251,6 +260,7 @@ export default new Vuex.Store({
         pieces: 1,
         arrivalDate: "2022/08/20",
         reviews: "",
+        favorite: false,
       },
       {
         id: 11,
@@ -271,6 +281,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/07/22",
         reviews: "",
+        favorite: false,
       },
       {
         id: 12,
@@ -291,6 +302,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/04/30",
         reviews: "",
+        favorite: false,
       },
       {
         id: 13,
@@ -311,6 +323,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/08/30",
         reviews: "",
+        favorite: false,
       },
       {
         id: 14,
@@ -331,6 +344,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/07/21",
         reviews: "",
+        favorite: false,
       },
       {
         id: 15,
@@ -351,6 +365,7 @@ export default new Vuex.Store({
         pieces: 4,
         arrivalDate: "2022/07/19",
         reviews: "",
+        favorite: false,
       },
       {
         id: 16,
@@ -371,6 +386,7 @@ export default new Vuex.Store({
         pieces: 2,
         arrivalDate: "2022/08/30",
         reviews: "",
+        favorite: false,
       },
       {
         id: 17,
@@ -391,6 +407,7 @@ export default new Vuex.Store({
         pieces: 5,
         arrivalDate: "2022/07/31",
         reviews: "",
+        favorite: false,
       },
       {
         id: 18,
@@ -411,6 +428,7 @@ export default new Vuex.Store({
         pieces: 3,
         arrivalDate: "2022/07/07",
         reviews: "",
+        favorite: false,
       },
     ],
   },
@@ -448,6 +466,11 @@ export default new Vuex.Store({
     },
     SET_PREV_ROUTE(state, prevPage) {
       state.prevPage = prevPage;
+    },
+    ADD_TO_FAV(state, id) {
+      state.products[
+        state.products.findIndex((product) => product.id === id)
+      ].favorite = true;
     },
   },
 

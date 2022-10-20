@@ -1,19 +1,77 @@
 <template>
   <div class="product-view">
-    <SlideShow class="slide-show-photos" :images="images" />
-    <h1 class="product-name">{{ product.name }}</h1>
-    <div class="product-share">
-      <h5 class="product-price">{{ product.price | currency }}</h5>
-      <img class="share-image" src="../assets/share.png" />
+    <div class="product-view-photo-info-web">
+      <SlideShow class="slide-show-photos" :images="images" />
+      <div class="product-view-info-web">
+        <h1 class="product-name">{{ product.name }}</h1>
+        <div class="product-share">
+          <h5 class="product-price">{{ product.price | currency }}</h5>
+          <img class="share-image" src="../assets/share.png" />
+        </div>
+
+        <p class="about-product-web body-small">
+          {{ product.aboutProducts }}
+        </p>
+
+        <div class="display-count-items-cart-web">
+          <div class="cart-item-quantity">
+            <button
+              class="decrement-btn body-small"
+              :disabled="product.count === 1"
+              @click=""
+            >
+              -
+            </button>
+            <span class="count body-small">{{ product.count }}</span>
+            <button
+              class="increment-btn body-small"
+              :disabled="product.pieces && product.pieces <= product.count"
+              @click=""
+            >
+              +
+            </button>
+          </div>
+
+          <button @click="addToCart(product)" class="add-to-cart body-small">
+            ADD TO CART
+          </button>
+        </div>
+        <div class="web-icons">
+          <img
+            class="favorite"
+            src="../assets/product-view-page-icons/favorite.png"
+          />
+          <div class="social-media-icons">
+            <img
+              class="social-media"
+              src="../assets/product-view-page-icons/message.png"
+            />
+            <img
+              class="social-media"
+              src="../assets/product-view-page-icons/facebook.png"
+            />
+            <img
+              class="social-media"
+              src="../assets/product-view-page-icons/instagram.png"
+            />
+            <img
+              class="social-media"
+              src="../assets/product-view-page-icons/twitter.png"
+            />
+          </div>
+        </div>
+        <div>
+          <span class="in-stock body-small" v-if="product.pieces > 0"
+            >In Stock</span
+          >
+          <span class="body-small out-of-stock" v-if="product.pieces < 0"
+            >Out of Stock</span
+          >
+        </div>
+      </div>
     </div>
-    <button
-      @click="addToCart(product)"
-      class="product-view-btn"
-      :disabled="product.pieces && product.pieces <= product.count"
-    >
-      ADD TO CART
-    </button>
-    <div>
+
+    <div class="view-more-product-description">
       <p class="body-small about-products">
         {{ productDescription }}
       </p>
@@ -24,7 +82,6 @@
         <img class="view-more-icon" src="../assets/Icon view-more.png" />
       </button>
     </div>
-
     <div class="description-reviews-container">
       <div class="description-reviews-btn body-small">
         <div class="description-reviews-group">
@@ -138,6 +195,12 @@ export default {
       )[0];
     },
 
+    productInCart() {
+      return this.$store.state.cart.filter(
+        (product) => `${product.id}` === this.$route.params.productId
+      )[0];
+    },
+
     productDescription() {
       // console.log(`${JSON.stringify(this.product, null, 3)}`);
       return this.readMore
@@ -170,11 +233,17 @@ export default {
     addToCart(product) {
       this.$store.dispatch("addToCart", product.id);
     },
+    favs(id) {
+      this.$store.commit("ADD_TO_FAV", id);
+      this.$router.push({
+        name: "favorites",
+      });
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography";
@@ -183,6 +252,10 @@ export default {
   .product-view {
     display: flex;
     flex-direction: column;
+  }
+
+  .cart-item-quantity {
+    display: none;
   }
 
   .slide-show-photos {
@@ -211,23 +284,16 @@ export default {
     margin-bottom: 24px;
   }
 
-  .product-view-btn {
+  .add-to-cart {
     left: 8px;
     height: 32px;
     max-width: 320px;
     padding: 6px 100px 6px 100px;
-    line-height: 20px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
     color: $black;
     background-color: $white;
     border-radius: 4px;
-    // border-color: $white;
     border: 1px solid $black;
     cursor: pointer;
-    // margin-top: 24px;
-    // margin-bottom: 16px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -305,13 +371,126 @@ export default {
       background-color: $white;
     }
   }
+  .web-icons {
+    display: none;
+  }
+  .about-product-web {
+    display: none;
+  }
 }
 
-@media only screen and (min-width: 728px) {
+@media only screen and (min-width: 1024px) {
+  .product-view {
+    margin-top: 60px;
+  }
   .slide-show-photos {
     flex-grow: 1;
+    max-width: 60%;
+    height: 700px;
+  }
+  .product-name {
+    margin-top: 0;
+  }
+
+  .product-price {
+    margin-top: 23px;
+  }
+
+  .share-image {
+    display: none;
+  }
+
+  .product-view-photo-info-web {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    height: 800px;
+    justify-content: space-between;
+  }
+
+  .product-view-info-web {
+    margin-left: 62px;
+    // min-width: 35%;
+    max-width: 35%;
+  }
+
+  .about-product-web {
+    display: flex;
+    color: $dark-grey;
+    margin: 60px 0 48px 0;
+  }
+
+  .display-count-items-cart-web {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    flex-direction: row;
+    background-color: $light-gray;
+    height: 53px;
+    width: 20%;
+    border-radius: 5px;
+  }
+
+  .count {
+    margin: 0 8px;
+    color: $dark-grey;
+  }
+
+  .increment-btn,
+  .decrement-btn {
+    border: none;
+    flex: 1;
+    color: $dark-grey;
+    width: 40%;
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  .add-to-cart {
+    height: 53px;
+    margin: 0;
+    width: 77%;
+    font-weight: 900;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  .view-more-product-description {
+    display: none;
+  }
+
+  .web-icons {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    margin-top: 250px;
+    margin-bottom: 38px;
+    height: 18px;
+  }
+  .social-media-icons {
+    border-left: 1px solid $dark-grey;
+  }
+  .favorite {
+    margin-right: 40px;
+  }
+  .social-media {
+    margin-right: 25px;
+  }
+  .social-media:first-child {
+    padding-left: 39px;
+  }
+  .description-reviews-container {
+    margin-top: 99px;
+  }
+  .in-stock {
+    color: $green;
   }
 }
 </style>

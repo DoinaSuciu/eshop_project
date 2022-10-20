@@ -24,6 +24,9 @@
           }}</span>
         </div>
       </router-link>
+      <router-link class="nav-icon mobile-hide" to="/favorites">
+        <img src="../assets/favorite.png" />
+      </router-link>
       <router-link class="nav-icon mobile-hide" to="/my-account">
         <img src="../assets/Icon account.png" />
       </router-link>
@@ -97,7 +100,7 @@ export default {
         },
         {
           name: "Our Story",
-          path: "/our-story",
+          path: "/about",
         },
       ],
       hambMenu: [

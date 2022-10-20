@@ -71,7 +71,7 @@ export default {
       {
         id: 112,
         category: "Fashion",
-        title: "A Preview of the Jewels of TEFAF Maastricht",
+        title: "A Preview of the Jewels of TEFAF",
         coverPhoto: require(`/src/assets/blog/jewels-TEFAF/TEFAF-choker-detail-750x600.jpg`),
         intro: `The annual TEFAF fair in Maastricht is a showcase for art and antiquities, including museum quality jewelry from contemporary masters like Wallace Chan, Hemmerle,
         and Glenn Spiro as well as vintage jewelry by Suzanne Belperron, Lalique, and other sought after-makers. With a growing international profile thanks to new spin and fall
@@ -123,7 +123,7 @@ export default {
       {
         id: 113,
         category: "Fashion",
-        title: "Top Ten: 2022 AGTA Spectrum Awards",
+        title: "Top Ten: 2022 Spectrum Awards",
         coverPhoto: require(`/src/assets/blog/top-ten-2018-AGTA-spec-awards/2018-AGTA-Spectrum-Awards.jpg`),
         intro: `It's time to celebrate gems in the annual AGTA Spectrum Awards competition! I think Spectrum is the best jewelry design competition because the editor's
         preview includes all the entries, not just the winners.  Although the winners are always good, it's nice to find favorites that might have been overlooked by the judges too.
@@ -179,7 +179,7 @@ export default {
       {
         id: 114,
         category: "Style",
-        title: "What are the Main Shapes of Diamond Rings?",
+        title: "The Main Shapes of Diamond Rings",
         coverPhoto: require(`/src/assets/blog/main-shapes-diamond-rings/Triple_0.50ct_Engagement_Ring_Model.jpg`),
         intro: `There are probably far more cuts of engagement rings than you might realise, but we're going to focus on nine of the most well-known diamond shapes for rings and give you
         each of the diamond shape names, so you have everything you need when you search online or in-store. Plus discover who different types of diamond cuts might be best suited to and why
@@ -396,7 +396,7 @@ export default {
       {
         id: 118,
         category: "Celebrity Jewelry",
-        title: "The Top 5 Oscar Jewelry Moments Ever",
+        title: "Top 5 Oscar Jewelry Moments Ever",
         coverPhoto: require(`/src/assets/blog/top-15-oscar-jewelry-moments-ever/Best-Oscars-Jewelry-675x600.jpg`),
         intro: `—There is no bigger stage for fine jewelry than the Academy Awards red carpet. It's the Super Bowl of jewelry, which is why celebrity placements are a jewelry brand's equivalent of Super Bowl
          commercials. Yes, they are often paid to wear the jewelry and very few own their own Oscar jewelry but we enjoy them much more than the main event itself. And like any self-respecting American spectacle,

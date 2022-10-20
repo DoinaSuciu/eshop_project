@@ -48,6 +48,7 @@ export default {
   @media only screen and (min-width: 0) {
     // margin-bottom: 30px;
     a {
+      max-width: 100%;
       text-decoration: none;
 
       .img-blog-card {
@@ -113,6 +114,10 @@ export default {
       font-weight: 400;
       margin-top: 0;
       font-style: normal;
+    }
+
+    .img-blog-card {
+      max-height: 322px;
     }
   }
 }

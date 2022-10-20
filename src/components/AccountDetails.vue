@@ -3,7 +3,7 @@
     <Modal
       v-if="modalActive"
       :modalMessage="modalMessage"
-      v-on:close-modal="closeModal"
+      @close-modal="closeModal"
     />
     <div class="container">
       <!-- <h1 class="text-align-center">Account details</h1> -->

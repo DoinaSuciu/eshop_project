@@ -131,4 +131,20 @@ export default {
     color: $accent;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .blog-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .blog-card {
+    min-width: 50%;
+    max-width: 50%;
+    flex: 1;
+  }
+}
 </style>

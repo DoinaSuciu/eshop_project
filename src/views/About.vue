@@ -7,7 +7,7 @@
       it, celebrate with it, reward yourself with it and keep it forever.
     </p>
     <h5>INSPIRED BY YOU</h5>
-    <img src="../assets/Img 01-about.png" />
+    <img src="../assets/about-page/about-photo-1.jpg" />
     <p class="body-small">
       Since our first Monday Drop in 2015, you have embraced fine jewelry for
       yourself. It's you—your daily style signatures, your decisions to buy
@@ -16,7 +16,10 @@
     </p>
 
     <h5>PRODUCED WITH CARE</h5>
-    <img class="img-produced-with-care" src="../assets/Img 02-about.png" />
+    <img
+      class="img-produced-with-care"
+      src="../assets/about-page/about-photo-2.jpg"
+    />
     <span class="text-align-center body-medium"> #WeLoveEarth </span>
     <p class="body-small">
       01. We've adopted processes from the aerospace industry to make jewelry
@@ -51,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography";
@@ -60,6 +63,10 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: left;
+}
+
+img {
+  border-radius: 6px;
 }
 
 .img-produced-with-care {
