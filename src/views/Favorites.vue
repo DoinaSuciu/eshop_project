@@ -64,9 +64,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .favorites-container {
-    // margin-bottom: 30px;
-  }
   h1 {
     margin-top: 40px;
     margin-bottom: 60px;
