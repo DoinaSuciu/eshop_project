@@ -1,5 +1,5 @@
 <template>
-  <div class="product-view">
+  <div class="product-view" :key="product.id">
     <div class="product-view-photo-info-web">
       <SlideShow class="slide-show-photos" :images="images" />
       <div class="product-view-info-web">
@@ -32,15 +32,23 @@
             </button>
           </div>
 
-          <button @click="addToCart(product)" class="add-to-cart body-small">
+          <button
+            @click="addToCart(product)"
+            class="add-to-cart body-small"
+            :disabled="!canAddToCart"
+          >
             ADD TO CART
           </button>
         </div>
         <div class="web-icons">
-          <img
-            class="favorite"
-            src="../assets/product-view-page-icons/favorite.png"
-          />
+          <button
+            @click="toggleFavs"
+            class="favorite-btn"
+            :class="{ 'is-favorite': getIsFavorite }"
+          >
+            <img src="../assets/product-view-page-icons/favorite.png" />
+          </button>
+
           <div class="social-media-icons">
             <img
               class="social-media"
@@ -60,7 +68,7 @@
             />
           </div>
         </div>
-        <div>
+        <div class="in-stock-check">
           <span class="in-stock body-small" v-if="product.pieces > 0"
             >In Stock</span
           >
@@ -68,6 +76,9 @@
             >Out of Stock</span
           >
         </div>
+        <span class="body-small category-style"
+          >Category: {{ product.styleCategory }}</span
+        >
       </div>
     </div>
 
@@ -162,7 +173,12 @@ export default {
       isHiddenDescription: false,
       isHiddenAddInfo: false,
       isHiddenReviews: false,
+      isFavorite: false,
     };
+  },
+  created() {
+    // console.log(`created`);
+    this.updateIsFavorite;
   },
 
   computed: {
@@ -195,10 +211,19 @@ export default {
       )[0];
     },
 
-    productInCart() {
-      return this.$store.state.cart.filter(
+    canAddToCart() {
+      const products = this.$store.state.cart.filter(
         (product) => `${product.id}` === this.$route.params.productId
-      )[0];
+      );
+
+      if (products.length === 0) {
+        return true;
+      }
+      const productInCart = products[0];
+      console.log(productInCart.pieces);
+      console.log(productInCart.count);
+
+      return productInCart.pieces && productInCart.pieces > productInCart.count;
     },
 
     productDescription() {
@@ -211,6 +236,15 @@ export default {
 
     buttonText() {
       return this.readMore ? "View less" : "View more";
+    },
+    updateIsFavorite() {
+      this.$store.dispatch("isFavorite", this.product.id).then((value) => {
+        this.isFavorite = value;
+      });
+    },
+    getIsFavorite() {
+      this.updateIsFavorite;
+      return this.isFavorite;
     },
   },
 
@@ -233,11 +267,10 @@ export default {
     addToCart(product) {
       this.$store.dispatch("addToCart", product.id);
     },
-    favs(id) {
-      this.$store.commit("ADD_TO_FAV", id);
-      this.$router.push({
-        name: "favorites",
-      });
+    toggleFavs() {
+      console.log(`TOGGLE_FAV ${this.product.id}`);
+      this.$store.commit("TOGGLE_FAV", this.product.id);
+      this.updateIsFavorite;
     },
   },
 };
@@ -377,6 +410,9 @@ export default {
   .about-product-web {
     display: none;
   }
+  .in-stock-check {
+    margin-top: 20px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -471,14 +507,21 @@ export default {
     flex-direction: row;
     // justify-content: space-between;
     margin-top: 250px;
-    margin-bottom: 38px;
+    margin-bottom: 45px;
     height: 18px;
   }
   .social-media-icons {
     border-left: 1px solid $dark-grey;
   }
-  .favorite {
+  .favorite-btn {
     margin-right: 40px;
+    border: none;
+    background-color: $white;
+  }
+
+  .is-favorite {
+    background-color: $black;
+    border: 1px solid red;
   }
   .social-media {
     margin-right: 25px;
@@ -491,6 +534,11 @@ export default {
   }
   .in-stock {
     color: $green;
+  }
+
+  .in-stock-check {
+    margin-bottom: 10px;
+    margin-top: 0;
   }
 }
 </style>

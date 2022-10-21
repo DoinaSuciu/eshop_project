@@ -2,19 +2,45 @@
   <div class="favorites-container">
     <SearchBar />
 
-    <h1>Wishlist</h1>
-    <h5>Usern.name this is the selection of items you like most</h5>
+    <h1 class="wishlist-title">Wishlist</h1>
+    <span v-if="getUserName !== null" class="body-medium">
+      {{ getUserName }} this is the selection of items you like most
+    </span>
+    <div v-else="getUserName === null" class="not-user-info-to-login">
+      <span class="body-medium keep-items-favorite"
+        >Don't lose your Wishlist items!</span
+      >
+      <span class="body-medium keep-items-favorite">
+        Create a SHOPPE account or log in to save them on all your devices.
+      </span>
+      <div class="redirect-to-login-in">
+        <router-link
+          class="create-account-redirect btn-black-normal-long"
+          to="/my-account"
+          >Create account / Sign in</router-link
+        >
 
-    <!-- <div class="filtered-products">
+        <img
+          class="img-on-all-devices"
+          src="../assets/icon-devices-favorites.png"
+        />
+      </div>
+    </div>
+
+    <div class="filtered-products">
       <ul class="product-cards">
-        <li class="product-card" v-for="product in products" :key="product.id">
+        <li
+          class="product-card"
+          v-for="product in favoritesProducts"
+          :key="product.id"
+        >
           <ProductCard :product="product" class="product-card" />
           <button @click="addToCart(product)" class="add-to-cart body-small">
             ADD TO CART
           </button>
         </li>
       </ul>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -29,7 +55,10 @@ export default {
   },
   computed: {
     favoritesProducts() {
-      return this.$store.state.products.filter((item) => item.favorite);
+      return this.$store.getters.getFavorites;
+    },
+    getUserName() {
+      return this.$store.state.auth.profileUsername;
     },
   },
   components: { ProductCard, SearchBar },
@@ -40,11 +69,15 @@ export default {
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography";
+@import "../styles/btn-syles.scss";
 
 @media only screen and (min-width: 0) {
-  h1 {
-    margin-top: 24px;
-    margin-bottom: 15px;
+  .favorites-container {
+    margin-bottom: 53px;
+  }
+  .wishlist-title {
+    margin: 24px auto 15px auto;
+    padding-bottom: 30px;
   }
   .add-to-cart {
     left: 8px;
@@ -60,6 +93,40 @@ export default {
     flex-direction: row;
     align-items: center;
     margin: auto;
+  }
+
+  .not-user-info-to-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .redirect-to-login-in {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .create-account-redirect {
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .keep-items-favorite {
+    padding-bottom: 10px;
+  }
+
+  .img-on-all-devices {
+    margin-top: 50px;
+    width: 50%;
+  }
+
+  .product-cards {
+    padding: 0;
+    // display: flex;
+    // flex-wrap: wrap;
+    // align-items: center;
+    // margin: 0 auto;
   }
 }
 

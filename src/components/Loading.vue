@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .loading {
   top: 0;
   z-index: 1002;

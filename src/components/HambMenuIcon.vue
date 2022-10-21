@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @media only screen and (min-width: 0) {
   .hamb-menu-icon {
     display: inline-block;

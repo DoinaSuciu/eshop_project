@@ -74,7 +74,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 
@@ -309,15 +309,6 @@ export default {
   .view-all {
     font-size: 20px;
     color: $accent;
-  }
-
-  .product-cards {
-  }
-
-  .product-card {
-  }
-
-  .shop-the-latest {
   }
 }
 </style>

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     prevPage: null,
     appliedCoupon: 0,
     cart: [],
+    favorites: [],
     isHambIconOpen: false,
     coupons: [
       { name: "HAPPY5", value: 5 },
@@ -72,6 +73,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/08/01",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 2,
@@ -93,6 +95,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/28",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 3,
@@ -114,6 +117,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/04",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 4,
@@ -135,6 +139,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/03/04",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 5,
@@ -156,6 +161,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/01/04",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 6,
@@ -177,6 +183,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/06/01",
         reviews: "",
         favorite: false,
+        styleCategory: "Accesories",
       },
       {
         id: 7,
@@ -198,6 +205,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/06/07",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 8,
@@ -219,6 +227,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/06/07",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 9,
@@ -240,6 +249,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/08/07",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 10,
@@ -261,6 +271,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/08/20",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 11,
@@ -282,6 +293,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/22",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 12,
@@ -303,6 +315,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/04/30",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 13,
@@ -324,6 +337,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/08/30",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 14,
@@ -345,6 +359,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/21",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 15,
@@ -366,6 +381,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/19",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 16,
@@ -387,6 +403,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/08/30",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 17,
@@ -408,6 +425,7 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/31",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
       {
         id: 18,
@@ -429,10 +447,17 @@ export default new Vuex.Store({
         arrivalDate: "2022/07/07",
         reviews: "",
         favorite: false,
+        styleCategory: "Style",
       },
     ],
   },
-  getters: {},
+  getters: {
+    getFavorites(state) {
+      return state.products.filter((product) =>
+        state.favorites.includes(product.id)
+      );
+    },
+  },
 
   mutations: {
     INCREMENT_PRODUCT_COUNT(state, id) {
@@ -467,10 +492,13 @@ export default new Vuex.Store({
     SET_PREV_ROUTE(state, prevPage) {
       state.prevPage = prevPage;
     },
-    ADD_TO_FAV(state, id) {
-      state.products[
-        state.products.findIndex((product) => product.id === id)
-      ].favorite = true;
+    TOGGLE_FAV(state, id) {
+      if (state.favorites.includes(id)) {
+        state.favorites = state.favorites.filter((item) => item !== id);
+      } else {
+        state.favorites.push(id);
+      }
+      console.log(`isFavorites toggle ${JSON.stringify(state.favorites)}`);
     },
   },
 
@@ -485,6 +513,9 @@ export default new Vuex.Store({
       } else {
         context.commit("ADD_TO_CART", productId);
       }
+    },
+    isFavorite(context, productId) {
+      return context.state.favorites.includes(productId);
     },
   },
 

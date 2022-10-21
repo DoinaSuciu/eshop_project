@@ -432,6 +432,10 @@ export default {
     #notes {
       margin-top: 37px;
     }
+
+    #notes {
+      padding: 0;
+    }
   }
 
   .billing-details-web {
