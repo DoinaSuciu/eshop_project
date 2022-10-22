@@ -46,6 +46,7 @@ export default {
     margin: 16px 0;
     border-radius: 5px;
     justify-content: center;
+    // background-color: $light-gray;
   }
 
   .input {
@@ -54,8 +55,7 @@ export default {
     height: 32px;
     text-indent: 30px;
     overflow: hidden;
-    background: $light-gray url("../assets/Icon-search-grey.png") no-repeat 10px
-      center;
+    background: url("../assets/Icon-search-grey.png") no-repeat 10px center;
     font-size: 14px;
     border: none;
     border-radius: 5px;
@@ -77,8 +77,5 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .search-bar {
-    display: none;
-  }
 }
 </style>

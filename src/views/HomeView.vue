@@ -1,10 +1,15 @@
 <template>
   <main class="home-page">
-    <SearchBar />
+    <SearchBar class="search-bar-component" />
 
     <div class="banner">
       <figure class="banner-figure">
-        <img class="banner-image" src="../assets/products/01/01-1.jpg" />
+        <img
+          class="banner-image"
+          :src="bannerPrincipalImg"
+          @mouseover="bannerPrincipalImg = bannerOtherImg"
+          @mouseleave="bannerPrincipalImg = bannerDefaultImg"
+        />
       </figure>
 
       <div class="banner-details">
@@ -51,7 +56,11 @@ export default {
     SearchBar,
   },
   data() {
-    return {};
+    return {
+      bannerPrincipalImg: require(`../assets/products/01/01-1.jpg`),
+      bannerOtherImg: require(`../assets/products/01/01 - onhover.jpg`),
+      bannerDefaultImg: require(`../assets/products/01/01-1.jpg`),
+    };
   },
   computed: {
     user() {
@@ -309,6 +318,10 @@ export default {
   .view-all {
     font-size: 20px;
     color: $accent;
+  }
+
+  .search-bar-component {
+    display: none;
   }
 }
 </style>

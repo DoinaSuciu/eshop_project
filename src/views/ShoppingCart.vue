@@ -96,6 +96,7 @@
                 v-model="country"
                 class="body-small right-element select-shipping"
               >
+                <option value="" disabled>Select a country</option>
                 <option
                   id="country-option"
                   v-for="cost in shippingCosts"
@@ -150,8 +151,8 @@ export default {
   data() {
     return {
       // count: "",
-      country: "Select a Country",
-      defaultCountry: "Select a Country",
+      country: "",
+      // defaultCountry: "Select a Country",
       shippingCost: 0,
       totalCost: 0,
       couponCode: null,

@@ -48,12 +48,14 @@
           v-model="country"
           class="body-small-dark-gray"
         >
-          <option value="Franta">Franta</option>
-          <option value="Germania">Germania</option>
-          <option value="Republica Moldova">Republica Moldova</option>
-          <option value="Romania">Romania</option>
-          <option value="UK">UK</option>
-          <option value="Spania">Spania</option>
+          <option value="" disabled>Select a country</option>
+          <option
+            id="country-option"
+            v-for="shipping in shippingList"
+            v-bind:value="shipping.id"
+          >
+            {{ shipping.country }}
+          </option>
         </select>
 
         <input
@@ -224,7 +226,7 @@ export default {
   name: "Checkout",
   data() {
     return {
-      country: "Romania",
+      country: "",
       payment: "",
     };
   },
@@ -253,6 +255,9 @@ export default {
     },
     finalTotalCost() {
       return this.calcSubtotal - this.appliedDiscount + this.totalShippingCost;
+    },
+    shippingList() {
+      return this.$store.state.shipping;
     },
   },
 };

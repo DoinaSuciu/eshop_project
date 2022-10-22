@@ -71,7 +71,6 @@ export default {
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
-@import "../styles/typography";
 
 .blogs-title {
   display: flex;
@@ -81,6 +80,11 @@ export default {
 }
 
 @media only screen and (min-width: 0) {
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
   .blog-cards {
     margin: 0;
     padding: 0;
@@ -98,6 +102,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-items: center;
     padding: 0 15px;
     margin: 0 auto;
   }

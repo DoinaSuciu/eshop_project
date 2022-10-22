@@ -33,6 +33,8 @@ export default {
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
+@import "../styles/btn-syles.scss";
+
 // @import "../styles/typography";
 
 .blog-card {

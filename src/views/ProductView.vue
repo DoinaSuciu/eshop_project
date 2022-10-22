@@ -507,7 +507,7 @@ export default {
     flex-direction: row;
     // justify-content: space-between;
     margin-top: 250px;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
     height: 18px;
   }
   .social-media-icons {

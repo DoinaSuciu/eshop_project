@@ -29,11 +29,14 @@
           name="subject"
           v-model="select"
         >
-          <option class="body-small" disabled value=""></option>
-          <option class="body-small">Subject</option>
-          <option class="body-small">Online Purchase</option>
-          <option class="body-small">Return</option>
-          <option class="body-small">Shipping Options</option>
+          <option class="body-small" value="" disabled>Subject</option>
+          <option
+            class="body-small"
+            v-for="option in options"
+            :value="option.id"
+          >
+            {{ option.name }}
+          </option>
         </select>
       </div>
 
@@ -57,7 +60,13 @@ export default {
   data() {
     return {
       formIsValid: true,
-      select: "Subject",
+      select: "",
+      options: [
+        { id: 1, name: "Online Purchase" },
+        { id: 2, name: "Return" },
+        { id: 3, name: "Shipping Options" },
+        { id: 4, name: "Gift Bag & Gift card options" },
+      ],
     };
   },
   methods: {

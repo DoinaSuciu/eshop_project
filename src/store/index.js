@@ -25,7 +25,6 @@ export default new Vuex.Store({
       { id: 3, name: "rings" },
     ],
     shipping: [
-      { country: "Select a Country", cost: 0 },
       {
         id: 90,
         country: "Romania",

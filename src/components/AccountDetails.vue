@@ -128,6 +128,7 @@ export default {
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
+@import "../styles/btn-syles.scss";
 
 @media only screen and (min-width: 0) {
   .profile {
@@ -136,6 +137,7 @@ export default {
     .container {
       max-width: 1000px;
       padding: 39px 25px;
+      margin: 0 auto;
       h2 {
         text-align: center;
         margin-bottom: 16px;
