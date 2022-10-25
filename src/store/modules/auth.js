@@ -82,14 +82,14 @@ export default {
 
     logout(context) {
       getAuth().signOut();
-      this.user = null;
-      this.profileAdmin = null;
-      this.profileEmail = null;
-      this.profileFirstName = null;
-      this.profileLastName = null;
-      this.profileUsername = null;
-      this.profileId = null;
-      this.profileInitials = null;
+      context.state.user = null;
+      context.state.profileAdmin = null;
+      context.state.profileEmail = null;
+      context.state.profileFirstName = null;
+      context.state.profileLastName = null;
+      context.state.profileUsername = null;
+      context.state.profileId = null;
+      context.state.profileInitials = null;
     },
   },
 };

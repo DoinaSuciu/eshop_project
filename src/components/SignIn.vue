@@ -64,7 +64,10 @@ export default {
         .then(() => {
           this.error = false;
           this.errorMsg = "";
-          if (this.prevPage.fullPath === "/blogs") {
+          if (
+            this.prevPage.fullPath === "/blogs" ||
+            this.prevPage.fullPath === "/favorites"
+          ) {
             this.$router.go(-1);
             return;
           }

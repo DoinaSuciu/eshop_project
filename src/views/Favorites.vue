@@ -1,12 +1,31 @@
 <template>
   <div class="favorites-container">
-    <SearchBar />
-
     <h1 class="wishlist-title">Wishlist</h1>
-    <span v-if="getUserName !== null" class="body-medium">
-      {{ getUserName }} this is the selection of items you like most
-    </span>
-    <div v-else="getUserName === null" class="not-user-info-to-login">
+
+    <div
+      v-if="favoritesProductsLength === 0"
+      class="body-medium empty-favorites-list"
+    >
+      <span class="empty-wishlist-info"> Your wishlist is empty.</span>
+      <span>
+        Save the items you like most so you don't lose sight of them.</span
+      >
+      <button @click="goToShop" class="btn-black-normal-long get-inspired-btn">
+        GET INSPIRED
+      </button>
+    </div>
+
+    <div
+      v-if="getUserName !== null && favoritesProductsLength > 0"
+      class="body-medium selected-itemes-info"
+    >
+      <span class="client-name">{{ getUserName }}</span>
+      <span> this is the selection of items you like most</span>
+    </div>
+    <div
+      v-if="getUserName === null && favoritesProductsLength > 0"
+      class="not-user-info-to-login"
+    >
       <span class="body-medium keep-items-favorite"
         >Don't lose your Wishlist items!</span
       >
@@ -15,7 +34,7 @@
       </span>
       <div class="redirect-to-login-in">
         <router-link
-          class="create-account-redirect btn-black-normal-long"
+          class="btn-black-normal-long create-account-redirect"
           to="/my-account"
           >Create account / Sign in</router-link
         >
@@ -27,26 +46,23 @@
       </div>
     </div>
 
-    <div class="filtered-products">
-      <ul class="product-cards">
-        <li
-          class="product-card"
-          v-for="product in favoritesProducts"
-          :key="product.id"
-        >
-          <ProductCard :product="product" class="product-card" />
-          <button @click="addToCart(product)" class="add-to-cart body-small">
-            ADD TO CART
-          </button>
-        </li>
-      </ul>
-    </div>
+    <ul class="product-cards">
+      <li
+        class="product-card"
+        v-for="product in favoritesProducts"
+        :key="product.id"
+      >
+        <ProductCard :product="product" class="product-card-component" />
+        <button @click="addToCart(product)" class="add-to-cart body-small">
+          ADD TO CART
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import ProductCard from "@/components/ProductCard.vue";
-import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "Favorites",
@@ -57,11 +73,25 @@ export default {
     favoritesProducts() {
       return this.$store.getters.getFavorites;
     },
+    favoritesProductsLength() {
+      return this.$store.getters.getFavorites.length;
+    },
+    removeFromFavorite(id) {
+      this.favoritesProducts = this.favoritesProducts.filter(
+        (item) => item.id !== id
+      );
+    },
     getUserName() {
       return this.$store.state.auth.profileUsername;
     },
   },
-  components: { ProductCard, SearchBar },
+  components: { ProductCard },
+
+  methods: {
+    goToShop() {
+      this.$router.push("/shop");
+    },
+  },
 };
 </script>
 
@@ -78,6 +108,9 @@ export default {
   .wishlist-title {
     margin: 24px auto 15px auto;
     padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
   .add-to-cart {
     left: 8px;
@@ -131,14 +164,24 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+  .client-name {
+    color: $accent;
+    margin-right: 5px;
+  }
+
+  .selected-itemes-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   h1 {
     margin-top: 40px;
     margin-bottom: 60px;
   }
   .add-to-cart {
     height: 53px;
+    font-size: 16px;
     margin: 0 auto;
-    min-width: 100%;
     font-weight: 900;
     display: flex;
     justify-content: center;
@@ -149,8 +192,52 @@ export default {
     }
   }
 
+  .create-account-redirect {
+    height: 53px;
+    font-size: 16px;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+
+  .product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+  }
+
   .product-card {
+    max-width: 40%;
     margin-bottom: 0;
+
+    // margin-right: 15px;
+  }
+
+  .product-card-component {
+    min-width: 100%;
+    height: auto;
+    flex: 1;
+  }
+
+  .empty-favorites-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .empty-wishlist-info {
+    margin-bottom: 15px;
+  }
+
+  .get-inspired-btn {
+    height: 53px;
+    margin-top: 150px;
+    font-size: 16px;
   }
 }
 </style>

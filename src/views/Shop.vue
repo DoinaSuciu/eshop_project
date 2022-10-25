@@ -161,6 +161,7 @@ export default {
     padding-left: 10px;
     color: black;
     border-color: $gray;
+    outline: none;
   }
 
   .product-cards {

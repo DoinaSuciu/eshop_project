@@ -59,6 +59,7 @@ export default {
     font-size: 14px;
     border: none;
     border-radius: 5px;
+    outline: none;
   }
 
   .item-error {

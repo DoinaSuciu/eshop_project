@@ -157,6 +157,10 @@ export default {
   .banner-button:active {
     background-color: rgb(255, 255, 255, 0.5);
   }
+  .banner-button:hover {
+    background-color: $white;
+    color: $black;
+  }
 
   .second-banner-text {
     display: flex;

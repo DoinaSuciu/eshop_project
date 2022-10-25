@@ -41,12 +41,8 @@
           </button>
         </div>
         <div class="web-icons">
-          <button
-            @click="toggleFavs"
-            class="favorite-btn"
-            :class="{ 'is-favorite': getIsFavorite }"
-          >
-            <img src="../assets/product-view-page-icons/favorite.png" />
+          <button @click="toggleFavs" class="favorite-btn">
+            <SvgFavorite :svgColor="getFavoriteIndicatorColor" />
           </button>
 
           <div class="social-media-icons">
@@ -158,6 +154,7 @@
 <script>
 import SlideShow from "../components/SlideShow.vue";
 import SimilarItemsSlides from "@/components/SimilarItemsSlides.vue";
+import SvgFavorite from "@/components/SvgFavorite.vue";
 
 //import { setTimeout } from "timers";
 export default {
@@ -165,6 +162,7 @@ export default {
   components: {
     SlideShow,
     SimilarItemsSlides,
+    SvgFavorite,
   },
   data() {
     return {
@@ -245,6 +243,9 @@ export default {
     getIsFavorite() {
       this.updateIsFavorite;
       return this.isFavorite;
+    },
+    getFavoriteIndicatorColor() {
+      return this.getIsFavorite ? "red" : "grey";
     },
   },
 
@@ -518,10 +519,13 @@ export default {
     border: none;
     background-color: $white;
   }
-
+  .isNotFavorite {
+    fill: none;
+  }
   .is-favorite {
-    background-color: $black;
-    border: 1px solid red;
+    // background-color: $black;
+    fill: black;
+    // border: 1px solid red;
   }
   .social-media {
     margin-right: 25px;

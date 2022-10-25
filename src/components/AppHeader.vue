@@ -25,7 +25,7 @@
         </div>
       </router-link>
       <router-link class="nav-icon mobile-hide" to="/favorites">
-        <img src="../assets/favorite.png" />
+        <img src="../assets/heart-favorite-header.png" />
       </router-link>
       <router-link class="nav-icon mobile-hide" to="/my-account">
         <img src="../assets/Icon account.png" />

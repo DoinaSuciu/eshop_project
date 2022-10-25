@@ -2,7 +2,7 @@
   <router-link class="product-card" :to="`/product-view/${product.id}`">
     <img class="img-card" :src="product.photo" />
     <span class="product-name body-medium">{{ product.name }}</span>
-    <h4 class="product-price body-small">$ {{ product.price }}</h4>
+    <h4 class="product-price body-small">{{ product.price | currency }}</h4>
   </router-link>
 </template>
 
