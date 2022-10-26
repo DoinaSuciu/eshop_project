@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="calcTotalCount === 0">
+    <div v-if="calcTotalCount === 0" class="empty-shopping-cart-info">
       <h5>Your Shopping cart is empty</h5>
       <button
         @click="continueShopping"
@@ -288,7 +288,11 @@ export default {
       height: 16px;
     }
   }
-
+  .empty-shopping-cart-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .total-count-items {
     width: 100%;
     margin: 25px 0 3px 0;

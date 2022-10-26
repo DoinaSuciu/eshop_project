@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="footer body-small">
     <div class="group-navs-newsletter">
       <div>
         <div class="ask-for-newsletter">
@@ -69,9 +69,10 @@ export default {
 <style lang="scss">
 @import "../styles/base.scss";
 @import "../styles/vars.scss";
+@import "../styles/typography.scss";
 
 @media only screen and (min-width: 0) {
-  footer {
+  .footer {
     margin-top: 80px;
     font-size: 12px;
     display: flex;
@@ -119,7 +120,7 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
-      margin-top: 32px;
+      // margin-top: 32px;
       margin-bottom: 49px;
     }
     .short-line {
@@ -158,9 +159,9 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  footer {
-    margin-top: 170px;
-    margin-bottom: 90px;
+  .footer {
+    // margin-top: 170px;
+    // margin-bottom: 90px;
     font-size: 16px;
     border-top: 1px solid $gray;
 
@@ -186,6 +187,7 @@ export default {
       justify-content: space-between;
       flex-direction: row-reverse;
       align-items: center;
+      margin-top: 53px;
     }
 
     .follow-us-group {
@@ -194,6 +196,7 @@ export default {
       flex-direction: row-reverse;
       align-items: center;
       margin-top: 57px;
+      margin-bottom: 105px;
     }
 
     .follow-us {
@@ -211,6 +214,10 @@ export default {
     .icon {
       width: auto;
       height: auto;
+
+      &:hover {
+        transform: scale(1.5);
+      }
     }
 
     .arrow {
