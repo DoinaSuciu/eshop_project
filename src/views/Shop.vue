@@ -17,7 +17,7 @@
           <option
             id="category-option"
             v-for="category in productCategories"
-            v-bind:value="category.id"
+            v-bind:value="category.name"
           >
             {{ category.name }}
           </option>
@@ -32,7 +32,7 @@
           <option
             id="category-option"
             v-for="sortCategory in sortBy"
-            v-bind:value="sortCategory.id"
+            v-bind:value="sortCategory.name"
           >
             {{ sortCategory.name }}
           </option>
@@ -43,10 +43,13 @@
         <ul class="product-cards">
           <li
             class="product-card"
-            v-for="product in products"
-            :key="product.id"
+            v-for="sortedProduct in sortedProducts"
+            :key="sortedProduct.id"
           >
-            <ProductCard :product="product" class="product-card-component" />
+            <ProductCard
+              :product="sortedProduct"
+              class="product-card-component"
+            />
           </li>
         </ul>
       </div>
@@ -65,18 +68,36 @@ export default {
       category: "",
       sort: "",
       sortBy: [
-        { id: 1, name: "Best Sellers" },
-        { id: 2, name: "Price High to Low" },
-        { id: 3, name: "Price Low to High" },
+        { id: 1111, name: "Popularity" },
+        { id: 1112, name: "Price High to Low" },
+        { id: 1113, name: "Price Low to High" },
       ],
     };
   },
   computed: {
     products() {
-      return this.$store.state.products;
+      if (this.category === "") {
+        return this.$store.state.products;
+      }
+      console.log(this.category);
+      return this.$store.state.products.filter(
+        (product) => product.category === this.category
+      );
     },
     productCategories() {
       return this.$store.state.categories;
+    },
+    sortedProducts() {
+      switch (this.sort) {
+        case "":
+          return this.products;
+        case this.sortBy[0].name:
+          return this.products.sort((a, b) => b.soldProducts - a.soldProducts);
+        case this.sortBy[1].name:
+          return this.products.sort((a, b) => b.price - a.price);
+        case this.sortBy[2].name:
+          return this.products.sort((a, b) => a.price - b.price);
+      }
     },
   },
   components: { ProductCard, SearchBar },

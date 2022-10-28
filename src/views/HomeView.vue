@@ -88,6 +88,9 @@ export default {
 @import "../styles/vars.scss";
 
 @media only screen and (min-width: 0) {
+  .search-bar-component {
+    background-color: $light-gray;
+  }
   .banner {
     position: relative;
     display: flex;

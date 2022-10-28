@@ -185,6 +185,7 @@ export default {
     font-size: 25px;
     border: none;
     background-color: $white;
+    color: $dark-grey;
     transform: rotate(45deg);
     padding: 0;
   }

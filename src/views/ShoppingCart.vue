@@ -350,7 +350,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 16px 16px 0;
     color: $green;
   }
   .group-cart-items {

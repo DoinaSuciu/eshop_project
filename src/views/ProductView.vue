@@ -1,152 +1,167 @@
 <template>
-  <div class="product-view" :key="product.id">
-    <div class="product-view-photo-info-web">
-      <SlideShow class="slide-show-photos" :images="images" />
-      <div class="product-view-info-web">
-        <h1 class="product-name">{{ product.name }}</h1>
-        <div class="product-share">
-          <h5 class="product-price">{{ product.price | currency }}</h5>
-          <img class="share-image" src="../assets/share.png" />
-        </div>
+  <div class="product-view-container">
+    <div v-if="addedToCart" class="pop-up-added-to-cart">
+      <div class="pop-up-text-icon body-small">
+        <img src="../assets/icon-checked-pop-up.png" />
+        <span class="pop-up-text">The item added to your Shopping bag.</span>
+      </div>
+      <div class="go-to-cart-pop-up_button">
+        <router-link class="go-to-cart-pop-up body-small" to="/shopping-cart">
+          VIEW CART
+        </router-link>
+        <button class="remove-btn body-medium" @click="closePopUp">+</button>
+      </div>
+    </div>
 
-        <p class="about-product-web body-small">
-          {{ product.aboutProducts }}
-        </p>
-
-        <div class="display-count-items-cart-web">
-          <div class="cart-item-quantity">
-            <button
-              class="decrement-btn body-small"
-              :disabled="product.count === 1"
-              @click=""
-            >
-              -
-            </button>
-            <span class="count body-small">{{ product.count }}</span>
-            <button
-              class="increment-btn body-small"
-              :disabled="product.pieces && product.pieces <= product.count"
-              @click=""
-            >
-              +
-            </button>
+    <div class="product-view" :key="product.id">
+      <div class="product-view-photo-info-web">
+        <SlideShow class="slide-show-photos" :images="images" />
+        <div class="product-view-info-web">
+          <h1 class="product-name">{{ product.name }}</h1>
+          <div class="product-share">
+            <h5 class="product-price">{{ product.price | currency }}</h5>
+            <img class="share-image" src="../assets/share.png" />
           </div>
 
-          <button
-            @click="addToCart(product)"
-            class="add-to-cart body-small"
-            :disabled="!canAddToCart"
-          >
-            ADD TO CART
-          </button>
-        </div>
-        <div class="web-icons">
-          <button @click="toggleFavs" class="favorite-btn">
-            <SvgFavorite :svgColor="getFavoriteIndicatorColor" />
-          </button>
+          <p class="about-product-web body-small">
+            {{ product.aboutProducts }}
+          </p>
 
-          <div class="social-media-icons">
-            <img
-              class="social-media"
-              src="../assets/product-view-page-icons/message.png"
-            />
-            <img
-              class="social-media"
-              src="../assets/product-view-page-icons/facebook.png"
-            />
-            <img
-              class="social-media"
-              src="../assets/product-view-page-icons/instagram.png"
-            />
-            <img
-              class="social-media"
-              src="../assets/product-view-page-icons/twitter.png"
-            />
+          <div class="display-count-items-cart-web">
+            <div class="cart-item-quantity">
+              <button
+                class="decrement-btn body-small"
+                :disabled="product.count === 1"
+                @click="decrementProductCount"
+              >
+                -
+              </button>
+              <span class="count body-small">{{ productCount }}</span>
+              <button
+                class="increment-btn body-small"
+                :disabled="product.pieces && product.pieces <= product.count"
+                @click="incrementProductCount"
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              @click="addToCart(product)"
+              class="add-to-cart body-small"
+              :disabled="!canAddToCart"
+            >
+              ADD TO CART
+            </button>
           </div>
-        </div>
-        <div class="in-stock-check">
-          <span class="in-stock body-small" v-if="product.pieces > 0"
-            >In Stock</span
+          <div class="web-icons">
+            <button @click="toggleFavs" class="favorite-btn">
+              <SvgFavorite :svgColor="getFavoriteIndicatorColor" />
+            </button>
+
+            <div class="social-media-icons">
+              <img
+                class="social-media"
+                src="../assets/product-view-page-icons/message.png"
+              />
+              <img
+                class="social-media"
+                src="../assets/product-view-page-icons/facebook.png"
+              />
+              <img
+                class="social-media"
+                src="../assets/product-view-page-icons/instagram.png"
+              />
+              <img
+                class="social-media"
+                src="../assets/product-view-page-icons/twitter.png"
+              />
+            </div>
+          </div>
+          <div class="in-stock-check">
+            <span class="in-stock body-small" v-if="product.pieces > 0"
+              >In Stock</span
+            >
+            <span class="body-small out-of-stock" v-if="product.pieces === 0"
+              >Out of Stock</span
+            >
+          </div>
+          <span class="body-small category-style"
+            >Category: {{ product.styleCategory }}</span
           >
-          <span class="body-small out-of-stock" v-if="product.pieces < 0"
-            >Out of Stock</span
-          >
         </div>
-        <span class="body-small category-style"
-          >Category: {{ product.styleCategory }}</span
-        >
       </div>
-    </div>
 
-    <div class="view-more-product-description">
-      <p class="body-small about-products">
-        {{ productDescription }}
-      </p>
-
-      <button @click="showMoreOrLess" class="view-more-group body-small">
-        <span class="view-more-text"> {{ buttonText }} </span>
-
-        <img class="view-more-icon" src="../assets/Icon view-more.png" />
-      </button>
-    </div>
-    <div class="description-reviews-container">
-      <div class="description-reviews-btn body-small">
-        <div class="description-reviews-group">
-          <p class="description-text body-small">Description</p>
-          <button @click="showHideDesciption" class="btn-view-more-vertical">
-            <img
-              class="view-more-icon-vertical"
-              src="../assets/Icon view-more-vertical.png"
-            />
-          </button>
-        </div>
-        <p v-if="isHiddenDescription">
-          {{ product.description }}
+      <div class="view-more-product-description">
+        <p class="body-small about-products">
+          {{ productDescription }}
         </p>
-      </div>
 
-      <div class="description-reviews-btn body-small">
-        <div class="description-reviews-group">
-          <p class="description-text body-small">Additional information</p>
-          <button @click="showHideAddInfo" class="btn-view-more-vertical">
-            <img
-              class="view-more-icon-vertical"
-              src="../assets/Icon view-more-vertical.png"
-            />
-          </button>
+        <button @click="showMoreOrLess" class="view-more-group body-small">
+          <span class="view-more-text"> {{ buttonText }} </span>
+
+          <img class="view-more-icon" src="../assets/Icon view-more.png" />
+        </button>
+      </div>
+      <div class="description-reviews-container">
+        <div class="description-reviews-btn body-small">
+          <div class="description-reviews-group">
+            <p class="description-text body-small">Description</p>
+            <button @click="showHideDesciption" class="btn-view-more-vertical">
+              <img
+                class="view-more-icon-vertical"
+                src="../assets/Icon view-more-vertical.png"
+              />
+            </button>
+          </div>
+          <p v-if="isHiddenDescription">
+            {{ product.description }}
+          </p>
         </div>
-        <span v-if="isHiddenAddInfo">
-          Arrival date: {{ product.arrivalDate }}
-        </span>
-      </div>
 
-      <div class="description-reviews-btn body-small">
-        <div class="description-reviews-group">
-          <p class="description-text body-small">Reviews</p>
-          <button @click="showHideReviews" class="btn-view-more-vertical">
-            <img
-              class="view-more-icon-vertical"
-              src="../assets/Icon view-more-vertical.png"
-            />
-          </button>
+        <div class="description-reviews-btn body-small">
+          <div class="description-reviews-group">
+            <p class="description-text body-small">Additional information</p>
+            <button @click="showHideAddInfo" class="btn-view-more-vertical">
+              <img
+                class="view-more-icon-vertical"
+                src="../assets/Icon view-more-vertical.png"
+              />
+            </button>
+          </div>
+          <span v-if="isHiddenAddInfo">
+            Arrival date: {{ product.arrivalDate }}
+          </span>
         </div>
-        <span v-if="isHiddenReviews"> 0 reviews {{ product.reviews }} </span>
+
+        <div class="description-reviews-btn body-small">
+          <div class="description-reviews-group">
+            <p class="description-text body-small">Reviews</p>
+            <button @click="showHideReviews" class="btn-view-more-vertical">
+              <img
+                class="view-more-icon-vertical"
+                src="../assets/Icon view-more-vertical.png"
+              />
+            </button>
+          </div>
+          <span v-if="isHiddenReviews"> 0 reviews {{ product.reviews }} </span>
+        </div>
       </div>
-    </div>
 
-    <div>
-      <h5 class="similar-items-title">Similar Items</h5>
-      <SimilarItemsSlides :products="similarProducts" />
-    </div>
+      <div>
+        <h5 class="similar-items-title">Similar Items</h5>
+        <SimilarItemsSlides :products="similarProducts" />
+      </div>
 
-    <div class="continue-shopping">
-      <p class="continue-shopping-text body-small">Continue shopping</p>
-      <button @click="redirectShopPage" class="btn-continue-shopping">
-        <img
-          class="view-more-icon-horizintal"
-          src="../assets/Icon view-more.png"
-        />
-      </button>
+      <div class="continue-shopping">
+        <p class="continue-shopping-text body-small">Continue shopping</p>
+        <button @click="redirectShopPage" class="btn-continue-shopping">
+          <img
+            class="view-more-icon-horizintal"
+            src="../assets/Icon view-more.png"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -172,6 +187,8 @@ export default {
       isHiddenAddInfo: false,
       isHiddenReviews: false,
       isFavorite: false,
+      addedToCart: false,
+      productCount: 1,
     };
   },
   created() {
@@ -208,20 +225,21 @@ export default {
         (product) => `${product.id}` === this.$route.params.productId
       )[0];
     },
-
-    canAddToCart() {
-      const products = this.$store.state.cart.filter(
+    productCountInCart() {
+      const productsInCart = this.$store.state.cart.filter(
         (product) => `${product.id}` === this.$route.params.productId
       );
 
-      if (products.length === 0) {
-        return true;
+      if (productsInCart.length === 0) {
+        return 0;
       }
-      const productInCart = products[0];
-      console.log(productInCart.pieces);
-      console.log(productInCart.count);
-
-      return productInCart.pieces && productInCart.pieces > productInCart.count;
+      return productsInCart[0].count;
+    },
+    canAddToCart() {
+      if (this.product.pieces === 0) {
+        return false;
+      }
+      return this.product.pieces > this.productCountInCart + this.productCount;
     },
 
     productDescription() {
@@ -266,12 +284,29 @@ export default {
       this.$router.push({ path: "/shop" });
     },
     addToCart(product) {
-      this.$store.dispatch("addToCart", product.id);
+      console.log(this.productCount);
+      this.$store.dispatch("addToCart", {
+        id: product.id,
+        productCount: this.productCount,
+      });
+      this.addedToCart = true;
     },
     toggleFavs() {
       console.log(`TOGGLE_FAV ${this.product.id}`);
       this.$store.commit("TOGGLE_FAV", this.product.id);
       this.updateIsFavorite;
+    },
+    closePopUp() {
+      this.addedToCart = false;
+    },
+    incrementProductCount() {
+      if (this.productCountInCart + this.productCount < this.product.pieces)
+        this.productCount++;
+    },
+    decrementProductCount() {
+      if (this.productCount > 1) {
+        this.productCount--;
+      }
     },
   },
 };
@@ -283,6 +318,66 @@ export default {
 @import "../styles/typography";
 
 @media only screen and (min-width: 0) {
+  .product-view-container {
+    margin: 0;
+  }
+  .pop-up-added-to-cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 20px 0;
+    background-color: $light-gray;
+    border-top: 2px solid $accent;
+    animation: right_to_left 1s ease-in-out;
+  }
+
+  .pop-up-text-icon {
+    margin-left: 39px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pop-up-text {
+    margin-left: 16px;
+    color: black;
+  }
+  .go-to-cart-pop-up_button {
+    margin-right: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .go-to-cart-pop-up {
+    color: $accent;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+
+  @keyframes right_to_left {
+    from {
+      margin-left: 100%;
+    }
+    to {
+      margin-left: 0;
+    }
+  }
+
+  .remove-btn {
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+    color: $dark-grey;
+    transform: rotate(45deg);
+  }
+
   .product-view {
     display: flex;
     flex-direction: column;
@@ -414,6 +509,14 @@ export default {
   .in-stock-check {
     margin-top: 20px;
   }
+
+  .in-stock {
+    color: $green;
+  }
+
+  .out-of-stock {
+    color: $errors;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -466,6 +569,8 @@ export default {
   .cart-item-quantity {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background-color: $light-gray;
     height: 53px;
     width: 20%;
@@ -473,8 +578,9 @@ export default {
   }
 
   .count {
-    margin: 0 8px;
+    margin: 0 auto;
     color: $dark-grey;
+    padding: 0;
   }
 
   .increment-btn,
@@ -496,6 +602,13 @@ export default {
     &:hover {
       background-color: $black;
       color: $white;
+    }
+
+    &:disabled {
+      background-color: $dark-grey;
+      color: $white;
+      border: 1px solid $dark-grey;
+      pointer-events: none;
     }
   }
 
@@ -523,9 +636,7 @@ export default {
     fill: none;
   }
   .is-favorite {
-    // background-color: $black;
     fill: black;
-    // border: 1px solid red;
   }
   .social-media {
     margin-right: 25px;
@@ -536,10 +647,6 @@ export default {
   .description-reviews-container {
     margin-top: 99px;
   }
-  .in-stock {
-    color: $green;
-  }
-
   .in-stock-check {
     margin-bottom: 10px;
     margin-top: 0;

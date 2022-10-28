@@ -1,15 +1,25 @@
 <template>
   <main class="search-bar">
-    <input class="input" type="text" v-model="search" placeholder="Search..." />
-    <div
-      class="item-category"
-      v-for="category in filteredCategories"
-      :key="category.id"
-    >
-      <p>{{ category.name }}</p>
+    <input
+      class="input"
+      :class="{ 'search-active': isActive }"
+      type="text"
+      v-model="search"
+      placeholder="Search..."
+    />
+    <div class="search-results" v-if="search && filteredProducts.length > 0">
+      <router-link
+        v-for="product in filteredProducts"
+        :key="product.id"
+        class="product-searched"
+        :to="`/product-view/${product.id}`"
+      >
+        {{ product.name }}
+      </router-link>
     </div>
-    <div class="item-error" v-if="search && !filteredCategories.length">
-      <p>No results found!</p>
+
+    <div class="item-error" v-if="search && !filteredProducts.length">
+      No results found!
     </div>
   </main>
 </template>
@@ -20,15 +30,19 @@ export default {
   data() {
     return {
       search: "",
+      isActive: false,
     };
   },
   computed: {
-    filteredCategories() {
+    filteredProducts() {
       if (this.search !== "") {
-        return this.$store.state.categories.filter((item) =>
-          item.name.toLowerCase().includes(this.search.toLowerCase())
+        this.isActive = true;
+        return this.$store.state.products.filter((item) =>
+          item.name.toLowerCase().includes(this.search.toLowerCase().trim())
         );
       }
+
+      this.isActive = false;
       return [];
     },
   },
@@ -46,6 +60,7 @@ export default {
     margin: 16px 0;
     border-radius: 5px;
     justify-content: center;
+    position: relative;
     // background-color: $light-gray;
   }
 
@@ -61,19 +76,38 @@ export default {
     border-radius: 5px;
     outline: none;
   }
-
+  .search-active {
+    background: url("../assets/Icon-close-search.png") no-repeat 10px center;
+  }
   .item-error {
     font-size: 14px;
     color: $errors;
+    padding: 10px 0 5px 10px;
   }
-
-  .item-category .item-error {
-    font-size: 14px;
-    color: $dark-grey;
-  }
-
-  p {
+  .search-results {
+    position: absolute;
+    z-index: 1999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    width: 100%;
     background-color: $white;
+    border-radius: 6px;
+    border: 1px solid $light-gray;
+  }
+  .product-searched {
+    font-size: 14px;
+    color: $white;
+    padding: 10px 0 5px 10px;
+    text-decoration: none;
+    background-color: $white;
+    color: black;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $light-gray;
+    }
   }
 }
 

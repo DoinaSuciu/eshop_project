@@ -3,7 +3,7 @@
     <h1 class="wishlist-title">Wishlist</h1>
 
     <div
-      v-if="favoritesProductsLength === 0"
+      v-if="favoriteProductsLength === 0"
       class="body-medium empty-favorites-list"
     >
       <span class="empty-wishlist-info"> Your wishlist is empty.</span>
@@ -16,14 +16,14 @@
     </div>
 
     <div
-      v-if="getUserName !== null && favoritesProductsLength > 0"
+      v-if="getUserName !== null && favoriteProductsLength > 0"
       class="body-medium selected-itemes-info"
     >
       <span class="client-name">{{ getUserName }}</span>
       <span> this is the selection of items you like most</span>
     </div>
     <div
-      v-if="getUserName === null && favoritesProductsLength > 0"
+      v-if="getUserName === null && favoriteProductsLength > 0"
       class="not-user-info-to-login"
     >
       <span class="body-medium keep-items-favorite"
@@ -49,11 +49,20 @@
     <ul class="product-cards">
       <li
         class="product-card"
-        v-for="product in favoritesProducts"
+        v-for="product in favoriteProducts"
         :key="product.id"
       >
-        <ProductCard :product="product" class="product-card-component" />
-        <button @click="addToCart(product)" class="add-to-cart body-small">
+        <ProductCard
+          :isRemovable="true"
+          @remove-product="removeProduct"
+          :product="product"
+          class="product-card-component"
+        />
+        <button
+          @click="addToCart(product.id, product.pieces)"
+          class="add-to-cart body-small"
+          :disabled="!canAddToCart(product.id, product.pieces)"
+        >
           ADD TO CART
         </button>
       </li>
@@ -70,16 +79,11 @@ export default {
     return {};
   },
   computed: {
-    favoritesProducts() {
+    favoriteProducts() {
       return this.$store.getters.getFavorites;
     },
-    favoritesProductsLength() {
+    favoriteProductsLength() {
       return this.$store.getters.getFavorites.length;
-    },
-    removeFromFavorite(id) {
-      this.favoritesProducts = this.favoritesProducts.filter(
-        (item) => item.id !== id
-      );
     },
     getUserName() {
       return this.$store.state.auth.profileUsername;
@@ -90,6 +94,38 @@ export default {
   methods: {
     goToShop() {
       this.$router.push("/shop");
+    },
+    removeProduct(productId) {
+      console.log(productId);
+      this.$store.commit("REMOVE_FROM_FAVORITES", productId);
+    },
+    productCountInCart(productId) {
+      console.log(`productId ${productId}`);
+      const productsInCart = this.$store.state.cart.filter(
+        (product) => product.id === productId
+      );
+
+      console.log(`productId ${JSON.stringify(productsInCart, null, 3)}`);
+
+      if (productsInCart.length === 0) {
+        return 0;
+      }
+      return productsInCart[0].count;
+    },
+    canAddToCart(productId, pieces) {
+      if (pieces === 0) {
+        return false;
+      }
+
+      return pieces > this.productCountInCart(productId);
+    },
+    addToCart(productId, productPieces) {
+      console.log(`productId ${productId}`);
+      console.log(`productPieces ${productPieces}`);
+      console.log(`productCountInCart ${this.productCountInCart(productId)}`);
+      if (this.productCountInCart(productId) < productPieces) {
+        this.$store.dispatch("addToCart", { id: productId });
+      }
     },
   },
 };
@@ -126,6 +162,19 @@ export default {
     flex-direction: row;
     align-items: center;
     margin: auto;
+
+    &:hover:enabled {
+      background-color: $black;
+      color: $white;
+    }
+
+    &:disabled {
+      background-color: $dark-grey;
+      color: $white;
+      border: 1px solid $dark-grey;
+      pointer-events: none;
+      cursor: no-drop;
+    }
   }
 
   .not-user-info-to-login {

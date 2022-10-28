@@ -68,11 +68,12 @@ export default new Vuex.Store({
           "Our new favourite huggie and our best selling Baroque pearl. Doina collection comes in organic certified cotton pouch to support sustainability via minimal packaging.",
         aboutProducts:
           "That means instantly wearable, everyday pieces that will last you a lifetime. All of our pieces are handcrafted from sustainably-sourced materials. Style it your way and bring joy to your everyday. Go ahead, treat yourself. We all know you deserve it.",
-        pieces: 4,
+        pieces: 0,
         arrivalDate: "2022/08/01",
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 25,
       },
       {
         id: 2,
@@ -95,6 +96,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 15,
       },
       {
         id: 3,
@@ -117,6 +119,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 8,
       },
       {
         id: 4,
@@ -139,6 +142,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 3,
       },
       {
         id: 5,
@@ -161,6 +165,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 20,
       },
       {
         id: 6,
@@ -183,6 +188,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Accesories",
+        soldProducts: 18,
       },
       {
         id: 7,
@@ -205,6 +211,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 13,
       },
       {
         id: 8,
@@ -227,6 +234,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 14,
       },
       {
         id: 9,
@@ -249,6 +257,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 28,
       },
       {
         id: 10,
@@ -271,6 +280,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 30,
       },
       {
         id: 11,
@@ -293,6 +303,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 27,
       },
       {
         id: 12,
@@ -315,6 +326,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 35,
       },
       {
         id: 13,
@@ -337,6 +349,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 40,
       },
       {
         id: 14,
@@ -359,6 +372,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 25,
       },
       {
         id: 15,
@@ -381,6 +395,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 21,
       },
       {
         id: 16,
@@ -403,6 +418,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 15,
       },
       {
         id: 17,
@@ -425,6 +441,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 14,
       },
       {
         id: 18,
@@ -447,6 +464,7 @@ export default new Vuex.Store({
         reviews: "",
         favorite: false,
         styleCategory: "Style",
+        soldProducts: 31,
       },
     ],
   },
@@ -459,9 +477,10 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    INCREMENT_PRODUCT_COUNT(state, id) {
+    INCREMENT_PRODUCT_COUNT(state, { id, productCount }) {
+      console.log(productCount);
       const index = state.cart.findIndex((product) => product.id === id);
-      state.cart[index].count += 1;
+      state.cart[index].count += productCount;
     },
     DECREMENT_PRODUCT_COUNT(state, id) {
       console.log(`ID: ${id}`);
@@ -470,9 +489,10 @@ export default new Vuex.Store({
         state.cart[index].count -= 1;
       }
     },
-    ADD_TO_CART(state, id) {
+    ADD_TO_CART(state, { id, productCount }) {
+      console.log(productCount);
       const index = state.products.findIndex((product) => product.id === id);
-      const product = { ...state.products[index], count: 1 };
+      const product = { ...state.products[index], count: productCount };
       state.cart.push(product);
       Vue.set(state.cart);
     },
@@ -497,20 +517,27 @@ export default new Vuex.Store({
       } else {
         state.favorites.push(id);
       }
-      console.log(`isFavorites toggle ${JSON.stringify(state.favorites)}`);
+      // console.log(`isFavorites toggle ${JSON.stringify(state.favorites)}`);
+    },
+    REMOVE_FROM_FAVORITES(state, id) {
+      state.favorites = state.favorites.filter((item) => item !== id);
     },
   },
 
   actions: {
-    addToCart(context, productId) {
+    addToCart(context, { id, productCount = 1 }) {
+      console.log(productCount);
       const index = context.state.cart.findIndex(
-        (product) => product.id === productId
+        (product) => product.id === id
       );
 
       if (index >= 0) {
-        context.commit("INCREMENT_PRODUCT_COUNT", productId);
+        context.commit("INCREMENT_PRODUCT_COUNT", {
+          id,
+          productCount,
+        });
       } else {
-        context.commit("ADD_TO_CART", productId);
+        context.commit("ADD_TO_CART", { id, productCount });
       }
     },
     isFavorite(context, productId) {
