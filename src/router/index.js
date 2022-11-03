@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Blogs from "../views/Blogs.vue";
 import BlogPost from "../views/BlogPost.vue";
-import OurStory from "../views/OurStory.vue";
 import Shop from "../views/Shop.vue";
 import ProductView from "../views/ProductView.vue";
 import About from "../views/About.vue";
@@ -44,11 +43,6 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-  },
-  {
-    path: "/our-story",
-    name: "our-story",
-    component: OurStory,
   },
   {
     path: "/product-view/:productId",

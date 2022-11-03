@@ -63,6 +63,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: left;
+  margin-bottom: 50px;
 }
 
 img {

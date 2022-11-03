@@ -640,15 +640,15 @@ export default {
     margin-right: 40px;
     border: none;
     background-color: $white;
-  }
-  .isNotFavorite {
-    fill: none;
-  }
-  .is-favorite {
-    fill: black;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
   .social-media {
     margin-right: 25px;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
   .social-media:first-child {
     padding-left: 39px;

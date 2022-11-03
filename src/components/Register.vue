@@ -44,7 +44,7 @@
         type="password"
         id="password-confirm"
         placeholder="Confirm password"
-        v-model.trim="password"
+        v-model.trim="passwordConfirm"
       />
 
       <label class="remember-checkbox">
@@ -88,6 +88,7 @@ export default {
       username: "",
       email: "",
       password: "",
+      passwordConfirm: "",
       error: null,
       errorMessage: "",
     };
@@ -99,6 +100,8 @@ export default {
       if (
         this.email !== "" &&
         this.password !== "" &&
+        this.passwordConfirm !== "" &&
+        this.passwordConfirm === this.password &&
         this.firstName !== "" &&
         this.username !== "" &&
         this.lastName !== ""

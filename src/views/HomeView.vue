@@ -88,9 +88,6 @@ export default {
 @import "../styles/vars.scss";
 
 @media only screen and (min-width: 0) {
-  .search-bar-component {
-    background-color: $light-gray;
-  }
   .banner {
     position: relative;
     display: flex;
@@ -269,6 +266,9 @@ export default {
     font-size: 20px;
     color: $accent;
   }
+  .search-bar-component {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -325,10 +325,6 @@ export default {
   .view-all {
     font-size: 20px;
     color: $accent;
-  }
-
-  .search-bar-component {
-    display: none;
   }
 }
 </style>

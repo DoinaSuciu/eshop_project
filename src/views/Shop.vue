@@ -130,14 +130,6 @@ export default {
       margin-right: 8px;
     }
   }
-
-  // .left-side-shop-web {
-  //   display: flex;
-  //   flex-direction: column;
-  //   max-width: 50%;
-  //   // align-items: center;
-  // }
-
   .search-bar-component {
     border: 1px solid $light-gray;
     border-radius: 5px;

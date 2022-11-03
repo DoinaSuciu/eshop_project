@@ -16,7 +16,7 @@
         </li>
       </ul>
       <span class="nav-icon mobile-hide"><img src="../assets/Line.png" /></span>
-      <button class="nav-icon search-btn mobile-hide">
+      <button @click="showSearchBar" class="nav-icon search-btn mobile-hide">
         <img src="../assets/Icon search.png" />
       </button>
       <router-link class="nav-icon" to="/shopping-cart">
@@ -143,6 +143,10 @@ export default {
   components: { HambMenuIcon },
 
   methods: {
+    showSearchBar() {
+      this.$emit("show-search-bar");
+    },
+
     hideHambMenu(isOpen) {
       this.handleHambIcon(!isOpen);
     },
