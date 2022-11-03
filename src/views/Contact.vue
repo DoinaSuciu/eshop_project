@@ -50,7 +50,7 @@
         Please enter a valid email.
       </p>
 
-      <button class="btn-send-contact body-small" @click="">SEND</button>
+      <button class="btn-send-contact body-small">SEND</button>
     </form>
   </main>
 </template>
@@ -86,88 +86,105 @@ export default {
 @import "../styles/vars.scss";
 @import "../styles/typography.scss";
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-}
-.myContact {
-  margin: 69px auto 0 auto;
-}
-
-.msg-error-formIsNotValid {
-  margin: 0 auto;
-}
-.form-contact {
-  margin-top: 0;
-  width: 100%;
-  // width: 288px;
-  padding: 0;
-  margin-bottom: 96px;
-  #email-contact,
-  #first-name,
-  #last-name {
-    width: 100%;
-    height: 25px;
-    padding: 0;
-    margin-top: 47px;
-    margin-bottom: 0;
-    border-bottom: 1px $light-gray;
-    border-style: none none solid none;
-    background-color: $white;
-    color: $dark-grey;
-    outline: none;
-  }
-  .select-group {
-    margin-top: 47px;
+@media only screen and (min-width: 0) {
+  main {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: $dark-grey;
-    width: 100%;
-    border: none;
-    // margin-top: 47px;
-    border-bottom: 1px $light-gray;
-    border-style: none none solid none;
-    background-color: $white;
-    color: $dark-grey;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
   }
-  .select-subject {
-    width: 100%;
-    border: none;
-    outline: none;
+  .myContact {
+    margin: 69px auto 0 auto;
   }
 
-  option {
-    color: $dark-grey;
+  .msg-error-formIsNotValid {
+    margin: 0 auto;
+  }
+  .form-contact {
+    margin-top: 0;
+    width: 100%;
+    // width: 288px;
+    padding: 0;
+    margin-bottom: 96px;
+    #email-contact,
+    #first-name,
+    #last-name {
+      width: 100%;
+      height: 25px;
+      padding: 0;
+      margin-top: 47px;
+      margin-bottom: 0;
+      border-bottom: 1px $light-gray;
+      border-style: none none solid none;
+      background-color: $white;
+      color: $dark-grey;
+      outline: none;
+    }
+    .select-group {
+      margin-top: 47px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      color: $dark-grey;
+      width: 100%;
+      border: none;
+      // margin-top: 47px;
+      border-bottom: 1px $light-gray;
+      border-style: none none solid none;
+      background-color: $white;
+      color: $dark-grey;
+    }
+    .select-subject {
+      width: 100%;
+      border: none;
+      outline: none;
+    }
+
+    option {
+      color: $dark-grey;
+    }
+
+    .message {
+      min-height: 85px;
+      margin-top: 47px;
+      width: 100%;
+      border: none;
+      // margin-top: 47px;
+      border-bottom: 1px $light-gray;
+      border-style: none none solid none;
+      background-color: $white;
+      color: $dark-grey;
+      outline: none;
+    }
   }
 
-  .message {
-    min-height: 85px;
-    margin-top: 47px;
-    width: 100%;
+  .btn-send-contact {
+    display: flex;
+    margin: 24px auto 0 auto;
     border: none;
-    // margin-top: 47px;
-    border-bottom: 1px $light-gray;
-    border-style: none none solid none;
-    background-color: $white;
-    color: $dark-grey;
-    outline: none;
+    border-radius: 4px;
+    background-color: $black;
+    color: $white;
+    width: 288px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 }
 
-.btn-send-contact {
-  display: flex;
-  margin: 24px auto 0 auto;
-  border: none;
-  border-radius: 4px;
-  background-color: $black;
-  color: $white;
-  width: 288px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
+@media only screen and (min-width: 1024px) {
+  .btn-send-contact {
+    width: 288px;
+    height: 53px;
+    font-weight: 900;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+      border: 1px solid $black;
+    }
+  }
 }
 </style>
 >

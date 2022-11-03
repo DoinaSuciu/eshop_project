@@ -99,19 +99,6 @@ export default {
       font-style: normal;
     }
   }
-
-  .img-card {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-
-    &:hover {
-      -webkit-transform: scale(1.05);
-      transform: scale(1.05);
-    }
-  }
-
   .remove-btn {
     position: absolute;
     margin-top: 20px;
@@ -184,6 +171,17 @@ export default {
     top: 10px;
     padding: 4px 8px;
     left: 8px;
+  }
+  .img-card {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      -webkit-transform: scale(1.03);
+      transform: scale(1.03);
+    }
   }
 }
 

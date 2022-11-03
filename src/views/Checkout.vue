@@ -11,7 +11,7 @@
     <div class="checkout-first-questions-group">
       <div class="checkout-first-questions">
         <span class="body-small-dark-gray">Returning customers?</span>
-        <router-link class="body-small click-here" to="/account"
+        <router-link class="body-small click-here" to="/account-sign-in"
           >Click here to login</router-link
         >
       </div>

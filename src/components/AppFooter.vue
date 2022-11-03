@@ -1,12 +1,19 @@
 <template>
   <footer class="footer body-small">
     <div class="group-navs-newsletter">
-      <div>
+      <div class="ask-for-newsletter-container">
         <div class="ask-for-newsletter">
-          <span> Give an email, get the newsletter. </span>
+          <!-- <div class="give-an-email-text">
+            Give an email, get the newsletter.
+          </div> -->
+          <input
+            type="text"
+            class="give-an-email-text body-small"
+            placeholder="Give an email, get the newsletter."
+          />
           <img class="arrow" src="../assets/footer/Icon arrow.png" />
         </div>
-        <span class="line"></span>
+        <!-- <span class="line"></span> -->
       </div>
 
       <!-- <form class="agree-conditions" @submit.prevent="handleSubmit">
@@ -78,6 +85,12 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 0;
+    width: 100%;
+
+    .give-an-email-text {
+      border: none;
+      width: 100%;
+    }
 
     .ask-for-newsletter {
       display: flex;
@@ -89,10 +102,11 @@ export default {
       color: $dark-grey;
     }
 
-    .line {
-      display: block;
+    .ask-for-newsletter-container {
+      // display: block;
       border-bottom: 0.05px solid black;
-      width: 288px;
+      width: 100%;
+      // width: 288px;
     }
 
     .agree-conditions {
@@ -146,7 +160,8 @@ export default {
 
     .arrow {
       width: 5%;
-      height: 5%;
+      height: 2%;
+      // margin-right: 5px;
     }
     .hidden-mobile {
       display: none;
@@ -157,13 +172,28 @@ export default {
     }
   }
 }
+@media only screen and (min-width: 630px) {
+  .footer {
+    .ask-for-newsletter-container {
+      width: 40%;
+    }
+    .arrow {
+      width: 8%;
+      height: 2%;
+    }
+  }
+}
 
 @media only screen and (min-width: 768px) {
   .footer {
     // margin-top: 170px;
     // margin-bottom: 90px;
-    font-size: 16px;
+    // font-size: 16px;
     border-top: 1px solid $gray;
+
+    .ask-for-newsletter-container {
+      width: 70%;
+    }
 
     .ask-for-newsletter {
       display: flex;
@@ -176,10 +206,11 @@ export default {
     .navs-footer {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
     }
 
     .nav-footer {
-      margin-right: 41px;
+      margin-right: 13px;
     }
 
     .group-navs-newsletter {
@@ -188,6 +219,7 @@ export default {
       flex-direction: row-reverse;
       align-items: center;
       margin-top: 53px;
+      // white-space: pre-wrap;
     }
 
     .follow-us-group {
@@ -223,6 +255,17 @@ export default {
     .arrow {
       width: auto;
       height: auto;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .footer {
+    .ask-for-newsletter-container {
+      width: 25%;
+    }
+    .nav-footer {
+      margin-right: 50px;
     }
   }
 }

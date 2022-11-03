@@ -96,7 +96,7 @@ export default {
       this.shouldDisplayRemoveConfirmation = true;
     },
     increment(id) {
-      this.$store.commit("INCREMENT_PRODUCT_COUNT", id);
+      this.$store.commit("INCREMENT_PRODUCT_COUNT", { id, productCount: 1 });
     },
     decrement(product) {
       this.$store.commit("DECREMENT_PRODUCT_COUNT", product.id);

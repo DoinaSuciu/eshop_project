@@ -113,7 +113,7 @@
               </button>
               <span
                 class="body-small check-shipping-selection"
-                v-if="isTotalUpdated && country === defaultCountry"
+                v-if="isTotalUpdated && country.length === 0"
                 >Please select a country</span
               >
             </div>
@@ -121,7 +121,7 @@
           <div class="group-cart-total-calculation">
             <span class="body-small left-text">TOTAL</span>
             <span
-              v-if="isTotalUpdated && country !== defaultCountry"
+              v-if="isTotalUpdated && country.length !== 0"
               class="body-small right-element group-cart-items"
             >
               {{ totalCost | currency }}</span
@@ -212,7 +212,7 @@ export default {
       this.$router.push("/shop");
     },
     goToCheckout() {
-      if (this.isTotalUpdated && this.country !== this.defaultCountry) {
+      if (this.isTotalUpdated) {
         this.$router.push("/checkout");
       } else {
         this.isReadyForDelivery = false;
@@ -229,10 +229,8 @@ export default {
     },
     calculatedTotalCost() {
       this.isTotalUpdated = true;
-      if (this.country !== this.defaultCountry) {
-        this.totalCost = this.shippingCost + this.calcSubtotal;
-        this.isReadyForDelivery = true;
-      }
+      this.totalCost = this.shippingCost + this.calcSubtotal;
+      this.isReadyForDelivery = true;
     },
     applyCoupon() {
       const coupons = this.$store.state.coupons.filter(

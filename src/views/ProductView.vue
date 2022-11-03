@@ -418,6 +418,7 @@ export default {
     height: 32px;
     max-width: 320px;
     padding: 6px 100px 6px 100px;
+    margin: 0 auto;
     color: $black;
     background-color: $white;
     border-radius: 4px;
@@ -425,8 +426,8 @@ export default {
     cursor: pointer;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    margin: auto;
   }
 
   .about-products {
@@ -519,6 +520,12 @@ export default {
   }
 }
 
+@media only screen and (min-width: 768px) {
+  .continue-shopping {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 1024px) {
   .product-view {
     margin-top: 60px;
@@ -591,13 +598,15 @@ export default {
     width: 40%;
     padding: 0;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .add-to-cart {
     height: 53px;
-    margin: 0;
+    margin: 0 auto;
     width: 77%;
     font-weight: 900;
+    padding: 0;
 
     &:hover {
       background-color: $black;

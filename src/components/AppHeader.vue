@@ -1,8 +1,11 @@
 <template>
   <nav class="nav-bar">
-    <router-link to="/">
-      <img @click="hideHambMenu" class="logo" src="../assets/SHOPPE.png" />
-    </router-link>
+    <div class="logo-by-Doina">
+      <router-link to="/" class="router-link-logo">
+        <img @click="hideHambMenu" class="logo" src="../assets/SHOPPE.png" />
+        <span class="header-by-Doina">by Doina</span>
+      </router-link>
+    </div>
 
     <div class="nav-icons">
       <ul class="nav-links">
@@ -13,9 +16,9 @@
         </li>
       </ul>
       <span class="nav-icon mobile-hide"><img src="../assets/Line.png" /></span>
-      <router-link class="nav-icon mobile-hide" to="/search">
+      <button class="nav-icon search-btn mobile-hide">
         <img src="../assets/Icon search.png" />
-      </router-link>
+      </button>
       <router-link class="nav-icon" to="/shopping-cart">
         <div class="bag-item">
           <img src="../assets/Bag.png" />
@@ -188,6 +191,7 @@ export default {
     align-items: center;
     margin-bottom: 16px;
     height: 18px;
+    width: 100%;
 
     .logo {
       max-width: 99px;
@@ -196,13 +200,26 @@ export default {
       display: none;
     }
   }
+  .router-link-logo {
+    text-decoration: none;
+  }
 
   .mobile-hide {
     display: none;
   }
+  .header-by-Doina {
+    margin-left: 6px;
+    font-family: "Brush Script MT";
+    font-style: italic;
+    font-size: 30px;
+    color: $accent;
+    white-space: nowrap;
+  }
 
   .nav-icon {
     margin-left: 16px;
+    border: none;
+    background-color: $white;
 
     .bag-item {
       position: relative;
@@ -210,37 +227,31 @@ export default {
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      // margin: 0;
-      // padding: 0;
-      // top: 14px;
-      // right: 50px;
-      // z-index: 4;
     }
-
     .cart-total-items {
       border-radius: 50%;
       width: 14px;
       height: 14px;
-      // padding: 10px;
       background: #fff;
       border: 1px solid #000;
       font-size: 7px;
       color: #000;
       text-align: center;
-      // border-color: black;
       padding: 2px;
       text-align: center;
-      // background-color: red;
       margin-bottom: 12px;
       margin-left: 17px;
       position: absolute;
     }
   }
-
+  .search-btn {
+    padding: 0;
+  }
   .nav-icons {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 100%;
   }
 
   .hamb-menu {
@@ -249,7 +260,6 @@ export default {
     width: 0;
     background-color: $white;
   }
-
   .show-menu {
     display: flex;
     flex-direction: column;
@@ -267,7 +277,6 @@ export default {
     transform: translate(-100vw);
     transition: transform 0.5s ease-in-out;
   }
-
   .hamb-menu-items {
     display: flex;
     flex-direction: column;
@@ -280,7 +289,6 @@ export default {
     list-style: none;
     background-color: $white;
   }
-
   .hamb-menu-list {
     padding: 0 0 23px 0;
     border-bottom: 1px $light-gray;
@@ -315,23 +323,26 @@ export default {
   .logo {
     min-width: 140px;
   }
+  .header-by-Doina {
+    margin-left: 12px;
+    font-size: 40px;
+  }
   .nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 16px;
     height: 80px;
-
     .nav-links {
       font-size: 16px;
       display: flex;
+      padding: 0;
     }
 
     ul {
       display: flex;
+      justify-content: space-between;
+      margin-left: 0;
       li {
         &:not(:last-child) {
-          margin-right: 35px;
+          margin-right: 20px;
           display: inline-block;
         }
       }
@@ -344,11 +355,9 @@ export default {
     display: flex;
     flex-direction: row;
   }
-
   .nav-icon {
     margin-left: 35px;
   }
-
   .show-menu {
     display: none;
   }

@@ -15,7 +15,7 @@
         >
           <option value="" disabled>Shop By</option>
           <option
-            id="category-option"
+            class="category-option"
             v-for="category in productCategories"
             v-bind:value="category.name"
           >
@@ -30,7 +30,7 @@
         >
           <option value="" disabled>Sort By</option>
           <option
-            id="category-option"
+            class="category-option"
             v-for="sortCategory in sortBy"
             v-bind:value="sortCategory.name"
           >
@@ -138,20 +138,25 @@ export default {
   //   // align-items: center;
   // }
 
-  // .search-bar-component {
-  //   border-bottom: 1px solid $gray;
-  //   border-radius: 0%;
-  // }
+  .search-bar-component {
+    border: 1px solid $light-gray;
+    border-radius: 5px;
+    background-color: $light-gray;
+  }
 
-  // #shop-filter-sort-by,
-  // #shop-filter-by-category {
-  //   min-width: 25%;
-  //   // margin-left: 15px;
-  //   height: 30px;
-  //   color: black;
-  //   border-color: $gray;
-  //   outline: none;
-  // }
+  #shop-filter-sort-by,
+  #shop-filter-by-category {
+    width: 47%;
+    height: 30px;
+    color: black;
+    border-color: $gray;
+    outline: none;
+    border-radius: 4px;
+  }
+
+  #shop-filter-sort-by {
+    margin-left: 15px;
+  }
   .product-cards {
     padding: 0;
   }
@@ -178,8 +183,10 @@ export default {
   }
 
   .search-bar-component {
+    border: none;
     border-bottom: 1px solid $gray;
     border-radius: 0%;
+    background-color: $white;
   }
 
   #shop-filter-sort-by,

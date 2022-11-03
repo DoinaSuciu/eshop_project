@@ -68,7 +68,7 @@ export default new Vuex.Store({
           "Our new favourite huggie and our best selling Baroque pearl. Doina collection comes in organic certified cotton pouch to support sustainability via minimal packaging.",
         aboutProducts:
           "That means instantly wearable, everyday pieces that will last you a lifetime. All of our pieces are handcrafted from sustainably-sourced materials. Style it your way and bring joy to your everyday. Go ahead, treat yourself. We all know you deserve it.",
-        pieces: 0,
+        pieces: 5,
         arrivalDate: "2022/08/01",
         reviews: "",
         favorite: false,
@@ -114,7 +114,7 @@ export default new Vuex.Store({
           "The Duchess of Cambridge's favourite hand cut gemstone earrings. Simple, elegant but standout. So, expect all of the compliments when wearing. As easy for everyday as an evening statement earring, and looks incredible in a stack.",
         aboutProducts:
           "That means instantly wearable, everyday pieces that will last you a lifetime. All of our pieces are handcrafted from sustainably-sourced materials. Style it your way and bring joy to your everyday. Go ahead, treat yourself. We all know you deserve it.",
-        pieces: 6,
+        pieces: 0,
         arrivalDate: "2022/07/04",
         reviews: "",
         favorite: false,
