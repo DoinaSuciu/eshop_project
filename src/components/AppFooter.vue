@@ -90,6 +90,7 @@ export default {
     .give-an-email-text {
       border: none;
       width: 100%;
+      outline: none;
     }
 
     .ask-for-newsletter {

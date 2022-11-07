@@ -8,6 +8,7 @@
         type="text"
         id="first-name"
         placeholder="First name"
+        v-model.trim="firstNameContact"
       />
 
       <input
@@ -15,6 +16,7 @@
         type="text"
         id="last-name"
         placeholder="Last name"
+        v-model.trim="lastNameContact"
       />
 
       <input
@@ -22,6 +24,7 @@
         type="text"
         id="email-contact"
         placeholder="Email"
+        v-model.trim="emailContact"
       />
       <div class="select-group body-small">
         <select
@@ -44,6 +47,7 @@
         class="message body-small"
         name="message"
         placeholder="Message"
+        v-model.trim="messageContact"
       ></textarea>
 
       <p v-if="!formIsValid" class="msg-error-formIsNotValid">
@@ -61,6 +65,10 @@ export default {
     return {
       formIsValid: true,
       select: "",
+      firstNameContact: "",
+      lastNameContact: "",
+      emailContact: "",
+      messageContact: "",
       options: [
         { id: 1, name: "Online Purchase" },
         { id: 2, name: "Return" },

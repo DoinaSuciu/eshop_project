@@ -213,6 +213,7 @@ export default {
     },
     goToCheckout() {
       if (this.isTotalUpdated) {
+        console.log(this.isReadyForDelivery);
         this.$router.push("/checkout");
       } else {
         this.isReadyForDelivery = false;
@@ -228,9 +229,15 @@ export default {
       this.$store.commit("SET_SHIPPING_COUNTRY", selectedCountry);
     },
     calculatedTotalCost() {
-      this.isTotalUpdated = true;
-      this.totalCost = this.shippingCost + this.calcSubtotal;
-      this.isReadyForDelivery = true;
+      if (this.country.length > 0) {
+        console.log(this.country);
+        this.isTotalUpdated = true;
+        this.totalCost = this.shippingCost + this.calcSubtotal;
+        this.isReadyForDelivery = true;
+      } else {
+        this.isTotalUpdated = false;
+        this.isReadyForDelivery = false;
+      }
     },
     applyCoupon() {
       const coupons = this.$store.state.coupons.filter(

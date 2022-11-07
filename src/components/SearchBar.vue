@@ -17,7 +17,11 @@
       </button>
     </div>
 
-    <div class="search-results" v-if="search && filteredProducts.length > 0">
+    <div
+      @click="closeSearchBar"
+      class="search-results"
+      v-if="search && filteredProducts.length > 0"
+    >
       <router-link
         v-for="product in filteredProducts"
         :key="product.id"

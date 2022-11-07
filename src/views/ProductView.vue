@@ -239,7 +239,7 @@ export default {
       if (this.product.pieces === 0) {
         return false;
       }
-      return this.product.pieces > this.productCountInCart + this.productCount;
+      return this.product.pieces >= this.productCountInCart + this.productCount;
     },
 
     productDescription() {

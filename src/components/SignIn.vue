@@ -66,7 +66,8 @@ export default {
           this.errorMsg = "";
           if (
             this.prevPage.fullPath === "/blogs" ||
-            this.prevPage.fullPath === "/favorites"
+            this.prevPage.fullPath === "/favorites" ||
+            this.prevPage.fullPath === "/checkout"
           ) {
             this.$router.go(-1);
             return;

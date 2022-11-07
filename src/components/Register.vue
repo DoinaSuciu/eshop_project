@@ -119,17 +119,15 @@ export default {
               email: this.email,
             });
             this.$router.push({ name: "home" });
-            return;
           })
           .catch((err) => {
             this.error = true;
             this.errorMessage = err.message;
-            return;
           });
+      } else {
+        this.error = true;
+        this.errorMessage = "Please fill out all the fields!";
       }
-      this.error = true;
-      this.errorMessage = "Please fill out all the fields!";
-      return;
     },
   },
 };
